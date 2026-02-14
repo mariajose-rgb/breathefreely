@@ -340,21 +340,44 @@
     display: flex; align-items: center; justify-content: center;
     background: conic-gradient(from 0deg, var(--accent), var(--teal), var(--accent2), var(--accent));
     padding: 4px;
-    animation: none;
+    transition: transform 4s ease-in-out, box-shadow 4s ease-in-out;
   }
-  .breath-circle-outer.animating { animation: breathSpin 16s linear infinite; }
-  @keyframes breathSpin { to { transform: rotate(360deg); } }
+  .breath-circle-outer.inhale {
+    transform: scale(1.3);
+    box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(99,102,241,0.15);
+  }
+  .breath-circle-outer.exhale {
+    transform: scale(0.85);
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+  .breath-circle-outer.hold-in {
+    transform: scale(1.3);
+    animation: holdThrob 1s ease-in-out infinite;
+  }
+  .breath-circle-outer.hold-out {
+    transform: scale(0.85);
+    animation: holdThrob 1s ease-in-out infinite;
+  }
+  @keyframes holdThrob {
+    0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
+    50% { box-shadow: 0 0 35px var(--accent-glow), 0 0 60px rgba(99,102,241,0.2); }
+  }
   .breath-circle {
     width: 100%; height: 100%;
     border-radius: 50%;
     background: var(--bg);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    transition: transform 4s ease-in-out;
   }
-  .breath-circle.inhale { transform: scale(1.15); }
-  .breath-circle.exhale { transform: scale(0.9); }
-  .breath-text { font-size: 1.3em; font-weight: 700; color: var(--text); }
+  .breath-text {
+    font-size: 1.3em; font-weight: 700; color: var(--text);
+    animation: none;
+  }
+  .breath-text.pulsing { animation: textPulse 1s ease-in-out infinite; }
+  @keyframes textPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.95); }
+  }
   .breath-timer { font-size: 2.5em; font-weight: 800; color: var(--accent); margin-top: 4px; }
   .breath-btn {
     margin-top: 30px;
@@ -886,7 +909,7 @@
           </div>
         </div>
         <button class="breath-btn" id="breathBtn" onclick="toggleBreathing()">Start Breathing</button>
-        <div class="breath-rounds">Completed: <strong id="breathRounds">0</strong> rounds</div>
+        <div class="breath-rounds">Round: <strong id="breathRounds">0 / 4</strong></div>
       </div>
     </div>
     <div class="card">
@@ -1459,8 +1482,9 @@ function renderTriggers() {
 
 // ===== BREATHING =====
 let breathInterval = null, breathPhase = 0, breathCount = 0, breathRounds = 0;
+const BREATH_TARGET_ROUNDS = 4;
 const breathPhases = ['Breathe In', 'Hold', 'Breathe Out', 'Hold'];
-const breathClasses = ['inhale', '', 'exhale', ''];
+const breathClasses = ['inhale', 'hold-in', 'exhale', 'hold-out'];
 
 function toggleBreathing() {
   breathInterval ? stopBreathing() : startBreathing();
@@ -1468,17 +1492,22 @@ function toggleBreathing() {
 function startBreathing() {
   breathPhase = 0; breathCount = 4; breathRounds = 0;
   document.getElementById('breathBtn').textContent = 'Stop';
-  document.getElementById('breathOuter').classList.add('animating');
   updateBreathDisplay();
+  document.getElementById('breathRounds').textContent = `0 / ${BREATH_TARGET_ROUNDS}`;
   breathInterval = setInterval(() => {
     breathCount--;
     if (breathCount <= 0) {
       breathPhase = (breathPhase + 1) % 4;
       if (breathPhase === 0) {
         breathRounds++;
-        document.getElementById('breathRounds').textContent = breathRounds;
+        document.getElementById('breathRounds').textContent = `${breathRounds} / ${BREATH_TARGET_ROUNDS}`;
         data.breathRoundsTotal++;
         saveData(data);
+        if (breathRounds >= BREATH_TARGET_ROUNDS) {
+          stopBreathing();
+          showToast(`Session complete — ${BREATH_TARGET_ROUNDS} rounds done. You're in control.`);
+          return;
+        }
       }
       breathCount = 4;
     }
@@ -1486,16 +1515,22 @@ function startBreathing() {
   }, 1000);
 }
 function updateBreathDisplay() {
-  document.getElementById('breathCircle').className = 'breath-circle ' + breathClasses[breathPhase];
-  document.getElementById('breathText').textContent = breathPhases[breathPhase];
+  const outer = document.getElementById('breathOuter');
+  outer.className = 'breath-circle-outer ' + breathClasses[breathPhase];
+  document.getElementById('breathCircle').className = 'breath-circle';
+  const textEl = document.getElementById('breathText');
+  textEl.textContent = breathPhases[breathPhase];
+  textEl.className = 'breath-text pulsing';
   document.getElementById('breathTimer').textContent = breathCount;
 }
 function stopBreathing() {
   clearInterval(breathInterval); breathInterval = null;
   document.getElementById('breathBtn').textContent = 'Start Breathing';
-  document.getElementById('breathOuter').classList.remove('animating');
+  document.getElementById('breathOuter').className = 'breath-circle-outer';
   document.getElementById('breathCircle').className = 'breath-circle';
-  document.getElementById('breathText').textContent = 'Ready';
+  const textEl = document.getElementById('breathText');
+  textEl.textContent = 'Ready';
+  textEl.className = 'breath-text';
   document.getElementById('breathTimer').textContent = '4:4:4:4';
   if (breathRounds > 0) showToast(`${breathRounds} rounds complete — your body thanks you.`);
 }
