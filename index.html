@@ -11,7 +11,7 @@
 
 <!-- PWA -->
 <link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#6d5cce">
+<meta name="theme-color" content="#db2777">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="BreatheFreely">
@@ -31,10 +31,10 @@
     --surface: #ffffff;
     --surface2: #f3f1ee;
     --surface3: #ebe8e3;
-    --accent: #6d5cce;
-    --accent2: #8b7be8;
-    --accent-light: #eeebfa;
-    --accent-glow: rgba(109,92,206,0.15);
+    --accent: #db2777;
+    --accent2: #ec4899;
+    --accent-light: #fce7f3;
+    --accent-glow: rgba(219,39,119,0.15);
     --green: #16a34a;
     --green-light: #dcfce7;
     --green-bg: #f0fdf4;
@@ -87,7 +87,7 @@
 
   /* Motivational banner */
   .motiv-banner {
-    background: linear-gradient(135deg, var(--accent), #8b5cf6, var(--teal));
+    background: linear-gradient(135deg, var(--accent), #f472b6, var(--teal));
     border-radius: var(--radius);
     padding: 24px 28px;
     margin: 20px 0;
@@ -241,7 +241,7 @@
     border-radius: 0 12px 12px 0;
     padding: 16px 20px;
     margin: 16px 0;
-    color: #5b4aab;
+    color: #9d174d;
     font-weight: 500;
     font-size: 0.95em;
     line-height: 1.6;
@@ -261,7 +261,7 @@
     border: 2px solid transparent;
     user-select: none;
   }
-  .checkin-item:hover { border-color: var(--accent-light); background: #faf8ff; }
+  .checkin-item:hover { border-color: var(--accent-light); background: #fdf2f8; }
   .checkin-item.checked {
     border-color: var(--green);
     background: var(--green-bg);
@@ -344,7 +344,7 @@
   }
   .breath-circle-outer.inhale {
     transform: scale(1.3);
-    box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(99,102,241,0.15);
+    box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(219,39,119,0.15);
   }
   .breath-circle-outer.exhale {
     transform: scale(0.85);
@@ -360,7 +360,7 @@
   }
   @keyframes holdThrob {
     0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
-    50% { box-shadow: 0 0 35px var(--accent-glow), 0 0 60px rgba(99,102,241,0.2); }
+    50% { box-shadow: 0 0 35px var(--accent-glow), 0 0 60px rgba(219,39,119,0.2); }
   }
   .breath-circle {
     width: 100%; height: 100%;
@@ -565,7 +565,7 @@
   }
   @keyframes pulse {
     0%,100% { box-shadow: 0 0 0 4px var(--accent-light); }
-    50% { box-shadow: 0 0 0 8px rgba(109,92,206,0.1); }
+    50% { box-shadow: 0 0 0 8px rgba(219,39,119,0.1); }
   }
   .timeline-content h4 { color: var(--text); font-size: 0.95em; margin-bottom: 4px; }
   .timeline-content p { font-size: 0.85em; color: var(--text-dim); }
@@ -751,8 +751,8 @@
 
 <div class="app">
   <div class="header">
-    <h1>BreatheFreely</h1>
-    <p>Your personal journey to freedom — one breath at a time</p>
+    <h1 data-i18n="app.title">BreatheFreely</h1>
+    <p data-i18n="app.subtitle">Your personal journey to freedom — one breath at a time</p>
   </div>
 
   <!-- Motivational banner - changes daily -->
@@ -765,49 +765,49 @@
   <div class="stats-bar">
     <div class="stat-card highlight">
       <div class="stat-number" id="daysFree">0</div>
-      <div class="stat-label">Days on Plan</div>
+      <div class="stat-label" data-i18n="stat.daysOnPlan">Days on Plan</div>
     </div>
     <div class="stat-card accent">
       <div class="stat-number" id="moneySaved">$0</div>
-      <div class="stat-label">Money Saved</div>
+      <div class="stat-label" data-i18n="stat.moneySaved">Money Saved</div>
     </div>
     <div class="stat-card teal">
       <div class="stat-number" id="cravingsBeaten">0</div>
-      <div class="stat-label">Cravings Beaten</div>
+      <div class="stat-label" data-i18n="stat.cravingsBeaten">Cravings Beaten</div>
     </div>
     <div class="stat-card highlight">
       <div class="stat-number" id="currentPhase">—</div>
-      <div class="stat-label">Current Phase</div>
+      <div class="stat-label" data-i18n="stat.currentPhase">Current Phase</div>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPanel('today',this)">Today</button>
-    <button class="nav-tab" onclick="showPanel('breathe',this)">Breathe</button>
-    <button class="nav-tab" onclick="showPanel('cravings',this)">Cravings</button>
-    <button class="nav-tab" onclick="showPanel('plan',this)">My Plan</button>
-    <button class="nav-tab" onclick="showPanel('social',this)">Social Kit</button>
-    <button class="nav-tab" onclick="showPanel('journal',this)">Journal</button>
-    <button class="nav-tab" onclick="showPanel('progress',this)">Progress</button>
-    <button class="nav-tab" onclick="showPanel('settings',this)">Settings</button>
+    <button class="nav-tab active" onclick="showPanel('today',this)" data-i18n="nav.today">Today</button>
+    <button class="nav-tab" onclick="showPanel('breathe',this)" data-i18n="nav.breathe">Breathe</button>
+    <button class="nav-tab" onclick="showPanel('cravings',this)" data-i18n="nav.cravings">Cravings</button>
+    <button class="nav-tab" onclick="showPanel('plan',this)" data-i18n="nav.plan">My Plan</button>
+    <button class="nav-tab" onclick="showPanel('social',this)" data-i18n="nav.social">Social Kit</button>
+    <button class="nav-tab" onclick="showPanel('journal',this)" data-i18n="nav.journal">Journal</button>
+    <button class="nav-tab" onclick="showPanel('progress',this)" data-i18n="nav.progress">Progress</button>
+    <button class="nav-tab" onclick="showPanel('settings',this)" data-i18n="nav.settings">Settings</button>
   </div>
 
   <!-- ====== TODAY ====== -->
   <div class="panel active" id="panel-today">
     <div class="card">
-      <h2>This Week</h2>
+      <h2 data-i18n="today.thisWeek">This Week</h2>
       <div class="week-grid" id="weekGrid"></div>
     </div>
 
     <div class="card">
-      <h2>Today's Puff Tracker</h2>
-      <p>Track how many times you vape today. The goal is to gradually reduce this number week by week — no pressure, just awareness.</p>
+      <h2 data-i18n="today.puffTracker">Today's Puff Tracker</h2>
+      <p data-i18n="today.puffDesc">Track how many times you vape today. The goal is to gradually reduce this number week by week — no pressure, just awareness.</p>
       <div class="puff-counter">
         <button onclick="changePuffs(-1)">-</button>
         <div class="puff-count">
           <div class="number" id="puffCount">0</div>
-          <div class="label">Puffs today</div>
+          <div class="label" data-i18n="today.puffsToday">Puffs today</div>
         </div>
         <button onclick="changePuffs(1)">+</button>
       </div>
@@ -815,83 +815,83 @@
     </div>
 
     <div class="card">
-      <h2>Daily Check-in</h2>
+      <h2 data-i18n="today.dailyCheckin">Daily Check-in</h2>
       <div class="slider-group">
         <div class="slider-label">
-          <span>Anxiety Level</span>
+          <span data-i18n="today.anxietyLevel">Anxiety Level</span>
           <span id="anxietyVal">5</span>
         </div>
         <input type="range" min="1" max="10" value="5" id="anxietySlider" oninput="document.getElementById('anxietyVal').textContent=this.value">
       </div>
       <div class="slider-group">
         <div class="slider-label">
-          <span>Craving Intensity</span>
+          <span data-i18n="today.cravingIntensity">Craving Intensity</span>
           <span id="cravingVal">5</span>
         </div>
         <input type="range" min="1" max="10" value="5" id="cravingSlider" oninput="document.getElementById('cravingVal').textContent=this.value">
       </div>
       <div class="checkin-grid" id="checkinGrid"></div>
-      <button class="btn-primary btn-full" onclick="saveDailyCheckin()">Save Today's Check-in</button>
+      <button class="btn-primary btn-full" onclick="saveDailyCheckin()" data-i18n="today.saveCheckin">Save Today's Check-in</button>
     </div>
 
     <div class="card">
-      <h2>Craving Right Now?</h2>
-      <button class="sos-btn" onclick="triggerSOS()">SOS — I Need Help Right Now</button>
+      <h2 data-i18n="today.cravingNow">Craving Right Now?</h2>
+      <button class="sos-btn" onclick="triggerSOS()" data-i18n="today.sosBtn">SOS — I Need Help Right Now</button>
       <div class="sos-tips" id="sosTips">
         <div class="sos-tip">
           <div class="icon">🧊</div>
           <div>
-            <h4>Ice Cube Trick</h4>
-            <p>Hold ice in your hand or press it to your neck. The cold activates your dive reflex and drops your heart rate in 30 seconds. Focus entirely on the sensation.</p>
+            <h4 data-i18n="sos.ice.title">Ice Cube Trick</h4>
+            <p data-i18n="sos.ice.desc">Hold ice in your hand or press it to your neck. The cold activates your dive reflex and drops your heart rate in 30 seconds. Focus entirely on the sensation.</p>
           </div>
         </div>
         <div class="sos-tip">
           <div class="icon">🫁</div>
           <div>
-            <h4>Box Breathing — Do It Now</h4>
-            <p>Go to the <strong>Breathe</strong> tab. 4 rounds = 4 minutes. The deep inhale you crave from vaping? You get it here — without the nicotine.</p>
+            <h4 data-i18n="sos.box.title">Box Breathing — Do It Now</h4>
+            <p data-i18n-html="sos.box.desc">Go to the <strong>Breathe</strong> tab. 4 rounds = 4 minutes. The deep inhale you crave from vaping? You get it here — without the nicotine.</p>
           </div>
         </div>
         <div class="sos-tip">
           <div class="icon">🚶</div>
           <div>
-            <h4>Move for 5 Minutes</h4>
-            <p>Walk, stretch, pace — anything. Taylor et al. (2007) found brief walking cuts cravings by 50%. Your body needs to burn off the restless energy.</p>
+            <h4 data-i18n="sos.move.title">Move for 5 Minutes</h4>
+            <p data-i18n="sos.move.desc">Walk, stretch, pace — anything. Taylor et al. (2007) found brief walking cuts cravings by 50%. Your body needs to burn off the restless energy.</p>
           </div>
         </div>
         <div class="sos-tip">
           <div class="icon">✊</div>
           <div>
-            <h4>Squeeze Something</h4>
-            <p>Grab a stress ball, rubber band, or just clench your fist hard for 10 seconds then release. This redirects the physical tension your body is feeling.</p>
+            <h4 data-i18n="sos.squeeze.title">Squeeze Something</h4>
+            <p data-i18n="sos.squeeze.desc">Grab a stress ball, rubber band, or just clench your fist hard for 10 seconds then release. This redirects the physical tension your body is feeling.</p>
           </div>
         </div>
         <div class="sos-tip">
           <div class="icon">⏱️</div>
           <div>
-            <h4>Wait 5 Minutes</h4>
-            <p>"I'll wait just 5 more minutes." Most cravings peak and fade within 3-5 minutes. Set a timer. You'll be surprised how fast it passes.</p>
+            <h4 data-i18n="sos.wait.title">Wait 5 Minutes</h4>
+            <p data-i18n="sos.wait.desc">"I'll wait just 5 more minutes." Most cravings peak and fade within 3-5 minutes. Set a timer. You'll be surprised how fast it passes.</p>
           </div>
         </div>
         <div class="sos-tip">
           <div class="icon">🧠</div>
           <div>
-            <h4>Reframe the Thought</h4>
-            <p>"I need to vape" → "My brain is requesting nicotine. This uncomfortable feeling IS the addiction losing its grip. Each time I resist, it gets weaker. I am winning right now."</p>
+            <h4 data-i18n="sos.reframe.title">Reframe the Thought</h4>
+            <p data-i18n="sos.reframe.desc">"I need to vape" → "My brain is requesting nicotine. This uncomfortable feeling IS the addiction losing its grip. Each time I resist, it gets weaker. I am winning right now."</p>
           </div>
         </div>
         <div class="sos-tip">
           <div class="icon">🍬</div>
           <div>
-            <h4>Oral Substitute — Now</h4>
-            <p>Pop a mint, chew gum, bite a toothpick, eat a crunchy carrot. The oral fixation is real — satisfy it without nicotine.</p>
+            <h4 data-i18n="sos.oral.title">Oral Substitute — Now</h4>
+            <p data-i18n="sos.oral.desc">Pop a mint, chew gum, bite a toothpick, eat a crunchy carrot. The oral fixation is real — satisfy it without nicotine.</p>
           </div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h2>Health Recovery Timeline</h2>
+      <h2 data-i18n="today.healthTimeline">Health Recovery Timeline</h2>
       <div id="milestones"></div>
     </div>
   </div>
@@ -899,8 +899,8 @@
   <!-- ====== BREATHE ====== -->
   <div class="panel" id="panel-breathe">
     <div class="card">
-      <h2>Box Breathing Exercise</h2>
-      <p>Your body's built-in calm-down switch. Used by Navy SEALs, recommended by anxiety researchers. Do this whenever you'd reach for the vape — the deep inhale satisfies the same physical urge.</p>
+      <h2 data-i18n="breathe.title">Box Breathing Exercise</h2>
+      <p data-i18n="breathe.desc">Your body's built-in calm-down switch. Used by Navy SEALs, recommended by anxiety researchers. Do this whenever you'd reach for the vape — the deep inhale satisfies the same physical urge.</p>
       <div class="breath-container">
         <div class="breath-circle-outer" id="breathOuter">
           <div class="breath-circle" id="breathCircle">
@@ -908,20 +908,20 @@
             <div class="breath-timer" id="breathTimer">4:4:4:4</div>
           </div>
         </div>
-        <button class="breath-btn" id="breathBtn" onclick="toggleBreathing()">Start Breathing</button>
+        <button class="breath-btn" id="breathBtn" onclick="toggleBreathing()" data-i18n="breathe.start">Start Breathing</button>
         <div class="breath-rounds">Round: <strong id="breathRounds">0 / 4</strong></div>
       </div>
     </div>
     <div class="card">
-      <h2>Why This Replaces Vaping</h2>
-      <p>Here's what most people don't realize: when you vape, the calming effect comes partly from the <strong>breathing pattern itself</strong> — slow, deep inhales. Nicotine gets the credit, but your lungs do the real work.</p>
-      <div class="callout">Box breathing gives you the same parasympathetic activation without the 50+ chemicals. After 2-3 weeks of practice, your brain rewires to use this as the default stress response.</div>
-      <h3>The Science</h3>
+      <h2 data-i18n="breathe.whyTitle">Why This Replaces Vaping</h2>
+      <p data-i18n-html="breathe.whyDesc">Here's what most people don't realize: when you vape, the calming effect comes partly from the <strong>breathing pattern itself</strong> — slow, deep inhales. Nicotine gets the credit, but your lungs do the real work.</p>
+      <div class="callout" data-i18n="breathe.callout">Box breathing gives you the same parasympathetic activation without the 50+ chemicals. After 2-3 weeks of practice, your brain rewires to use this as the default stress response.</div>
+      <h3 data-i18n="breathe.science">The Science</h3>
       <ul>
-        <li>Extended exhales stimulate the vagus nerve, lowering heart rate instantly (Gerritsen & Band, 2018)</li>
-        <li>4 rounds reduce cortisol by up to 20% (Ma et al., 2017)</li>
-        <li>Regular practice physically rewires your stress response in 2-3 weeks</li>
-        <li>This is literally what your body was doing when you vaped — minus the poison</li>
+        <li data-i18n="breathe.sci1">Extended exhales stimulate the vagus nerve, lowering heart rate instantly (Gerritsen & Band, 2018)</li>
+        <li data-i18n="breathe.sci2">4 rounds reduce cortisol by up to 20% (Ma et al., 2017)</li>
+        <li data-i18n="breathe.sci3">Regular practice physically rewires your stress response in 2-3 weeks</li>
+        <li data-i18n="breathe.sci4">This is literally what your body was doing when you vaped — minus the poison</li>
       </ul>
     </div>
   </div>
@@ -929,88 +929,88 @@
   <!-- ====== CRAVINGS & HABITS ====== -->
   <div class="panel" id="panel-cravings">
     <div class="card">
-      <h2>Understanding Your Cravings</h2>
-      <p>A craving is a <strong>wave</strong> — it rises, peaks, and falls in 3-5 minutes. You don't need to fight it. You just need to <strong>surf it</strong>. The technique is called "urge surfing" (Marlatt, 1985) and it's one of the most effective tools in addiction research.</p>
-      <div class="callout-accent">Every single craving you ride out without vaping physically weakens the neural pathway. Your brain literally rewires. It's not willpower — it's neuroscience.</div>
-      <h3>The Craving Wave</h3>
+      <h2 data-i18n="cravings.title">Understanding Your Cravings</h2>
+      <p data-i18n-html="cravings.desc">A craving is a <strong>wave</strong> — it rises, peaks, and falls in 3-5 minutes. You don't need to fight it. You just need to <strong>surf it</strong>. The technique is called "urge surfing" (Marlatt, 1985) and it's one of the most effective tools in addiction research.</p>
+      <div class="callout-accent" data-i18n="cravings.callout">Every single craving you ride out without vaping physically weakens the neural pathway. Your brain literally rewires. It's not willpower — it's neuroscience.</div>
+      <h3 data-i18n="cravings.wave">The Craving Wave</h3>
       <ul>
-        <li><strong>0-1 min:</strong> Trigger hits. You feel the pull. This is the steepest part.</li>
-        <li><strong>1-3 min:</strong> Peak intensity. Your brain is screaming. This is where most people give in.</li>
-        <li><strong>3-5 min:</strong> It starts fading. You made it through the worst.</li>
-        <li><strong>5+ min:</strong> Gone. You won. The neural pathway just got weaker.</li>
+        <li data-i18n-html="cravings.wave1"><strong>0-1 min:</strong> Trigger hits. You feel the pull. This is the steepest part.</li>
+        <li data-i18n-html="cravings.wave2"><strong>1-3 min:</strong> Peak intensity. Your brain is screaming. This is where most people give in.</li>
+        <li data-i18n-html="cravings.wave3"><strong>3-5 min:</strong> It starts fading. You made it through the worst.</li>
+        <li data-i18n-html="cravings.wave4"><strong>5+ min:</strong> Gone. You won. The neural pathway just got weaker.</li>
       </ul>
     </div>
 
     <div class="card">
-      <h2>Hand-to-Mouth Habit Replacements</h2>
-      <p>Vaping isn't just nicotine — it's a <strong>physical habit</strong>. Your hand reaches for it automatically. Here are proven replacements that satisfy the same motor pattern:</p>
+      <h2 data-i18n="cravings.habits">Hand-to-Mouth Habit Replacements</h2>
+      <p data-i18n-html="cravings.habitsDesc">Vaping isn't just nicotine — it's a <strong>physical habit</strong>. Your hand reaches for it automatically. Here are proven replacements that satisfy the same motor pattern:</p>
       <div class="habit-grid">
         <div class="habit-card">
           <div class="habit-icon">🖊️</div>
-          <h4>Pen / Pencil Fidget</h4>
-          <p>Keep a pen in your hand. Click it, twirl it, hold it between your fingers like a vape. Same hand movement, zero nicotine.</p>
-          <div class="habit-when">When: Working, sitting, thinking</div>
+          <h4 data-i18n="habit.pen.title">Pen / Pencil Fidget</h4>
+          <p data-i18n="habit.pen.desc">Keep a pen in your hand. Click it, twirl it, hold it between your fingers like a vape. Same hand movement, zero nicotine.</p>
+          <div class="habit-when" data-i18n="habit.pen.when">When: Working, sitting, thinking</div>
         </div>
         <div class="habit-card">
           <div class="habit-icon">🍬</div>
-          <h4>Mints & Hard Candy</h4>
-          <p>Strong mints (Altoids, cinnamon) work best. The intense flavor distracts your brain and satisfies the oral fixation.</p>
-          <div class="habit-when">When: After meals, social events</div>
+          <h4 data-i18n="habit.mints.title">Mints & Hard Candy</h4>
+          <p data-i18n="habit.mints.desc">Strong mints (Altoids, cinnamon) work best. The intense flavor distracts your brain and satisfies the oral fixation.</p>
+          <div class="habit-when" data-i18n="habit.mints.when">When: After meals, social events</div>
         </div>
         <div class="habit-card">
           <div class="habit-icon">🥕</div>
-          <h4>Crunchy Snacks</h4>
-          <p>Carrots, celery, sunflower seeds, apple slices. The chewing and crunching engages your jaw and satisfies the oral need.</p>
-          <div class="habit-when">When: At home, watching TV</div>
+          <h4 data-i18n="habit.snacks.title">Crunchy Snacks</h4>
+          <p data-i18n="habit.snacks.desc">Carrots, celery, sunflower seeds, apple slices. The chewing and crunching engages your jaw and satisfies the oral need.</p>
+          <div class="habit-when" data-i18n="habit.snacks.when">When: At home, watching TV</div>
         </div>
         <div class="habit-card">
           <div class="habit-icon">💪</div>
-          <h4>Stress Ball / Grip</h4>
-          <p>Squeeze a stress ball or hand gripper. Channels the physical tension somewhere productive. Bonus: builds forearm strength.</p>
-          <div class="habit-when">When: Anxious moments, meetings</div>
+          <h4 data-i18n="habit.stress.title">Stress Ball / Grip</h4>
+          <p data-i18n="habit.stress.desc">Squeeze a stress ball or hand gripper. Channels the physical tension somewhere productive. Bonus: builds forearm strength.</p>
+          <div class="habit-when" data-i18n="habit.stress.when">When: Anxious moments, meetings</div>
         </div>
         <div class="habit-card">
           <div class="habit-icon">🧊</div>
-          <h4>Cold Water Bottle</h4>
-          <p>Sip ice water through a straw. The cold, the sipping motion, and the hand-holding all mimic vaping sensations.</p>
-          <div class="habit-when">When: Driving, desk work</div>
+          <h4 data-i18n="habit.water.title">Cold Water Bottle</h4>
+          <p data-i18n="habit.water.desc">Sip ice water through a straw. The cold, the sipping motion, and the hand-holding all mimic vaping sensations.</p>
+          <div class="habit-when" data-i18n="habit.water.when">When: Driving, desk work</div>
         </div>
         <div class="habit-card">
           <div class="habit-icon">🪥</div>
-          <h4>Flavored Toothpick</h4>
-          <p>Cinnamon or tea tree toothpicks give you something in your mouth and hands. Many ex-smokers swear by this.</p>
-          <div class="habit-when">When: Social events, bars</div>
+          <h4 data-i18n="habit.toothpick.title">Flavored Toothpick</h4>
+          <p data-i18n="habit.toothpick.desc">Cinnamon or tea tree toothpicks give you something in your mouth and hands. Many ex-smokers swear by this.</p>
+          <div class="habit-when" data-i18n="habit.toothpick.when">When: Social events, bars</div>
         </div>
         <div class="habit-card">
           <div class="habit-icon">📿</div>
-          <h4>Fidget Ring / Worry Stone</h4>
-          <p>A spinner ring or smooth stone you roll between your fingers. Keeps your hands busy without thinking about it.</p>
-          <div class="habit-when">When: Anywhere, anytime</div>
+          <h4 data-i18n="habit.fidget.title">Fidget Ring / Worry Stone</h4>
+          <p data-i18n="habit.fidget.desc">A spinner ring or smooth stone you roll between your fingers. Keeps your hands busy without thinking about it.</p>
+          <div class="habit-when" data-i18n="habit.fidget.when">When: Anywhere, anytime</div>
         </div>
         <div class="habit-card">
           <div class="habit-icon">🫁</div>
-          <h4>Deep Breath Through a Straw</h4>
-          <p>Inhale slowly through a straw — mimics the exact draw sensation of vaping. Exhale slowly through your nose. Repeat 5x.</p>
-          <div class="habit-when">When: Intense cravings</div>
+          <h4 data-i18n="habit.straw.title">Deep Breath Through a Straw</h4>
+          <p data-i18n="habit.straw.desc">Inhale slowly through a straw — mimics the exact draw sensation of vaping. Exhale slowly through your nose. Repeat 5x.</p>
+          <div class="habit-when" data-i18n="habit.straw.when">When: Intense cravings</div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h2>Trigger Map</h2>
-      <p>Most vaping happens on autopilot. Identify your triggers so you can prepare:</p>
+      <h2 data-i18n="cravings.triggerMap">Trigger Map</h2>
+      <p data-i18n="cravings.triggerDesc">Most vaping happens on autopilot. Identify your triggers so you can prepare:</p>
       <div class="checkin-grid" id="triggerChecklist"></div>
-      <p style="margin-top:14px;font-size:0.85em;color:var(--text-dim)">Check the ones that apply to you. For each trigger you identify, plan a specific replacement action. Writing "When X happens, I will do Y instead" (implementation intentions) doubles your success rate (Gollwitzer, 1999).</p>
+      <p style="margin-top:14px;font-size:0.85em;color:var(--text-dim)" data-i18n="cravings.triggerHelp">Check the ones that apply to you. For each trigger you identify, plan a specific replacement action. Writing "When X happens, I will do Y instead" (implementation intentions) doubles your success rate (Gollwitzer, 1999).</p>
     </div>
 
     <div class="card">
-      <h2>Things That Actually Help (Evidence-Based)</h2>
+      <h2 data-i18n="cravings.evidenceTitle">Things That Actually Help (Evidence-Based)</h2>
       <ul>
-        <li><strong>Nicotine gum/lozenges (NRT):</strong> Available over the counter. Use for breakthrough cravings, especially in social situations. Clinically proven to improve quit rates by 50-70% (Stead et al., 2012)</li>
-        <li><strong>Exercise:</strong> Even 10 minutes reduces cravings significantly. The endorphins replace the dopamine hit from nicotine</li>
-        <li><strong>Sleep:</strong> Poor sleep increases cravings 40%. Prioritize 7+ hours</li>
-        <li><strong>Water:</strong> Dehydration intensifies cravings. Drink a full glass when a craving hits</li>
-        <li><strong>CBT (therapy):</strong> The gold standard for anxiety + cessation. Many therapists offer it online. This is the single most effective intervention available</li>
+        <li data-i18n-html="cravings.ev1"><strong>Nicotine gum/lozenges (NRT):</strong> Available over the counter. Use for breakthrough cravings, especially in social situations. Clinically proven to improve quit rates by 50-70% (Stead et al., 2012)</li>
+        <li data-i18n-html="cravings.ev2"><strong>Exercise:</strong> Even 10 minutes reduces cravings significantly. The endorphins replace the dopamine hit from nicotine</li>
+        <li data-i18n-html="cravings.ev3"><strong>Sleep:</strong> Poor sleep increases cravings 40%. Prioritize 7+ hours</li>
+        <li data-i18n-html="cravings.ev4"><strong>Water:</strong> Dehydration intensifies cravings. Drink a full glass when a craving hits</li>
+        <li data-i18n-html="cravings.ev5"><strong>CBT (therapy):</strong> The gold standard for anxiety + cessation. Many therapists offer it online. This is the single most effective intervention available</li>
       </ul>
     </div>
   </div>
@@ -1018,41 +1018,41 @@
   <!-- ====== PLAN ====== -->
   <div class="panel" id="panel-plan">
     <div class="card">
-      <h2>Your Frequency Reduction Plan</h2>
-      <p>Since you're using a 5% nicotine vape with no lower option, the strategy shifts to <strong>reducing how often you use it</strong>. This is called "scheduled reduction" and research shows it's effective — especially for anxious quitters, because it avoids the shock of going cold turkey (Cinciripini et al., 1995).</p>
+      <h2 data-i18n="plan.title">Your Frequency Reduction Plan</h2>
+      <p data-i18n-html="plan.desc">Since you're using a 5% nicotine vape with no lower option, the strategy shifts to <strong>reducing how often you use it</strong>. This is called "scheduled reduction" and research shows it's effective — especially for anxious quitters, because it avoids the shock of going cold turkey (Cinciripini et al., 1995).</p>
       <table class="schedule-table">
         <thead>
-          <tr><th>Weeks</th><th>Goal</th><th>Strategy</th><th>Phase</th></tr>
+          <tr><th data-i18n="plan.weeks">Weeks</th><th data-i18n="plan.goal">Goal</th><th data-i18n="plan.strategy">Strategy</th><th data-i18n="plan.phase">Phase</th></tr>
         </thead>
         <tbody>
-          <tr><td>1 — 2</td><td>Track baseline</td><td>Count every puff. No reduction yet — just observe.</td><td><span class="badge badge-purple">Awareness</span></td></tr>
-          <tr><td>3 — 4</td><td>Reduce 25%</td><td>If you average 40 puffs/day, target 30. Cut the "automatic" ones first.</td><td><span class="badge badge-orange">Reduce</span></td></tr>
-          <tr><td>5 — 6</td><td>Reduce 50%</td><td>Target half your baseline. Add 10-min delays before each session.</td><td><span class="badge badge-orange">Reduce</span></td></tr>
-          <tr><td>7 — 8</td><td>Reduce 75%</td><td>Vape only at designated times (after meals, before bed). Max 3 sessions/day.</td><td><span class="badge badge-teal">Structure</span></td></tr>
-          <tr><td>9 — 10</td><td>1-2x per day</td><td>Only vape once or twice. Use NRT gum for breakthroughs.</td><td><span class="badge badge-teal">Structure</span></td></tr>
-          <tr><td>11 — 12</td><td>Zero</td><td>Full stop. Use every tool in this app. You're ready.</td><td><span class="badge badge-green">Freedom</span></td></tr>
+          <tr><td>1 — 2</td><td data-i18n="plan.r1.goal">Track baseline</td><td data-i18n="plan.r1.strategy">Count every puff. No reduction yet — just observe.</td><td><span class="badge badge-purple" data-i18n="plan.r1.phase">Awareness</span></td></tr>
+          <tr><td>3 — 4</td><td data-i18n="plan.r2.goal">Reduce 25%</td><td data-i18n="plan.r2.strategy">If you average 40 puffs/day, target 30. Cut the "automatic" ones first.</td><td><span class="badge badge-orange" data-i18n="plan.r2.phase">Reduce</span></td></tr>
+          <tr><td>5 — 6</td><td data-i18n="plan.r3.goal">Reduce 50%</td><td data-i18n="plan.r3.strategy">Target half your baseline. Add 10-min delays before each session.</td><td><span class="badge badge-orange" data-i18n="plan.r2.phase">Reduce</span></td></tr>
+          <tr><td>7 — 8</td><td data-i18n="plan.r4.goal">Reduce 75%</td><td data-i18n="plan.r4.strategy">Vape only at designated times (after meals, before bed). Max 3 sessions/day.</td><td><span class="badge badge-teal" data-i18n="plan.r4.phase">Structure</span></td></tr>
+          <tr><td>9 — 10</td><td data-i18n="plan.r5.goal">1-2x per day</td><td data-i18n="plan.r5.strategy">Only vape once or twice. Use NRT gum for breakthroughs.</td><td><span class="badge badge-teal" data-i18n="plan.r4.phase">Structure</span></td></tr>
+          <tr><td>11 — 12</td><td data-i18n="plan.r6.goal">Zero</td><td data-i18n="plan.r6.strategy">Full stop. Use every tool in this app. You're ready.</td><td><span class="badge badge-green" data-i18n="plan.r6.phase">Freedom</span></td></tr>
         </tbody>
       </table>
-      <div class="callout">Key principle: Don't try to resist a craving with nothing. Always have a REPLACEMENT ready — gum, breathing, a fidget, a walk. Willpower alone fails. Systems win.</div>
+      <div class="callout" data-i18n="plan.callout">Key principle: Don't try to resist a craving with nothing. Always have a REPLACEMENT ready — gum, breathing, a fidget, a walk. Willpower alone fails. Systems win.</div>
     </div>
 
     <div class="card">
-      <h2>The Truth About Anxiety + Nicotine</h2>
-      <p>This is the most important thing you'll read in this app:</p>
-      <p>Nicotine <strong>feels</strong> like it helps your anxiety. But the science shows it actually <strong>makes it worse</strong>:</p>
+      <h2 data-i18n="plan.anxietyTitle">The Truth About Anxiety + Nicotine</h2>
+      <p data-i18n="plan.anxietyIntro">This is the most important thing you'll read in this app:</p>
+      <p data-i18n-html="plan.anxietyDesc">Nicotine <strong>feels</strong> like it helps your anxiety. But the science shows it actually <strong>makes it worse</strong>:</p>
       <ul>
-        <li>Nicotine withdrawal creates anxiety symptoms → the next hit "relieves" it → you think it helped → this <strong>increases your baseline anxiety</strong> over time (Moylan et al., 2013)</li>
-        <li>People who quit experience <strong>reduced anxiety equal to taking medication</strong> within 1-3 months (Taylor et al., 2014)</li>
-        <li>The hardest window is days 3-14 after full cessation. After that, it improves every week</li>
+        <li data-i18n-html="plan.anx1">Nicotine withdrawal creates anxiety symptoms → the next hit "relieves" it → you think it helped → this <strong>increases your baseline anxiety</strong> over time (Moylan et al., 2013)</li>
+        <li data-i18n-html="plan.anx2">People who quit experience <strong>reduced anxiety equal to taking medication</strong> within 1-3 months (Taylor et al., 2014)</li>
+        <li data-i18n="plan.anx3">The hardest window is days 3-14 after full cessation. After that, it improves every week</li>
       </ul>
-      <div class="callout" style="background:#faf5ff;border-color:var(--accent);color:#5b4aab;">
-        You're not losing a coping tool. You're breaking free from something that was quietly making your anxiety worse every single day. The person you'll be in 3 months will be calmer, more present, and genuinely less anxious. That person is worth fighting for.
+      <div class="callout" style="background:#fdf2f8;border-color:var(--accent);color:#9d174d;">
+        <span data-i18n="plan.anxCallout">You're not losing a coping tool. You're breaking free from something that was quietly making your anxiety worse every single day. The person you'll be in 3 months will be calmer, more present, and genuinely less anxious. That person is worth fighting for.</span>
       </div>
     </div>
 
     <div class="card">
-      <h2>Getting Started Checklist</h2>
-      <p>Complete these to begin your journey:</p>
+      <h2 data-i18n="plan.checklistTitle">Getting Started Checklist</h2>
+      <p data-i18n="plan.checklistDesc">Complete these to begin your journey:</p>
       <div class="checkin-grid" id="setupChecklist"></div>
     </div>
   </div>
@@ -1060,73 +1060,73 @@
   <!-- ====== SOCIAL KIT ====== -->
   <div class="panel" id="panel-social">
     <div class="card">
-      <h2>Social Situations Toolkit</h2>
-      <p>This is your hardest trigger — so it gets the most preparation. These strategies are based on CBT principles for social anxiety and substance use. You're not broken for finding this hard. <strong>Everyone</strong> does.</p>
+      <h2 data-i18n="social.title">Social Situations Toolkit</h2>
+      <p data-i18n-html="social.desc">This is your hardest trigger — so it gets the most preparation. These strategies are based on CBT principles for social anxiety and substance use. You're not broken for finding this hard. <strong>Everyone</strong> does.</p>
     </div>
 
     <div class="toolkit-card">
-      <h4>Before You Arrive</h4>
-      <p>Vape <strong>before</strong> the event so you arrive satisfied. Set one rule: "I won't vape in the first 30 minutes." This breaks the automatic link between "social = vape." After a few events, the association weakens permanently.</p>
-      <span class="tag tag-purple">Pre-event</span>
+      <h4 data-i18n="social.before.title">Before You Arrive</h4>
+      <p data-i18n-html="social.before.desc">Vape <strong>before</strong> the event so you arrive satisfied. Set one rule: "I won't vape in the first 30 minutes." This breaks the automatic link between "social = vape." After a few events, the association weakens permanently.</p>
+      <span class="tag tag-purple" data-i18n="social.before.tag">Pre-event</span>
     </div>
 
     <div class="toolkit-card">
-      <h4>The Dominant Hand Trick</h4>
-      <p>Keep a drink in your dominant hand the entire time. This physically blocks the hand-to-mouth reflex. It's stupidly simple — and that's why it works.</p>
-      <span class="tag tag-teal">During event</span>
+      <h4 data-i18n="social.hand.title">The Dominant Hand Trick</h4>
+      <p data-i18n="social.hand.desc">Keep a drink in your dominant hand the entire time. This physically blocks the hand-to-mouth reflex. It's stupidly simple — and that's why it works.</p>
+      <span class="tag tag-teal" data-i18n="social.hand.tag">During event</span>
     </div>
 
     <div class="toolkit-card">
-      <h4>Your Pre-Loaded Response</h4>
-      <p>When someone offers or asks, use: <strong>"I'm cutting back"</strong> — three words, no debate, no awkwardness. Practice saying it out loud before you go. CBT research shows rehearsed responses dramatically reduce social anxiety about refusal.</p>
-      <span class="tag tag-orange">Key phrase</span>
+      <h4 data-i18n="social.response.title">Your Pre-Loaded Response</h4>
+      <p data-i18n-html="social.response.desc">When someone offers or asks, use: <strong>"I'm cutting back"</strong> — three words, no debate, no awkwardness. Practice saying it out loud before you go. CBT research shows rehearsed responses dramatically reduce social anxiety about refusal.</p>
+      <span class="tag tag-orange" data-i18n="social.response.tag">Key phrase</span>
     </div>
 
     <div class="toolkit-card">
-      <h4>Your Secret Weapons: Pocket Kit</h4>
-      <p>Bring a small kit to every social event: <strong>strong mints, a fidget ring or worry stone, and nicotine gum (just in case).</strong> Having backups reduces anxiety because you know you're prepared. You may not even use them — but knowing they're there is the point.</p>
-      <span class="tag tag-pink">Game changer</span>
+      <h4 data-i18n="social.weapons.title">Your Secret Weapons: Pocket Kit</h4>
+      <p data-i18n-html="social.weapons.desc">Bring a small kit to every social event: <strong>strong mints, a fidget ring or worry stone, and nicotine gum (just in case).</strong> Having backups reduces anxiety because you know you're prepared. You may not even use them — but knowing they're there is the point.</p>
+      <span class="tag tag-pink" data-i18n="social.weapons.tag">Game changer</span>
     </div>
 
     <div class="toolkit-card">
-      <h4>Find Your Accountability Buddy</h4>
-      <p>Tell <strong>one</strong> friend about your goal. Not for a lecture — just someone who knows. When you feel the pull, text them or make eye contact. Social support increases quit success by 30% (Westmaas et al., 2010).</p>
-      <span class="tag tag-green">Support</span>
+      <h4 data-i18n="social.buddy.title">Find Your Accountability Buddy</h4>
+      <p data-i18n-html="social.buddy.desc">Tell <strong>one</strong> friend about your goal. Not for a lecture — just someone who knows. When you feel the pull, text them or make eye contact. Social support increases quit success by 30% (Westmaas et al., 2010).</p>
+      <span class="tag tag-green" data-i18n="social.buddy.tag">Support</span>
     </div>
 
     <div class="toolkit-card">
-      <h4>The Step-Away Swap</h4>
-      <p>When you feel the pull to go outside and vape, <strong>still step away</strong> — but do 2 minutes of box breathing or walk around the block instead. You keep the break from socializing (which is what you actually need), just without nicotine.</p>
-      <span class="tag tag-teal">Replacement</span>
+      <h4 data-i18n="social.swap.title">The Step-Away Swap</h4>
+      <p data-i18n-html="social.swap.desc">When you feel the pull to go outside and vape, <strong>still step away</strong> — but do 2 minutes of box breathing or walk around the block instead. You keep the break from socializing (which is what you actually need), just without nicotine.</p>
+      <span class="tag tag-teal" data-i18n="social.swap.tag">Replacement</span>
     </div>
 
     <div class="toolkit-card">
-      <h4>The Reframe</h4>
-      <p><em>"I can't socialize without nicotine"</em> → You did it as a child, a teenager before vaping, and in many situations now. Nicotine withdrawal mimics social anxiety (racing heart, restlessness) but <strong>isn't the same thing</strong>. After 2-4 weeks, most people feel more comfortable socially, not less.</p>
-      <span class="tag tag-purple">Mindset</span>
+      <h4 data-i18n="social.reframe.title">The Reframe</h4>
+      <p data-i18n-html="social.reframe.desc"><em>"I can't socialize without nicotine"</em> → You did it as a child, a teenager before vaping, and in many situations now. Nicotine withdrawal mimics social anxiety (racing heart, restlessness) but <strong>isn't the same thing</strong>. After 2-4 weeks, most people feel more comfortable socially, not less.</p>
+      <span class="tag tag-purple" data-i18n="social.reframe.tag">Mindset</span>
     </div>
 
     <div class="card" style="border-left:4px solid var(--green);">
-      <h2>Setback Protocol</h2>
-      <p>If you slip at a party — <strong>read this:</strong></p>
+      <h2 data-i18n="social.setback.title">Setback Protocol</h2>
+      <p data-i18n-html="social.setback.intro">If you slip at a party — <strong>read this:</strong></p>
       <ul>
-        <li>One slip is NOT a relapse. The Abstinence Violation Effect ("I already failed, might as well keep going") is the real enemy</li>
-        <li>Log it in your journal — what triggered it, how you felt</li>
-        <li>Do NOT reset your mental timeline</li>
-        <li>One slip in a month = you succeeded <strong>29 out of 30 days</strong>. That's a 97% success rate</li>
-        <li>Resume the plan tomorrow as if nothing happened. Because nothing did — you're still on track</li>
+        <li data-i18n="social.setback1">One slip is NOT a relapse. The Abstinence Violation Effect ("I already failed, might as well keep going") is the real enemy</li>
+        <li data-i18n="social.setback2">Log it in your journal — what triggered it, how you felt</li>
+        <li data-i18n="social.setback3">Do NOT reset your mental timeline</li>
+        <li data-i18n-html="social.setback4">One slip in a month = you succeeded <strong>29 out of 30 days</strong>. That's a 97% success rate</li>
+        <li data-i18n="social.setback5">Resume the plan tomorrow as if nothing happened. Because nothing did — you're still on track</li>
       </ul>
-      <div class="callout">Perfection isn't the goal. Progress is. And progress isn't linear — it's messy and human. Just like you. Keep going.</div>
+      <div class="callout" data-i18n="social.setbackCallout">Perfection isn't the goal. Progress is. And progress isn't linear — it's messy and human. Just like you. Keep going.</div>
     </div>
   </div>
 
   <!-- ====== JOURNAL ====== -->
   <div class="panel" id="panel-journal">
     <div class="card">
-      <h2>Your Journal</h2>
-      <p>Writing about cravings, victories, and feelings improves quit outcomes by 25% (Pennebaker, 1997). This is private and stays on your device only.</p>
-      <textarea class="journal-input" id="journalInput" placeholder="How are you feeling today? What triggered a craving? What are you proud of? Write anything..."></textarea>
-      <button class="btn-primary btn-full" onclick="saveJournalEntry()">Save Entry</button>
+      <h2 data-i18n="journal.title">Your Journal</h2>
+      <p data-i18n="journal.desc">Writing about cravings, victories, and feelings improves quit outcomes by 25% (Pennebaker, 1997). This is private and stays on your device only.</p>
+      <textarea class="journal-input" id="journalInput" data-i18n-placeholder="journal.placeholder" placeholder="How are you feeling today? What triggered a craving? What are you proud of? Write anything..."></textarea>
+      <button class="btn-primary btn-full" onclick="saveJournalEntry()" data-i18n="journal.save">Save Entry</button>
       <div class="journal-entries" id="journalEntries"></div>
     </div>
   </div>
@@ -1134,16 +1134,16 @@
   <!-- ====== PROGRESS ====== -->
   <div class="panel" id="panel-progress">
     <div class="card">
-      <h2>Your Journey Timeline</h2>
+      <h2 data-i18n="progress.timeline">Your Journey Timeline</h2>
       <div class="timeline" id="progressTimeline"></div>
     </div>
     <div class="card">
-      <h2>Craving & Anxiety Trend</h2>
+      <h2 data-i18n="progress.trend">Craving & Anxiety Trend</h2>
       <canvas id="trendChart" height="200"></canvas>
-      <p style="margin-top:12px;font-size:0.85em;color:var(--text-dim)">Your daily scores over the last 14 days. Fluctuations are normal — the <strong>overall downward trend</strong> is what matters. Some days will be harder. That's not failure, that's the process.</p>
+      <p style="margin-top:12px;font-size:0.85em;color:var(--text-dim)" data-i18n-html="progress.trendDesc">Your daily scores over the last 14 days. Fluctuations are normal — the <strong>overall downward trend</strong> is what matters. Some days will be harder. That's not failure, that's the process.</p>
     </div>
     <div class="card">
-      <h2>Achievements</h2>
+      <h2 data-i18n="progress.achievements">Achievements</h2>
       <div id="achievements"></div>
     </div>
   </div>
@@ -1151,18 +1151,26 @@
   <!-- ====== SETTINGS ====== -->
   <div class="panel" id="panel-settings">
     <div class="card">
-      <h2>Your Settings</h2>
-      <p>Personalize BreatheFreely to match your situation.</p>
+      <h2 data-i18n="settings.title">Your Settings</h2>
+      <p data-i18n="settings.desc">Personalize BreatheFreely to match your situation.</p>
 
-      <h3>Your Name</h3>
+      <h3 data-i18n="settings.language">Language</h3>
       <div style="margin:14px 0">
-        <input type="text" id="userName" placeholder="e.g. Majo" maxlength="30" style="width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:1em;color:var(--text);background:var(--surface2);outline:none" oninput="this.style.borderColor='var(--accent)'">
-        <p style="margin-top:8px;font-size:0.82em;color:var(--text-dim)">Used to personalize greetings and motivational messages throughout the app.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <button class="currency-btn lang-btn" onclick="setLanguage('en')">English</button>
+          <button class="currency-btn lang-btn" onclick="setLanguage('es')">Español</button>
+        </div>
       </div>
 
-      <h3>Money Tracking</h3>
+      <h3 data-i18n="settings.name">Your Name</h3>
       <div style="margin:14px 0">
-        <label style="display:block;font-weight:600;font-size:0.9em;color:var(--text);margin-bottom:6px">Currency Symbol</label>
+        <input type="text" id="userName" placeholder="e.g. Majo" maxlength="30" style="width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:1em;color:var(--text);background:var(--surface2);outline:none" oninput="this.style.borderColor='var(--accent)'">
+        <p style="margin-top:8px;font-size:0.82em;color:var(--text-dim)" data-i18n="settings.nameDesc">Used to personalize greetings and motivational messages throughout the app.</p>
+      </div>
+
+      <h3 data-i18n="settings.money">Money Tracking</h3>
+      <div style="margin:14px 0">
+        <label style="display:block;font-weight:600;font-size:0.9em;color:var(--text);margin-bottom:6px" data-i18n="settings.currency">Currency Symbol</label>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
           <button class="currency-btn" onclick="setCurrency('$','USD')">$ USD</button>
           <button class="currency-btn" onclick="setCurrency('COP$','COP')">COP$ Pesos</button>
@@ -1170,29 +1178,29 @@
           <button class="currency-btn" onclick="setCurrency('£','GBP')">£ GBP</button>
           <button class="currency-btn" onclick="setCurrency('MX$','MXN')">MX$ MXN</button>
         </div>
-        <label style="display:block;font-weight:600;font-size:0.9em;color:var(--text);margin-bottom:6px">How much do you spend per WEEK on vaping?</label>
+        <label style="display:block;font-weight:600;font-size:0.9em;color:var(--text);margin-bottom:6px" data-i18n="settings.weeklySpend">How much do you spend per WEEK on vaping?</label>
         <div style="display:flex;gap:10px;align-items:center">
           <span id="currencyLabel" style="font-weight:700;font-size:1.2em;color:var(--accent)">$</span>
           <input type="number" id="weeklySpend" placeholder="e.g. 50000" style="flex:1;padding:12px 16px;border:2px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:1em;color:var(--text);background:var(--surface2);outline:none;-moz-appearance:textfield" oninput="this.style.borderColor='var(--accent)'">
-          <span style="color:var(--text-dim);font-size:0.85em;font-weight:500">/ week</span>
+          <span style="color:var(--text-dim);font-size:0.85em;font-weight:500" data-i18n="settings.perWeek">/ week</span>
         </div>
-        <p style="margin-top:8px;font-size:0.82em;color:var(--text-dim)">This calculates how much you're saving as you reduce. Your daily cost = weekly spend / 7.</p>
+        <p style="margin-top:8px;font-size:0.82em;color:var(--text-dim)" data-i18n="settings.moneyDesc">This calculates how much you're saving as you reduce. Your daily cost = weekly spend / 7.</p>
       </div>
 
-      <h3>Puff Baseline</h3>
+      <h3 data-i18n="settings.puffBaseline">Puff Baseline</h3>
       <div style="margin:14px 0">
-        <label style="display:block;font-weight:600;font-size:0.9em;color:var(--text);margin-bottom:6px">Average puffs per day (your starting point)</label>
+        <label style="display:block;font-weight:600;font-size:0.9em;color:var(--text);margin-bottom:6px" data-i18n="settings.puffLabel">Average puffs per day (your starting point)</label>
         <input type="number" id="baselinePuffsInput" placeholder="e.g. 40" style="width:120px;padding:12px 16px;border:2px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:1em;color:var(--text);background:var(--surface2);outline:none;-moz-appearance:textfield">
-        <p style="margin-top:8px;font-size:0.82em;color:var(--text-dim)">This sets your reduction targets. If you're not sure, track for a few days first and come back.</p>
+        <p style="margin-top:8px;font-size:0.82em;color:var(--text-dim)" data-i18n="settings.puffDesc">This sets your reduction targets. If you're not sure, track for a few days first and come back.</p>
       </div>
 
-      <button class="btn-primary btn-full" onclick="saveSettings()">Save Settings</button>
+      <button class="btn-primary btn-full" onclick="saveSettings()" data-i18n="settings.save">Save Settings</button>
     </div>
 
     <div class="card" style="border-left:4px solid var(--red);">
-      <h2>Danger Zone</h2>
-      <p>This permanently deletes all your data — check-ins, journal entries, achievements, everything.</p>
-      <button class="btn-primary btn-full" style="background:var(--red);margin-top:12px" onclick="resetApp()">Reset All Data</button>
+      <h2 data-i18n="settings.danger">Danger Zone</h2>
+      <p data-i18n="settings.dangerDesc">This permanently deletes all your data — check-ins, journal entries, achievements, everything.</p>
+      <button class="btn-primary btn-full" style="background:var(--red);margin-top:12px" onclick="resetApp()" data-i18n="settings.reset">Reset All Data</button>
     </div>
   </div>
 
@@ -1207,6 +1215,7 @@ const STORAGE_KEY = 'breathefreely_v2';
 const defaultData = () => ({
   startDate: new Date().toISOString().split('T')[0],
   dailyCheckins: {},
+  lang: 'en',
   journal: [],
   cravingsBeaten: 0,
   setupDone: {},
@@ -1231,6 +1240,461 @@ function loadData() {
 }
 function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
 let data = loadData();
+
+// ===== i18n TRANSLATIONS =====
+function t(key) {
+  const entry = T[key];
+  if (!entry) return key;
+  return entry[data.lang] || entry.en || key;
+}
+
+const T = {
+  // Header
+  'app.title': { en: 'BreatheFreely', es: 'RespiraLibre' },
+  'app.subtitle': { en: 'Your personal journey to freedom — one breath at a time', es: 'Tu viaje personal hacia la libertad — una respiración a la vez' },
+  'app.subtitle.name': { en: ', your personal journey to freedom — one breath at a time', es: ', tu viaje personal hacia la libertad — una respiración a la vez' },
+  // Stats
+  'stat.daysOnPlan': { en: 'Days on Plan', es: 'Días en Plan' },
+  'stat.moneySaved': { en: 'Money Saved', es: 'Dinero Ahorrado' },
+  'stat.cravingsBeaten': { en: 'Cravings Beaten', es: 'Antojos Vencidos' },
+  'stat.currentPhase': { en: 'Current Phase', es: 'Fase Actual' },
+  // Nav
+  'nav.today': { en: 'Today', es: 'Hoy' },
+  'nav.breathe': { en: 'Breathe', es: 'Respira' },
+  'nav.cravings': { en: 'Cravings', es: 'Antojos' },
+  'nav.plan': { en: 'My Plan', es: 'Mi Plan' },
+  'nav.social': { en: 'Social Kit', es: 'Kit Social' },
+  'nav.journal': { en: 'Journal', es: 'Diario' },
+  'nav.progress': { en: 'Progress', es: 'Progreso' },
+  'nav.settings': { en: 'Settings', es: 'Ajustes' },
+  // Today panel
+  'today.thisWeek': { en: 'This Week', es: 'Esta Semana' },
+  'today.puffTracker': { en: "Today's Puff Tracker", es: 'Contador de Caladas' },
+  'today.puffDesc': { en: 'Track how many times you vape today. The goal is to gradually reduce this number week by week — no pressure, just awareness.', es: 'Registra cuántas veces vapeas hoy. El objetivo es reducir gradualmente este número semana a semana — sin presión, solo consciencia.' },
+  'today.puffsToday': { en: 'Puffs today', es: 'Caladas hoy' },
+  'today.dailyCheckin': { en: 'Daily Check-in', es: 'Check-in Diario' },
+  'today.anxietyLevel': { en: 'Anxiety Level', es: 'Nivel de Ansiedad' },
+  'today.cravingIntensity': { en: 'Craving Intensity', es: 'Intensidad del Antojo' },
+  'today.saveCheckin': { en: "Save Today's Check-in", es: 'Guardar Check-in de Hoy' },
+  'today.cravingNow': { en: 'Craving Right Now?', es: '¿Antojo Ahora Mismo?' },
+  'today.sosBtn': { en: 'SOS — I Need Help Right Now', es: 'SOS — Necesito Ayuda Ahora' },
+  'today.healthTimeline': { en: 'Health Recovery Timeline', es: 'Línea de Recuperación de Salud' },
+  // SOS tips
+  'sos.ice.title': { en: 'Ice Cube Trick', es: 'Truco del Hielo' },
+  'sos.ice.desc': { en: 'Hold ice in your hand or press it to your neck. The cold activates your dive reflex and drops your heart rate in 30 seconds. Focus entirely on the sensation.', es: 'Sostén hielo en tu mano o presiónalo contra tu cuello. El frío activa tu reflejo de inmersión y reduce tu ritmo cardíaco en 30 segundos. Concéntrate totalmente en la sensación.' },
+  'sos.box.title': { en: 'Box Breathing — Do It Now', es: 'Respiración Cuadrada — Hazla Ahora' },
+  'sos.box.desc': { en: 'Go to the <strong>Breathe</strong> tab. 4 rounds = 4 minutes. The deep inhale you crave from vaping? You get it here — without the nicotine.', es: 'Ve a la pestaña <strong>Respira</strong>. 4 rondas = 4 minutos. ¿La inhalación profunda que deseas del vape? La obtienes aquí — sin nicotina.' },
+  'sos.move.title': { en: 'Move for 5 Minutes', es: 'Muévete 5 Minutos' },
+  'sos.move.desc': { en: "Walk, stretch, pace — anything. Taylor et al. (2007) found brief walking cuts cravings by 50%. Your body needs to burn off the restless energy.", es: 'Camina, estírate, pasea — lo que sea. Taylor et al. (2007) encontró que caminar brevemente reduce los antojos un 50%. Tu cuerpo necesita quemar la energía inquieta.' },
+  'sos.squeeze.title': { en: 'Squeeze Something', es: 'Aprieta Algo' },
+  'sos.squeeze.desc': { en: 'Grab a stress ball, rubber band, or just clench your fist hard for 10 seconds then release. This redirects the physical tension your body is feeling.', es: 'Agarra una pelota antiestrés, una liga, o simplemente aprieta tu puño fuerte por 10 segundos y suelta. Esto redirige la tensión física que siente tu cuerpo.' },
+  'sos.wait.title': { en: 'Wait 5 Minutes', es: 'Espera 5 Minutos' },
+  'sos.wait.desc': { en: '"I\'ll wait just 5 more minutes." Most cravings peak and fade within 3-5 minutes. Set a timer. You\'ll be surprised how fast it passes.', es: '"Esperaré solo 5 minutos más." La mayoría de los antojos llegan al pico y se desvanecen en 3-5 minutos. Pon un temporizador. Te sorprenderá lo rápido que pasa.' },
+  'sos.reframe.title': { en: 'Reframe the Thought', es: 'Reencuadra el Pensamiento' },
+  'sos.reframe.desc': { en: '"I need to vape" → "My brain is requesting nicotine. This uncomfortable feeling IS the addiction losing its grip. Each time I resist, it gets weaker. I am winning right now."', es: '"Necesito vapear" → "Mi cerebro está pidiendo nicotina. Esta sensación incómoda ES la adicción perdiendo su control. Cada vez que resisto, se debilita. Estoy ganando ahora mismo."' },
+  'sos.oral.title': { en: 'Oral Substitute — Now', es: 'Sustituto Oral — Ahora' },
+  'sos.oral.desc': { en: 'Pop a mint, chew gum, bite a toothpick, eat a crunchy carrot. The oral fixation is real — satisfy it without nicotine.', es: 'Come una menta, mastica chicle, muerde un palillo, come una zanahoria crujiente. La fijación oral es real — satisfácela sin nicotina.' },
+  // Breathe panel
+  'breathe.title': { en: 'Box Breathing Exercise', es: 'Ejercicio de Respiración Cuadrada' },
+  'breathe.desc': { en: "Your body's built-in calm-down switch. Used by Navy SEALs, recommended by anxiety researchers. Do this whenever you'd reach for the vape — the deep inhale satisfies the same physical urge.", es: 'El interruptor de calma incorporado de tu cuerpo. Usado por Navy SEALs, recomendado por investigadores de ansiedad. Haz esto cada vez que busques el vape — la inhalación profunda satisface la misma necesidad física.' },
+  'breathe.start': { en: 'Start Breathing', es: 'Comenzar Respiración' },
+  'breathe.stop': { en: 'Stop', es: 'Detener' },
+  'breathe.ready': { en: 'Ready', es: 'Listo' },
+  'breathe.round': { en: 'Round:', es: 'Ronda:' },
+  'breathe.whyTitle': { en: 'Why This Replaces Vaping', es: 'Por Qué Esto Reemplaza al Vape' },
+  'breathe.whyDesc': { en: "Here's what most people don't realize: when you vape, the calming effect comes partly from the <strong>breathing pattern itself</strong> — slow, deep inhales. Nicotine gets the credit, but your lungs do the real work.", es: 'Esto es lo que la mayoría no sabe: cuando vapeas, el efecto calmante viene en parte del <strong>patrón de respiración</strong> — inhalaciones lentas y profundas. La nicotina se lleva el crédito, pero tus pulmones hacen el trabajo real.' },
+  'breathe.callout': { en: 'Box breathing gives you the same parasympathetic activation without the 50+ chemicals. After 2-3 weeks of practice, your brain rewires to use this as the default stress response.', es: 'La respiración cuadrada te da la misma activación parasimpática sin los 50+ químicos. Después de 2-3 semanas de práctica, tu cerebro se reconfigura para usar esto como respuesta predeterminada al estrés.' },
+  'breathe.science': { en: 'The Science', es: 'La Ciencia' },
+  'breathe.sci1': { en: 'Extended exhales stimulate the vagus nerve, lowering heart rate instantly (Gerritsen & Band, 2018)', es: 'Las exhalaciones prolongadas estimulan el nervio vago, reduciendo el ritmo cardíaco instantáneamente (Gerritsen & Band, 2018)' },
+  'breathe.sci2': { en: '4 rounds reduce cortisol by up to 20% (Ma et al., 2017)', es: '4 rondas reducen el cortisol hasta un 20% (Ma et al., 2017)' },
+  'breathe.sci3': { en: 'Regular practice physically rewires your stress response in 2-3 weeks', es: 'La práctica regular reconfigura físicamente tu respuesta al estrés en 2-3 semanas' },
+  'breathe.sci4': { en: 'This is literally what your body was doing when you vaped — minus the poison', es: 'Esto es literalmente lo que tu cuerpo hacía cuando vapeabas — menos el veneno' },
+  // Cravings panel
+  'cravings.title': { en: 'Understanding Your Cravings', es: 'Entendiendo Tus Antojos' },
+  'cravings.desc': { en: 'A craving is a <strong>wave</strong> — it rises, peaks, and falls in 3-5 minutes. You don\'t need to fight it. You just need to <strong>surf it</strong>. The technique is called "urge surfing" (Marlatt, 1985) and it\'s one of the most effective tools in addiction research.', es: 'Un antojo es una <strong>ola</strong> — sube, llega al pico y baja en 3-5 minutos. No necesitas luchar contra él. Solo necesitas <strong>surfear la ola</strong>. La técnica se llama "surfeo de impulsos" (Marlatt, 1985) y es una de las herramientas más efectivas en investigación de adicciones.' },
+  'cravings.callout': { en: "Every single craving you ride out without vaping physically weakens the neural pathway. Your brain literally rewires. It's not willpower — it's neuroscience.", es: 'Cada antojo que superas sin vapear debilita físicamente la vía neuronal. Tu cerebro literalmente se reconfigura. No es fuerza de voluntad — es neurociencia.' },
+  'cravings.wave': { en: 'The Craving Wave', es: 'La Ola del Antojo' },
+  'cravings.wave1': { en: '<strong>0-1 min:</strong> Trigger hits. You feel the pull. This is the steepest part.', es: '<strong>0-1 min:</strong> El disparador golpea. Sientes el impulso. Esta es la parte más intensa.' },
+  'cravings.wave2': { en: '<strong>1-3 min:</strong> Peak intensity. Your brain is screaming. This is where most people give in.', es: '<strong>1-3 min:</strong> Intensidad máxima. Tu cerebro está gritando. Aquí es donde la mayoría cede.' },
+  'cravings.wave3': { en: '<strong>3-5 min:</strong> It starts fading. You made it through the worst.', es: '<strong>3-5 min:</strong> Empieza a desvanecerse. Pasaste lo peor.' },
+  'cravings.wave4': { en: '<strong>5+ min:</strong> Gone. You won. The neural pathway just got weaker.', es: '<strong>5+ min:</strong> Se fue. Ganaste. La vía neuronal se acaba de debilitar.' },
+  'cravings.habits': { en: 'Hand-to-Mouth Habit Replacements', es: 'Reemplazos del Hábito Mano-a-Boca' },
+  'cravings.habitsDesc': { en: "Vaping isn't just nicotine — it's a <strong>physical habit</strong>. Your hand reaches for it automatically. Here are proven replacements that satisfy the same motor pattern:", es: 'Vapear no es solo nicotina — es un <strong>hábito físico</strong>. Tu mano lo busca automáticamente. Aquí hay reemplazos probados que satisfacen el mismo patrón motor:' },
+  'habit.pen.title': { en: 'Pen / Pencil Fidget', es: 'Jugar con un Lapicero' },
+  'habit.pen.desc': { en: 'Keep a pen in your hand. Click it, twirl it, hold it between your fingers like a vape. Same hand movement, zero nicotine.', es: 'Mantén un lapicero en tu mano. Haz clic, gíralo, sostenlo entre tus dedos como un vape. Mismo movimiento de mano, cero nicotina.' },
+  'habit.pen.when': { en: 'When: Working, sitting, thinking', es: 'Cuándo: Trabajando, sentado, pensando' },
+  'habit.mints.title': { en: 'Mints & Hard Candy', es: 'Mentas y Caramelos Duros' },
+  'habit.mints.desc': { en: 'Strong mints (Altoids, cinnamon) work best. The intense flavor distracts your brain and satisfies the oral fixation.', es: 'Las mentas fuertes (Altoids, canela) funcionan mejor. El sabor intenso distrae tu cerebro y satisface la fijación oral.' },
+  'habit.mints.when': { en: 'When: After meals, social events', es: 'Cuándo: Después de comer, eventos sociales' },
+  'habit.snacks.title': { en: 'Crunchy Snacks', es: 'Snacks Crujientes' },
+  'habit.snacks.desc': { en: 'Carrots, celery, sunflower seeds, apple slices. The chewing and crunching engages your jaw and satisfies the oral need.', es: 'Zanahorias, apio, semillas de girasol, rodajas de manzana. Masticar y crujir activa tu mandíbula y satisface la necesidad oral.' },
+  'habit.snacks.when': { en: 'When: At home, watching TV', es: 'Cuándo: En casa, viendo TV' },
+  'habit.stress.title': { en: 'Stress Ball / Grip', es: 'Pelota Antiestrés' },
+  'habit.stress.desc': { en: 'Squeeze a stress ball or hand gripper. Channels the physical tension somewhere productive. Bonus: builds forearm strength.', es: 'Aprieta una pelota antiestrés o un grip de mano. Canaliza la tensión física de forma productiva. Bonus: fortalece el antebrazo.' },
+  'habit.stress.when': { en: 'When: Anxious moments, meetings', es: 'Cuándo: Momentos de ansiedad, reuniones' },
+  'habit.water.title': { en: 'Cold Water Bottle', es: 'Botella de Agua Fría' },
+  'habit.water.desc': { en: 'Sip ice water through a straw. The cold, the sipping motion, and the hand-holding all mimic vaping sensations.', es: 'Bebe agua helada con un pitillo. El frío, el movimiento de sorber y sostener la botella imitan las sensaciones del vape.' },
+  'habit.water.when': { en: 'When: Driving, desk work', es: 'Cuándo: Conduciendo, trabajo de escritorio' },
+  'habit.toothpick.title': { en: 'Flavored Toothpick', es: 'Palillo Saborizado' },
+  'habit.toothpick.desc': { en: 'Cinnamon or tea tree toothpicks give you something in your mouth and hands. Many ex-smokers swear by this.', es: 'Los palillos de canela o árbol de té te dan algo en la boca y las manos. Muchos ex-fumadores confían en esto.' },
+  'habit.toothpick.when': { en: 'When: Social events, bars', es: 'Cuándo: Eventos sociales, bares' },
+  'habit.fidget.title': { en: 'Fidget Ring / Worry Stone', es: 'Anillo Fidget / Piedra de Preocupación' },
+  'habit.fidget.desc': { en: "A spinner ring or smooth stone you roll between your fingers. Keeps your hands busy without thinking about it.", es: 'Un anillo giratorio o piedra lisa que giras entre tus dedos. Mantiene tus manos ocupadas sin pensarlo.' },
+  'habit.fidget.when': { en: 'When: Anywhere, anytime', es: 'Cuándo: Donde sea, cuando sea' },
+  'habit.straw.title': { en: 'Deep Breath Through a Straw', es: 'Respiración Profunda por un Pitillo' },
+  'habit.straw.desc': { en: 'Inhale slowly through a straw — mimics the exact draw sensation of vaping. Exhale slowly through your nose. Repeat 5x.', es: 'Inhala lentamente por un pitillo — imita la sensación exacta de inhalar del vape. Exhala lentamente por la nariz. Repite 5 veces.' },
+  'habit.straw.when': { en: 'When: Intense cravings', es: 'Cuándo: Antojos intensos' },
+  'cravings.triggerMap': { en: 'Trigger Map', es: 'Mapa de Disparadores' },
+  'cravings.triggerDesc': { en: 'Most vaping happens on autopilot. Identify your triggers so you can prepare:', es: 'La mayoría del vapeo ocurre en automático. Identifica tus disparadores para prepararte:' },
+  'cravings.triggerHelp': { en: 'Check the ones that apply to you. For each trigger you identify, plan a specific replacement action. Writing "When X happens, I will do Y instead" (implementation intentions) doubles your success rate (Gollwitzer, 1999).', es: 'Marca los que aplican para ti. Para cada disparador que identifiques, planea una acción de reemplazo específica. Escribir "Cuando pase X, haré Y en su lugar" (intenciones de implementación) duplica tu tasa de éxito (Gollwitzer, 1999).' },
+  'cravings.evidenceTitle': { en: 'Things That Actually Help (Evidence-Based)', es: 'Cosas Que Realmente Ayudan (Basadas en Evidencia)' },
+  'cravings.ev1': { en: '<strong>Nicotine gum/lozenges (NRT):</strong> Available over the counter. Use for breakthrough cravings, especially in social situations. Clinically proven to improve quit rates by 50-70% (Stead et al., 2012)', es: '<strong>Chicle/pastillas de nicotina (NRT):</strong> Disponibles sin receta. Úsalos para antojos intensos, especialmente en situaciones sociales. Clínicamente probado para mejorar las tasas de abandono un 50-70% (Stead et al., 2012)' },
+  'cravings.ev2': { en: '<strong>Exercise:</strong> Even 10 minutes reduces cravings significantly. The endorphins replace the dopamine hit from nicotine', es: '<strong>Ejercicio:</strong> Incluso 10 minutos reducen los antojos significativamente. Las endorfinas reemplazan el golpe de dopamina de la nicotina' },
+  'cravings.ev3': { en: '<strong>Sleep:</strong> Poor sleep increases cravings 40%. Prioritize 7+ hours', es: '<strong>Sueño:</strong> Dormir mal aumenta los antojos un 40%. Prioriza 7+ horas' },
+  'cravings.ev4': { en: '<strong>Water:</strong> Dehydration intensifies cravings. Drink a full glass when a craving hits', es: '<strong>Agua:</strong> La deshidratación intensifica los antojos. Bebe un vaso lleno cuando te dé un antojo' },
+  'cravings.ev5': { en: '<strong>CBT (therapy):</strong> The gold standard for anxiety + cessation. Many therapists offer it online. This is the single most effective intervention available', es: '<strong>TCC (terapia):</strong> El estándar de oro para ansiedad + cesación. Muchos terapeutas lo ofrecen online. Es la intervención más efectiva disponible' },
+  // Plan panel
+  'plan.title': { en: 'Your Frequency Reduction Plan', es: 'Tu Plan de Reducción de Frecuencia' },
+  'plan.desc': { en: 'Since you\'re using a 5% nicotine vape with no lower option, the strategy shifts to <strong>reducing how often you use it</strong>. This is called "scheduled reduction" and research shows it\'s effective — especially for anxious quitters, because it avoids the shock of going cold turkey (Cinciripini et al., 1995).', es: 'Ya que usas un vape de nicotina al 5% sin opción más baja, la estrategia cambia a <strong>reducir qué tan seguido lo usas</strong>. Esto se llama "reducción programada" y la investigación muestra que es efectivo — especialmente para quienes dejan con ansiedad, porque evita el shock de dejarlo de golpe (Cinciripini et al., 1995).' },
+  'plan.weeks': { en: 'Weeks', es: 'Semanas' },
+  'plan.goal': { en: 'Goal', es: 'Meta' },
+  'plan.strategy': { en: 'Strategy', es: 'Estrategia' },
+  'plan.phase': { en: 'Phase', es: 'Fase' },
+  'plan.callout': { en: "Key principle: Don't try to resist a craving with nothing. Always have a REPLACEMENT ready — gum, breathing, a fidget, a walk. Willpower alone fails. Systems win.", es: 'Principio clave: No intentes resistir un antojo sin nada. Siempre ten un REEMPLAZO listo — chicle, respiración, un fidget, una caminata. La fuerza de voluntad sola falla. Los sistemas ganan.' },
+  'plan.anxietyTitle': { en: 'The Truth About Anxiety + Nicotine', es: 'La Verdad Sobre la Ansiedad + Nicotina' },
+  'plan.anxietyIntro': { en: 'This is the most important thing you\'ll read in this app:', es: 'Esto es lo más importante que leerás en esta app:' },
+  'plan.anxietyDesc': { en: 'Nicotine <strong>feels</strong> like it helps your anxiety. But the science shows it actually <strong>makes it worse</strong>:', es: 'La nicotina <strong>se siente</strong> como si ayudara tu ansiedad. Pero la ciencia muestra que en realidad <strong>la empeora</strong>:' },
+  'plan.anx1': { en: 'Nicotine withdrawal creates anxiety symptoms → the next hit "relieves" it → you think it helped → this <strong>increases your baseline anxiety</strong> over time (Moylan et al., 2013)', es: 'La abstinencia de nicotina crea síntomas de ansiedad → la siguiente calada la "alivia" → crees que ayudó → esto <strong>aumenta tu ansiedad base</strong> con el tiempo (Moylan et al., 2013)' },
+  'plan.anx2': { en: 'People who quit experience <strong>reduced anxiety equal to taking medication</strong> within 1-3 months (Taylor et al., 2014)', es: 'Las personas que dejan experimentan <strong>reducción de ansiedad igual a tomar medicación</strong> en 1-3 meses (Taylor et al., 2014)' },
+  'plan.anx3': { en: 'The hardest window is days 3-14 after full cessation. After that, it improves every week', es: 'La ventana más difícil son los días 3-14 después de la cesación total. Después de eso, mejora cada semana' },
+  'plan.anxCallout': { en: "You're not losing a coping tool. You're breaking free from something that was quietly making your anxiety worse every single day. The person you'll be in 3 months will be calmer, more present, and genuinely less anxious. That person is worth fighting for.", es: 'No estás perdiendo una herramienta. Te estás liberando de algo que silenciosamente empeoraba tu ansiedad cada día. La persona que serás en 3 meses será más tranquila, más presente y genuinamente menos ansiosa. Esa persona vale la pena.' },
+  'plan.checklistTitle': { en: 'Getting Started Checklist', es: 'Lista para Comenzar' },
+  'plan.checklistDesc': { en: 'Complete these to begin your journey:', es: 'Completa estos para comenzar tu viaje:' },
+  // Social panel
+  'social.title': { en: 'Social Situations Toolkit', es: 'Kit para Situaciones Sociales' },
+  'social.desc': { en: "This is your hardest trigger — so it gets the most preparation. These strategies are based on CBT principles for social anxiety and substance use. You're not broken for finding this hard. <strong>Everyone</strong> does.", es: 'Este es tu disparador más difícil — por eso recibe la mayor preparación. Estas estrategias están basadas en principios de TCC para ansiedad social y uso de sustancias. No estás roto/a por encontrar esto difícil. <strong>Todos</strong> lo encuentran así.' },
+  'social.before.title': { en: 'Before You Arrive', es: 'Antes de Llegar' },
+  'social.before.desc': { en: 'Vape <strong>before</strong> the event so you arrive satisfied. Set one rule: "I won\'t vape in the first 30 minutes." This breaks the automatic link between "social = vape." After a few events, the association weakens permanently.', es: 'Vapea <strong>antes</strong> del evento para llegar satisfecho/a. Pon una regla: "No vapearé en los primeros 30 minutos." Esto rompe el vínculo automático entre "social = vape." Después de algunos eventos, la asociación se debilita permanentemente.' },
+  'social.before.tag': { en: 'Pre-event', es: 'Pre-evento' },
+  'social.hand.title': { en: 'The Dominant Hand Trick', es: 'El Truco de la Mano Dominante' },
+  'social.hand.desc': { en: "Keep a drink in your dominant hand the entire time. This physically blocks the hand-to-mouth reflex. It's stupidly simple — and that's why it works.", es: 'Mantén una bebida en tu mano dominante todo el tiempo. Esto bloquea físicamente el reflejo mano-a-boca. Es increíblemente simple — y por eso funciona.' },
+  'social.hand.tag': { en: 'During event', es: 'Durante evento' },
+  'social.response.title': { en: 'Your Pre-Loaded Response', es: 'Tu Respuesta Preparada' },
+  'social.response.desc': { en: 'When someone offers or asks, use: <strong>"I\'m cutting back"</strong> — three words, no debate, no awkwardness. Practice saying it out loud before you go. CBT research shows rehearsed responses dramatically reduce social anxiety about refusal.', es: 'Cuando alguien ofrezca o pregunte, usa: <strong>"Estoy reduciendo"</strong> — dos palabras, sin debate, sin incomodidad. Practica diciéndolo en voz alta antes de ir. La investigación en TCC muestra que las respuestas ensayadas reducen dramáticamente la ansiedad social sobre el rechazo.' },
+  'social.response.tag': { en: 'Key phrase', es: 'Frase clave' },
+  'social.weapons.title': { en: 'Your Secret Weapons: Pocket Kit', es: 'Tus Armas Secretas: Kit de Bolsillo' },
+  'social.weapons.desc': { en: 'Bring a small kit to every social event: <strong>strong mints, a fidget ring or worry stone, and nicotine gum (just in case).</strong> Having backups reduces anxiety because you know you\'re prepared. You may not even use them — but knowing they\'re there is the point.', es: 'Lleva un pequeño kit a cada evento social: <strong>mentas fuertes, un anillo fidget o piedra de preocupación, y chicle de nicotina (por si acaso).</strong> Tener respaldos reduce la ansiedad porque sabes que estás preparado/a. Puede que ni los uses — pero saber que están ahí es el punto.' },
+  'social.weapons.tag': { en: 'Game changer', es: 'Cambio de juego' },
+  'social.buddy.title': { en: 'Find Your Accountability Buddy', es: 'Encuentra Tu Compañero de Apoyo' },
+  'social.buddy.desc': { en: 'Tell <strong>one</strong> friend about your goal. Not for a lecture — just someone who knows. When you feel the pull, text them or make eye contact. Social support increases quit success by 30% (Westmaas et al., 2010).', es: 'Dile a <strong>un</strong> amigo sobre tu meta. No para un sermón — solo alguien que sepa. Cuando sientas el impulso, escríbele o haz contacto visual. El apoyo social aumenta el éxito al dejar en un 30% (Westmaas et al., 2010).' },
+  'social.buddy.tag': { en: 'Support', es: 'Apoyo' },
+  'social.swap.title': { en: 'The Step-Away Swap', es: 'El Intercambio al Salir' },
+  'social.swap.desc': { en: 'When you feel the pull to go outside and vape, <strong>still step away</strong> — but do 2 minutes of box breathing or walk around the block instead. You keep the break from socializing (which is what you actually need), just without nicotine.', es: 'Cuando sientas el impulso de salir a vapear, <strong>igual sal</strong> — pero haz 2 minutos de respiración cuadrada o camina por la cuadra. Mantienes el descanso de socializar (que es lo que realmente necesitas), solo sin nicotina.' },
+  'social.swap.tag': { en: 'Replacement', es: 'Reemplazo' },
+  'social.reframe.title': { en: 'The Reframe', es: 'El Reencuadre' },
+  'social.reframe.desc': { en: '<em>"I can\'t socialize without nicotine"</em> → You did it as a child, a teenager before vaping, and in many situations now. Nicotine withdrawal mimics social anxiety (racing heart, restlessness) but <strong>isn\'t the same thing</strong>. After 2-4 weeks, most people feel more comfortable socially, not less.', es: '<em>"No puedo socializar sin nicotina"</em> → Lo hiciste de niño/a, de adolescente antes de vapear, y en muchas situaciones ahora. La abstinencia de nicotina imita la ansiedad social (corazón acelerado, inquietud) pero <strong>no es lo mismo</strong>. Después de 2-4 semanas, la mayoría se siente más cómoda socialmente, no menos.' },
+  'social.reframe.tag': { en: 'Mindset', es: 'Mentalidad' },
+  'social.setback.title': { en: 'Setback Protocol', es: 'Protocolo de Recaída' },
+  'social.setback.intro': { en: 'If you slip at a party — <strong>read this:</strong>', es: 'Si recaes en una fiesta — <strong>lee esto:</strong>' },
+  'social.setback1': { en: 'One slip is NOT a relapse. The Abstinence Violation Effect ("I already failed, might as well keep going") is the real enemy', es: 'Un desliz NO es una recaída. El Efecto de Violación de Abstinencia ("ya fallé, mejor sigo") es el verdadero enemigo' },
+  'social.setback2': { en: 'Log it in your journal — what triggered it, how you felt', es: 'Regístralo en tu diario — qué lo disparó, cómo te sentiste' },
+  'social.setback3': { en: 'Do NOT reset your mental timeline', es: 'NO reinicies tu línea temporal mental' },
+  'social.setback4': { en: 'One slip in a month = you succeeded <strong>29 out of 30 days</strong>. That\'s a 97% success rate', es: 'Un desliz en un mes = tuviste éxito <strong>29 de 30 días</strong>. Eso es un 97% de éxito' },
+  'social.setback5': { en: "Resume the plan tomorrow as if nothing happened. Because nothing did — you're still on track", es: 'Retoma el plan mañana como si nada pasara. Porque nada pasó — sigues en camino' },
+  'social.setbackCallout': { en: "Perfection isn't the goal. Progress is. And progress isn't linear — it's messy and human. Just like you. Keep going.", es: 'La perfección no es la meta. El progreso sí. Y el progreso no es lineal — es desordenado y humano. Igual que tú. Sigue adelante.' },
+  // Journal
+  'journal.title': { en: 'Your Journal', es: 'Tu Diario' },
+  'journal.desc': { en: 'Writing about cravings, victories, and feelings improves quit outcomes by 25% (Pennebaker, 1997). This is private and stays on your device only.', es: 'Escribir sobre antojos, victorias y sentimientos mejora los resultados al dejar en un 25% (Pennebaker, 1997). Esto es privado y se queda solo en tu dispositivo.' },
+  'journal.placeholder': { en: 'How are you feeling today? What triggered a craving? What are you proud of? Write anything...', es: '¿Cómo te sientes hoy? ¿Qué disparó un antojo? ¿De qué estás orgulloso/a? Escribe lo que quieras...' },
+  'journal.save': { en: 'Save Entry', es: 'Guardar Entrada' },
+  // Progress
+  'progress.timeline': { en: 'Your Journey Timeline', es: 'Tu Línea de Tiempo' },
+  'progress.trend': { en: 'Craving & Anxiety Trend', es: 'Tendencia de Antojos y Ansiedad' },
+  'progress.trendDesc': { en: 'Your daily scores over the last 14 days. Fluctuations are normal — the <strong>overall downward trend</strong> is what matters. Some days will be harder. That\'s not failure, that\'s the process.', es: 'Tus puntajes diarios de los últimos 14 días. Las fluctuaciones son normales — la <strong>tendencia general a la baja</strong> es lo que importa. Algunos días serán más difíciles. Eso no es fracaso, es el proceso.' },
+  'progress.achievements': { en: 'Achievements', es: 'Logros' },
+  'progress.chartEmpty': { en: 'Check in for at least 2 days to see your trend', es: 'Haz check-in por al menos 2 días para ver tu tendencia' },
+  'progress.cravings': { en: '● Cravings', es: '● Antojos' },
+  'progress.anxiety': { en: '● Anxiety', es: '● Ansiedad' },
+  // Settings
+  'settings.title': { en: 'Your Settings', es: 'Tus Ajustes' },
+  'settings.desc': { en: 'Personalize BreatheFreely to match your situation.', es: 'Personaliza BreatheFreely para tu situación.' },
+  'settings.language': { en: 'Language', es: 'Idioma' },
+  'settings.name': { en: 'Your Name', es: 'Tu Nombre' },
+  'settings.namePlaceholder': { en: 'e.g. Majo', es: 'ej. Majo' },
+  'settings.nameDesc': { en: 'Used to personalize greetings and motivational messages throughout the app.', es: 'Usado para personalizar saludos y mensajes motivacionales en toda la app.' },
+  'settings.money': { en: 'Money Tracking', es: 'Seguimiento de Dinero' },
+  'settings.currency': { en: 'Currency Symbol', es: 'Símbolo de Moneda' },
+  'settings.weeklySpend': { en: 'How much do you spend per WEEK on vaping?', es: '¿Cuánto gastas por SEMANA en vapear?' },
+  'settings.perWeek': { en: '/ week', es: '/ semana' },
+  'settings.moneyDesc': { en: 'This calculates how much you\'re saving as you reduce. Your daily cost = weekly spend / 7.', es: 'Esto calcula cuánto estás ahorrando mientras reduces. Tu costo diario = gasto semanal / 7.' },
+  'settings.puffBaseline': { en: 'Puff Baseline', es: 'Base de Caladas' },
+  'settings.puffLabel': { en: 'Average puffs per day (your starting point)', es: 'Caladas promedio por día (tu punto de inicio)' },
+  'settings.puffDesc': { en: "This sets your reduction targets. If you're not sure, track for a few days first and come back.", es: 'Esto establece tus metas de reducción. Si no estás seguro/a, registra por unos días primero y vuelve.' },
+  'settings.save': { en: 'Save Settings', es: 'Guardar Ajustes' },
+  'settings.danger': { en: 'Danger Zone', es: 'Zona de Peligro' },
+  'settings.dangerDesc': { en: 'This permanently deletes all your data — check-ins, journal entries, achievements, everything.', es: 'Esto elimina permanentemente todos tus datos — check-ins, entradas de diario, logros, todo.' },
+  'settings.reset': { en: 'Reset All Data', es: 'Reiniciar Todos los Datos' },
+  // Toasts
+  'toast.checkinSaved': { en: 'Check-in saved! You showed up today — that matters.', es: '¡Check-in guardado! Te presentaste hoy — eso importa.' },
+  'toast.checkinSavedName': { en: 'Check-in saved! You showed up today, ', es: '¡Check-in guardado! Te presentaste hoy, ' },
+  'toast.journalSaved': { en: 'Journal entry saved. Reflecting = healing.', es: 'Entrada de diario guardada. Reflexionar = sanar.' },
+  'toast.settingsSaved': { en: 'Settings saved!', es: '¡Ajustes guardados!' },
+  'toast.settingsSavedName': { en: "Settings saved! Let's go, ", es: '¡Ajustes guardados! Vamos, ' },
+  'toast.breathComplete': { en: ' rounds done. You\'re in control.', es: ' rondas completadas. Tienes el control.' },
+  'toast.breathSession': { en: ' rounds complete — your body thanks you.', es: ' rondas completadas — tu cuerpo te lo agradece.' },
+  'toast.sessionComplete': { en: 'Session complete — ', es: 'Sesión completa — ' },
+  'toast.resetConfirm1': { en: 'This will delete ALL your data. Are you sure?', es: '¿Esto eliminará TODOS tus datos. ¿Estás seguro/a?' },
+  'toast.resetConfirm2': { en: 'Really? This cannot be undone.', es: '¿De verdad? Esto no se puede deshacer.' },
+  // Puff tracker
+  'puff.tracking': { en: 'Tracking phase — just count honestly. Your average becomes the baseline.', es: 'Fase de seguimiento — solo cuenta honestamente. Tu promedio se convierte en la base.' },
+  'puff.target': { en: "Today's target: ", es: 'Meta de hoy: ' },
+  'puff.orFewer': { en: ' puffs or fewer', es: ' caladas o menos' },
+  'puff.onTrack': { en: " — You're on track!", es: ' — ¡Vas por buen camino!' },
+  // Milestones
+  'milestone.unlocked': { en: 'Unlocked!', es: '¡Desbloqueado!' },
+  // Week days
+  'days.mon': { en: 'Mon', es: 'Lun' },
+  'days.tue': { en: 'Tue', es: 'Mar' },
+  'days.wed': { en: 'Wed', es: 'Mié' },
+  'days.thu': { en: 'Thu', es: 'Jue' },
+  'days.fri': { en: 'Fri', es: 'Vie' },
+  'days.sat': { en: 'Sat', es: 'Sáb' },
+  'days.sun': { en: 'Sun', es: 'Dom' },
+  // Breath phases
+  'breath.in': { en: 'Breathe In', es: 'Inhala' },
+  'breath.hold': { en: 'Hold', es: 'Mantén' },
+  'breath.out': { en: 'Breathe Out', es: 'Exhala' },
+  // Badges
+  'badge.earned': { en: 'Earned!', es: '¡Ganado!' },
+  'badge.locked': { en: 'Locked', es: 'Bloqueado' },
+  // Plan table
+  'plan.r1.goal': { en: 'Track baseline', es: 'Registrar base' },
+  'plan.r1.strategy': { en: 'Count every puff. No reduction yet — just observe.', es: 'Cuenta cada calada. Sin reducción aún — solo observa.' },
+  'plan.r1.phase': { en: 'Awareness', es: 'Consciencia' },
+  'plan.r2.goal': { en: 'Reduce 25%', es: 'Reducir 25%' },
+  'plan.r2.strategy': { en: 'If you average 40 puffs/day, target 30. Cut the "automatic" ones first.', es: 'Si promedias 40 caladas/día, apunta a 30. Elimina las "automáticas" primero.' },
+  'plan.r2.phase': { en: 'Reduce', es: 'Reducir' },
+  'plan.r3.goal': { en: 'Reduce 50%', es: 'Reducir 50%' },
+  'plan.r3.strategy': { en: 'Target half your baseline. Add 10-min delays before each session.', es: 'Apunta a la mitad de tu base. Agrega retrasos de 10 min antes de cada sesión.' },
+  'plan.r4.goal': { en: 'Reduce 75%', es: 'Reducir 75%' },
+  'plan.r4.strategy': { en: 'Vape only at designated times (after meals, before bed). Max 3 sessions/day.', es: 'Vapea solo en tiempos designados (después de comer, antes de dormir). Máx 3 sesiones/día.' },
+  'plan.r4.phase': { en: 'Structure', es: 'Estructura' },
+  'plan.r5.goal': { en: '1-2x per day', es: '1-2x por día' },
+  'plan.r5.strategy': { en: 'Only vape once or twice. Use NRT gum for breakthroughs.', es: 'Solo vapea una o dos veces. Usa chicle de nicotina para emergencias.' },
+  'plan.r6.goal': { en: 'Zero', es: 'Cero' },
+  'plan.r6.strategy': { en: "Full stop. Use every tool in this app. You're ready.", es: 'Alto total. Usa cada herramienta en esta app. Estás listo/a.' },
+  'plan.r6.phase': { en: 'Freedom', es: 'Libertad' },
+};
+
+// Bilingual arrays
+const dailyTasksI18n = {
+  en: [
+    "I stayed at or below my puff target today",
+    "I used a replacement (gum, mint, fidget) instead of vaping at least once",
+    "I did a breathing exercise",
+    "I moved my body for 10+ minutes",
+    "I identified a trigger and chose a different response",
+    "I drank plenty of water today",
+    "I'm proud of myself for trying — even if today wasn't perfect"
+  ],
+  es: [
+    "Me mantuve en o por debajo de mi meta de caladas hoy",
+    "Usé un sustituto (chicle, menta, fidget) en vez de vapear al menos una vez",
+    "Hice un ejercicio de respiración",
+    "Moví mi cuerpo por 10+ minutos",
+    "Identifiqué un disparador y elegí una respuesta diferente",
+    "Tomé suficiente agua hoy",
+    "Estoy orgulloso/a de mí por intentarlo — aunque hoy no fue perfecto"
+  ]
+};
+
+const setupTasksI18n = {
+  en: [
+    "Write down 3 personal reasons for quitting",
+    "Set your start date (today counts!)",
+    "Buy oral substitutes: strong mints, gum, toothpicks",
+    "Get a fidget (stress ball, spinner ring, or worry stone)",
+    "Consider buying nicotine gum/lozenges for breakthrough cravings",
+    "Tell one person about your goal",
+    "Remove the vape from your nightstand / easy-access spots"
+  ],
+  es: [
+    "Escribe 3 razones personales para dejar",
+    "Establece tu fecha de inicio (¡hoy cuenta!)",
+    "Compra sustitutos orales: mentas fuertes, chicle, palillos",
+    "Consigue un fidget (pelota antiestrés, anillo giratorio o piedra)",
+    "Considera comprar chicle/pastillas de nicotina para antojos fuertes",
+    "Dile a una persona sobre tu meta",
+    "Retira el vape de tu mesita de noche / lugares de fácil acceso"
+  ]
+};
+
+const triggersI18n = {
+  en: [
+    "After eating a meal", "First thing in the morning", "While driving",
+    "When feeling anxious or stressed", "During social events / parties",
+    "When drinking alcohol", "When bored / scrolling phone", "Before bed",
+    "During work breaks", "After an argument or conflict", "When seeing others vape"
+  ],
+  es: [
+    "Después de comer", "Al despertar", "Mientras conduzco",
+    "Cuando me siento ansioso/a o estresado/a", "En eventos sociales / fiestas",
+    "Cuando tomo alcohol", "Cuando estoy aburrido/a / viendo el celular", "Antes de dormir",
+    "En descansos del trabajo", "Después de una discusión o conflicto", "Cuando veo a otros vapear"
+  ]
+};
+
+const milestonesI18n = {
+  en: [
+    { hours: 1, icon: '💓', title: 'Heart rate normalizing', desc: 'Heart rate and blood pressure begin dropping.' },
+    { hours: 8, icon: '🫁', title: 'Oxygen levels recover', desc: 'Carbon monoxide clears. Oxygen returns to normal.' },
+    { hours: 24, icon: '🧹', title: 'Lungs start clearing', desc: 'Lungs begin clearing mucus and debris.' },
+    { hours: 48, icon: '👃', title: 'Taste & smell return', desc: 'Nerve endings regrow. Food tastes amazing again.' },
+    { hours: 72, icon: '⚡', title: 'Breathing easier', desc: 'Bronchial tubes relax. Energy levels rise.' },
+    { hours: 336, icon: '🛡️', title: 'Immune boost (2 weeks)', desc: 'Circulation improves. Immune function strengthens.' },
+    { hours: 720, icon: '🧠', title: 'Anxiety decreases (1 month)', desc: 'Baseline anxiety drops to non-smoker levels.' },
+    { hours: 2160, icon: '💪', title: 'Lung function +30% (3 months)', desc: 'Lung capacity significantly improved.' },
+  ],
+  es: [
+    { hours: 1, icon: '💓', title: 'Ritmo cardíaco normalizándose', desc: 'El ritmo cardíaco y la presión arterial comienzan a bajar.' },
+    { hours: 8, icon: '🫁', title: 'Niveles de oxígeno se recuperan', desc: 'El monóxido de carbono se elimina. El oxígeno vuelve a la normalidad.' },
+    { hours: 24, icon: '🧹', title: 'Los pulmones empiezan a limpiarse', desc: 'Los pulmones comienzan a eliminar mucosidad y residuos.' },
+    { hours: 48, icon: '👃', title: 'El gusto y olfato regresan', desc: 'Las terminaciones nerviosas se regeneran. La comida sabe increíble otra vez.' },
+    { hours: 72, icon: '⚡', title: 'Respirar es más fácil', desc: 'Los tubos bronquiales se relajan. Los niveles de energía suben.' },
+    { hours: 336, icon: '🛡️', title: 'Impulso inmunológico (2 semanas)', desc: 'La circulación mejora. La función inmune se fortalece.' },
+    { hours: 720, icon: '🧠', title: 'La ansiedad disminuye (1 mes)', desc: 'La ansiedad base baja a niveles de no fumador.' },
+    { hours: 2160, icon: '💪', title: 'Función pulmonar +30% (3 meses)', desc: 'La capacidad pulmonar mejora significativamente.' },
+  ]
+};
+
+const motivBannersI18n = {
+  en: [
+    { text: "Every craving you survive is a <strong>neural pathway getting weaker</strong>. You are literally rewiring your brain right now.", sub: "Neuroscience backs this — it's not just motivation, it's biology." },
+    { text: "You are not giving something up. You are <strong>getting yourself back</strong>.", sub: "The calm, present, un-addicted version of you is already emerging." },
+    { text: "The anxiety you feel isn't you — it's <strong>nicotine withdrawal pretending to be you</strong>.", sub: "Real you is calmer. You'll meet that person soon." },
+    { text: "People who quit nicotine see anxiety drop to <strong>the same level as taking medication</strong>.", sub: "Taylor et al., 2014 — this is published, peer-reviewed science." },
+    { text: "The craving you're fighting right now will <strong>last 3-5 minutes</strong>. Your freedom lasts forever.", sub: "Set a timer. You'll be shocked how fast it passes." },
+    { text: "You didn't come this far to <strong>only come this far</strong>.", sub: "Look at your stats above. That's real progress. That's you." },
+    { text: "A bad day doesn't erase a good week. <strong>Progress isn't linear</strong> — and that's okay.", sub: "The overall trend is what matters. Keep showing up." },
+    { text: "Your lungs are healing <strong>right now</strong>, even as you read this.", sub: "Your body wants to recover. You just have to let it." },
+    { text: "The version of you who started this journey would be <strong>proud of today's you</strong>.", sub: "Don't forget to celebrate how far you've come." },
+    { text: "Discipline isn't about perfection. It's about <strong>getting back up one more time than you fall</strong>.", sub: "Every day you try is a day you win." },
+    { text: "In 3 months, you'll look back and be <strong>grateful you didn't quit quitting</strong>.", sub: "Future you is counting on present you. Don't let them down." },
+    { text: "You are stronger than a <strong>3-minute craving</strong>. You've survived harder things.", sub: "This feeling is temporary. Your strength is not." },
+  ],
+  es: [
+    { text: "Cada antojo que superas es una <strong>vía neuronal debilitándose</strong>. Literalmente estás reconfigurando tu cerebro ahora mismo.", sub: "La neurociencia lo respalda — no es solo motivación, es biología." },
+    { text: "No estás renunciando a algo. Estás <strong>recuperándote a ti mismo/a</strong>.", sub: "La versión tranquila, presente y libre de adicción de ti ya está emergiendo." },
+    { text: "La ansiedad que sientes no eres tú — es la <strong>abstinencia de nicotina pretendiendo ser tú</strong>.", sub: "El verdadero tú es más tranquilo/a. Pronto conocerás a esa persona." },
+    { text: "Las personas que dejan la nicotina ven su ansiedad bajar al <strong>mismo nivel que tomar medicación</strong>.", sub: "Taylor et al., 2014 — esto es ciencia publicada y revisada por pares." },
+    { text: "El antojo contra el que luchas ahora <strong>durará 3-5 minutos</strong>. Tu libertad dura para siempre.", sub: "Pon un temporizador. Te sorprenderá lo rápido que pasa." },
+    { text: "No llegaste hasta aquí para <strong>solo llegar hasta aquí</strong>.", sub: "Mira tus estadísticas arriba. Eso es progreso real. Eso eres tú." },
+    { text: "Un mal día no borra una buena semana. <strong>El progreso no es lineal</strong> — y está bien.", sub: "La tendencia general es lo que importa. Sigue presentándote." },
+    { text: "Tus pulmones se están sanando <strong>ahora mismo</strong>, mientras lees esto.", sub: "Tu cuerpo quiere recuperarse. Solo tienes que dejarlo." },
+    { text: "La versión de ti que empezó este viaje estaría <strong>orgullosa del tú de hoy</strong>.", sub: "No olvides celebrar lo lejos que has llegado." },
+    { text: "La disciplina no se trata de perfección. Se trata de <strong>levantarte una vez más de las que caes</strong>.", sub: "Cada día que intentas es un día que ganas." },
+    { text: "En 3 meses, mirarás atrás y estarás <strong>agradecido/a de no haber dejado de intentar</strong>.", sub: "El tú del futuro cuenta con el tú del presente. No lo decepciones." },
+    { text: "Eres más fuerte que un <strong>antojo de 3 minutos</strong>. Has sobrevivido cosas más difíciles.", sub: "Este sentimiento es temporal. Tu fuerza no lo es." },
+  ]
+};
+
+const nameInsertsI18n = {
+  en: ['{name}, remember: ', 'Hey {name} — ', '{name}, listen: ', '{name}, ', "You've got this, {name}. "],
+  es: ['{name}, recuerda: ', 'Oye {name} — ', '{name}, escucha: ', '{name}, ', 'Tú puedes, {name}. ']
+};
+
+const quotesI18n = {
+  en: [
+    "You don't have to be fearless. You just have to be <strong>brave enough to start</strong>.",
+    "Every craving you resist makes the next one <strong>weaker</strong>. That's not motivation — that's <strong>neuroscience</strong>.",
+    "The discomfort is temporary. The freedom is <strong>permanent</strong>.",
+    "You're not giving something up — you're <strong>getting yourself back</strong>.",
+    "Anxiety lies. It says you can't do this. But here you are, <strong>doing it anyway</strong>.",
+    "Progress isn't linear. A bad day doesn't erase <strong>a good week</strong>.",
+    "Your lungs are healing <strong>right now</strong>, as you read this.",
+    "The version of you who started this would be <strong>so proud of today's you</strong>.",
+    "Small steps still move you <strong>forward</strong>.",
+    "You didn't come this far to <strong>only come this far</strong>.",
+    "Courage isn't the absence of fear. It's <strong>acting in spite of it</strong>.",
+    "3 months from now, you'll wish you had <strong>started today</strong>. Oh wait — you did.",
+    "You are not your addiction. You are the person <strong>fighting it</strong>.",
+    "The only person you need to be better than is <strong>who you were yesterday</strong>.",
+    "Some days the mountain seems impossible. But you're already <strong>climbing it</strong>.",
+  ],
+  es: [
+    "No tienes que ser valiente. Solo tienes que ser <strong>lo suficientemente valiente para empezar</strong>.",
+    "Cada antojo que resistes hace al siguiente <strong>más débil</strong>. Eso no es motivación — es <strong>neurociencia</strong>.",
+    "La incomodidad es temporal. La libertad es <strong>permanente</strong>.",
+    "No estás renunciando a algo — estás <strong>recuperándote a ti mismo/a</strong>.",
+    "La ansiedad miente. Dice que no puedes. Pero aquí estás, <strong>haciéndolo de todos modos</strong>.",
+    "El progreso no es lineal. Un mal día no borra <strong>una buena semana</strong>.",
+    "Tus pulmones se están sanando <strong>ahora mismo</strong>, mientras lees esto.",
+    "La versión de ti que empezó esto estaría <strong>muy orgullosa del tú de hoy</strong>.",
+    "Los pasos pequeños igual te mueven <strong>hacia adelante</strong>.",
+    "No llegaste hasta aquí para <strong>solo llegar hasta aquí</strong>.",
+    "El coraje no es la ausencia de miedo. Es <strong>actuar a pesar de él</strong>.",
+    "En 3 meses, desearás haber <strong>empezado hoy</strong>. Ah espera — ya lo hiciste.",
+    "No eres tu adicción. Eres la persona que <strong>lucha contra ella</strong>.",
+    "La única persona que necesitas superar es <strong>quien eras ayer</strong>.",
+    "Algunos días la montaña parece imposible. Pero ya la estás <strong>escalando</strong>.",
+  ]
+};
+
+const badgesI18n = {
+  en: [
+    { icon: '🌱', title: 'Journey Started', desc: 'You took the hardest step — the first one.' },
+    { icon: '☀️', title: 'Day One', desc: 'Your first full day on the plan.' },
+    { icon: '🔥', title: 'Three Day Streak', desc: 'The first 72 hours are the hardest. You did it.' },
+    { icon: '⭐', title: 'One Week Strong', desc: '7 days of commitment. This is real.' },
+    { icon: '🎯', title: 'Two Weeks', desc: 'Officially through the awareness phase.' },
+    { icon: '🏆', title: 'One Month', desc: 'Your brain is actively rewiring. Anxiety is dropping.' },
+    { icon: '💎', title: 'Two Months', desc: "Nicotine receptors are downregulating. You're changing." },
+    { icon: '👑', title: 'Plan Complete', desc: "12 weeks. You conquered it. You're free." },
+    { icon: '📝', title: 'Consistent Tracker', desc: '7 daily check-ins. Awareness is your superpower.' },
+    { icon: '💪', title: 'Craving Crusher', desc: '10 cravings beaten. Each one made you stronger.' },
+    { icon: '🦁', title: 'Unstoppable', desc: '50 cravings defeated. You are a force.' },
+    { icon: '🧘', title: 'Zen Master', desc: '20 breathing rounds. Your nervous system thanks you.' },
+    { icon: '✍️', title: 'Reflective Mind', desc: '5 journal entries. Self-awareness is healing.' },
+    { icon: '📖', title: 'Storyteller', desc: "20 entries. You're writing the story of your freedom." },
+  ],
+  es: [
+    { icon: '🌱', title: 'Viaje Iniciado', desc: 'Diste el paso más difícil — el primero.' },
+    { icon: '☀️', title: 'Día Uno', desc: 'Tu primer día completo en el plan.' },
+    { icon: '🔥', title: 'Racha de Tres Días', desc: 'Las primeras 72 horas son las más difíciles. Lo lograste.' },
+    { icon: '⭐', title: 'Una Semana Fuerte', desc: '7 días de compromiso. Esto es real.' },
+    { icon: '🎯', title: 'Dos Semanas', desc: 'Oficialmente pasaste la fase de consciencia.' },
+    { icon: '🏆', title: 'Un Mes', desc: 'Tu cerebro se está reconfigurando activamente. La ansiedad está bajando.' },
+    { icon: '💎', title: 'Dos Meses', desc: 'Los receptores de nicotina se están regulando a la baja. Estás cambiando.' },
+    { icon: '👑', title: 'Plan Completado', desc: '12 semanas. Lo conquistaste. Eres libre.' },
+    { icon: '📝', title: 'Tracker Consistente', desc: '7 check-ins diarios. La consciencia es tu superpoder.' },
+    { icon: '💪', title: 'Destructor de Antojos', desc: '10 antojos vencidos. Cada uno te hizo más fuerte.' },
+    { icon: '🦁', title: 'Imparable', desc: '50 antojos derrotados. Eres una fuerza.' },
+    { icon: '🧘', title: 'Maestro Zen', desc: '20 rondas de respiración. Tu sistema nervioso te lo agradece.' },
+    { icon: '✍️', title: 'Mente Reflexiva', desc: '5 entradas de diario. La autoconciencia es sanación.' },
+    { icon: '📖', title: 'Narrador/a', desc: '20 entradas. Estás escribiendo la historia de tu libertad.' },
+  ]
+};
+
+const timelinePhasesI18n = {
+  en: [
+    { w: 0, label: 'Awareness', desc: 'Track every puff. Build self-awareness. Prepare your tools.' },
+    { w: 2, label: 'First Cut (-25%)', desc: 'Eliminate the automatic, mindless puffs first.' },
+    { w: 4, label: 'Half Way (-50%)', desc: 'Down to half. Add 10-min delays. Use replacements.' },
+    { w: 6, label: 'Structured Use (-75%)', desc: 'Designated times only. Max 3 sessions per day.' },
+    { w: 8, label: 'Almost Free (1-2/day)', desc: 'Once or twice daily. NRT for breakthroughs.' },
+    { w: 10, label: 'Full Stop', desc: 'Zero puffs. Every tool in this app is ready for you.' },
+    { w: 12, label: 'Freedom', desc: "You did it. The hardest thing you've ever done. Maintain & celebrate." },
+  ],
+  es: [
+    { w: 0, label: 'Consciencia', desc: 'Registra cada calada. Construye autoconciencia. Prepara tus herramientas.' },
+    { w: 2, label: 'Primer Corte (-25%)', desc: 'Elimina primero las caladas automáticas e inconscientes.' },
+    { w: 4, label: 'A la Mitad (-50%)', desc: 'Reducido a la mitad. Agrega retrasos de 10 min. Usa reemplazos.' },
+    { w: 6, label: 'Uso Estructurado (-75%)', desc: 'Solo en tiempos designados. Máx 3 sesiones por día.' },
+    { w: 8, label: 'Casi Libre (1-2/día)', desc: 'Una o dos veces al día. Chicle de nicotina para emergencias.' },
+    { w: 10, label: 'Alto Total', desc: 'Cero caladas. Cada herramienta en esta app está lista para ti.' },
+    { w: 12, label: 'Libertad', desc: 'Lo lograste. Lo más difícil que has hecho. Mantén y celebra.' },
+  ]
+};
 
 // ===== UTILS =====
 function daysBetween(a, b) {
@@ -1269,37 +1733,19 @@ function showToast(msg) {
 }
 
 // ===== MOTIVATIONAL BANNERS =====
-const motivBanners = [
-  { text: "Every craving you survive is a <strong>neural pathway getting weaker</strong>. You are literally rewiring your brain right now.", sub: "Neuroscience backs this — it's not just motivation, it's biology." },
-  { text: "You are not giving something up. You are <strong>getting yourself back</strong>.", sub: "The calm, present, un-addicted version of you is already emerging." },
-  { text: "The anxiety you feel isn't you — it's <strong>nicotine withdrawal pretending to be you</strong>.", sub: "Real you is calmer. You'll meet that person soon." },
-  { text: "People who quit nicotine see anxiety drop to <strong>the same level as taking medication</strong>.", sub: "Taylor et al., 2014 — this is published, peer-reviewed science." },
-  { text: "The craving you're fighting right now will <strong>last 3-5 minutes</strong>. Your freedom lasts forever.", sub: "Set a timer. You'll be shocked how fast it passes." },
-  { text: "You didn't come this far to <strong>only come this far</strong>.", sub: "Look at your stats above. That's real progress. That's you." },
-  { text: "A bad day doesn't erase a good week. <strong>Progress isn't linear</strong> — and that's okay.", sub: "The overall trend is what matters. Keep showing up." },
-  { text: "Your lungs are healing <strong>right now</strong>, even as you read this.", sub: "Your body wants to recover. You just have to let it." },
-  { text: "The version of you who started this journey would be <strong>proud of today's you</strong>.", sub: "Don't forget to celebrate how far you've come." },
-  { text: "Discipline isn't about perfection. It's about <strong>getting back up one more time than you fall</strong>.", sub: "Every day you try is a day you win." },
-  { text: "In 3 months, you'll look back and be <strong>grateful you didn't quit quitting</strong>.", sub: "Future you is counting on present you. Don't let them down." },
-  { text: "You are stronger than a <strong>3-minute craving</strong>. You've survived harder things.", sub: "This feeling is temporary. Your strength is not." },
-];
+// motivBanners now in motivBannersI18n above
 
 function showMotivBanner() {
   const dayIdx = daysBetween(data.startDate, today());
-  const b = motivBanners[dayIdx % motivBanners.length];
+  const banners = motivBannersI18n[data.lang] || motivBannersI18n.en;
+  const b = banners[dayIdx % banners.length];
   const name = data.userName;
   let text = b.text;
   let sub = b.sub;
   if (name) {
-    // Add name to some banners for personalization
-    const nameInserts = [
-      `${name}, remember: `,
-      `Hey ${name} — `,
-      `${name}, listen: `,
-      `${name}, `,
-      `You've got this, ${name}. `,
-    ];
-    text = nameInserts[dayIdx % nameInserts.length] + text.charAt(0).toLowerCase() + text.slice(1);
+    const inserts = nameInsertsI18n[data.lang] || nameInsertsI18n.en;
+    const insert = inserts[dayIdx % inserts.length].replace('{name}', name);
+    text = insert + text.charAt(0).toLowerCase() + text.slice(1);
   }
   document.getElementById('motivText').innerHTML = text;
   document.getElementById('motivSub').textContent = sub;
@@ -1336,7 +1782,7 @@ function renderWeek() {
   const dow = now.getDay();
   const mon = new Date(now);
   mon.setDate(now.getDate() - ((dow + 6) % 7));
-  const names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const names = [t('days.mon'),t('days.tue'),t('days.wed'),t('days.thu'),t('days.fri'),t('days.sat'),t('days.sun')];
   for (let i = 0; i < 7; i++) {
     const d = new Date(mon);
     d.setDate(mon.getDate() + i);
@@ -1356,9 +1802,9 @@ function renderPuffCounter() {
   const target = getTargetPuffs();
   const w = currentWeek();
   if (w < 2) {
-    document.getElementById('puffTarget').innerHTML = 'Tracking phase — just count honestly. Your average becomes the baseline.';
+    document.getElementById('puffTarget').innerHTML = t('puff.tracking');
   } else {
-    document.getElementById('puffTarget').innerHTML = `Today's target: <strong>${target} puffs or fewer</strong>` + (count <= target ? ' — You\'re on track!' : '');
+    document.getElementById('puffTarget').innerHTML = t('puff.target') + `<strong>${target}${t('puff.orFewer')}</strong>` + (count <= target ? t('puff.onTrack') : '');
   }
 }
 
@@ -1371,20 +1817,13 @@ function changePuffs(delta) {
 }
 
 // ===== DAILY CHECKIN =====
-const dailyTasks = [
-  "I stayed at or below my puff target today",
-  "I used a replacement (gum, mint, fidget) instead of vaping at least once",
-  "I did a breathing exercise",
-  "I moved my body for 10+ minutes",
-  "I identified a trigger and chose a different response",
-  "I drank plenty of water today",
-  "I'm proud of myself for trying — even if today wasn't perfect"
-];
+// dailyTasks now in dailyTasksI18n above
 
 function renderCheckin() {
   const grid = document.getElementById('checkinGrid');
   grid.innerHTML = '';
   const td = data.dailyCheckins[today()] || {};
+  const dailyTasks = dailyTasksI18n[data.lang] || dailyTasksI18n.en;
   dailyTasks.forEach((task, i) => {
     const checked = td.tasks && td.tasks[i];
     const el = document.createElement('div');
@@ -1416,23 +1855,16 @@ function saveDailyCheckin() {
     if (avg > 0) { data.baselinePuffs = avg; saveData(data); }
   }
   const nm = data.userName;
-  showToast(nm ? `Check-in saved! You showed up today, ${nm}.` : 'Check-in saved! You showed up today — that matters.');
+  showToast(nm ? t('toast.checkinSavedName') + nm + '.' : t('toast.checkinSaved'));
 }
 
 // ===== SETUP CHECKLIST =====
-const setupTasks = [
-  "Write down 3 personal reasons for quitting",
-  "Set your start date (today counts!)",
-  "Buy oral substitutes: strong mints, gum, toothpicks",
-  "Get a fidget (stress ball, spinner ring, or worry stone)",
-  "Consider buying nicotine gum/lozenges for breakthrough cravings",
-  "Tell one person about your goal",
-  "Remove the vape from your nightstand / easy-access spots"
-];
+// setupTasks now in setupTasksI18n above
 
 function renderSetup() {
   const grid = document.getElementById('setupChecklist');
   grid.innerHTML = '';
+  const setupTasks = setupTasksI18n[data.lang] || setupTasksI18n.en;
   setupTasks.forEach((task, i) => {
     const checked = data.setupDone[i];
     const el = document.createElement('div');
@@ -1448,23 +1880,12 @@ function renderSetup() {
 }
 
 // ===== TRIGGER CHECKLIST =====
-const triggers = [
-  "After eating a meal",
-  "First thing in the morning",
-  "While driving",
-  "When feeling anxious or stressed",
-  "During social events / parties",
-  "When drinking alcohol",
-  "When bored / scrolling phone",
-  "Before bed",
-  "During work breaks",
-  "After an argument or conflict",
-  "When seeing others vape"
-];
+// triggers now in triggersI18n above
 
 function renderTriggers() {
   const grid = document.getElementById('triggerChecklist');
   grid.innerHTML = '';
+  const triggers = triggersI18n[data.lang] || triggersI18n.en;
   triggers.forEach((t, i) => {
     const checked = data.triggersDone && data.triggersDone[i];
     const el = document.createElement('div');
@@ -1483,7 +1904,7 @@ function renderTriggers() {
 // ===== BREATHING =====
 let breathInterval = null, breathPhase = 0, breathCount = 0, breathRounds = 0;
 const BREATH_TARGET_ROUNDS = 4;
-const breathPhases = ['Breathe In', 'Hold', 'Breathe Out', 'Hold'];
+function getBreathPhases() { return [t('breath.in'), t('breath.hold'), t('breath.out'), t('breath.hold')]; }
 const breathClasses = ['inhale', 'hold-in', 'exhale', 'hold-out'];
 
 function toggleBreathing() {
@@ -1491,7 +1912,7 @@ function toggleBreathing() {
 }
 function startBreathing() {
   breathPhase = 0; breathCount = 4; breathRounds = 0;
-  document.getElementById('breathBtn').textContent = 'Stop';
+  document.getElementById('breathBtn').textContent = t('breathe.stop');
   updateBreathDisplay();
   document.getElementById('breathRounds').textContent = `0 / ${BREATH_TARGET_ROUNDS}`;
   breathInterval = setInterval(() => {
@@ -1505,7 +1926,7 @@ function startBreathing() {
         saveData(data);
         if (breathRounds >= BREATH_TARGET_ROUNDS) {
           stopBreathing();
-          showToast(`Session complete — ${BREATH_TARGET_ROUNDS} rounds done. You're in control.`);
+          showToast(t('toast.sessionComplete') + BREATH_TARGET_ROUNDS + t('toast.breathComplete'));
           return;
         }
       }
@@ -1519,20 +1940,20 @@ function updateBreathDisplay() {
   outer.className = 'breath-circle-outer ' + breathClasses[breathPhase];
   document.getElementById('breathCircle').className = 'breath-circle';
   const textEl = document.getElementById('breathText');
-  textEl.textContent = breathPhases[breathPhase];
+  textEl.textContent = getBreathPhases()[breathPhase];
   textEl.className = 'breath-text pulsing';
   document.getElementById('breathTimer').textContent = breathCount;
 }
 function stopBreathing() {
   clearInterval(breathInterval); breathInterval = null;
-  document.getElementById('breathBtn').textContent = 'Start Breathing';
+  document.getElementById('breathBtn').textContent = t('breathe.start');
   document.getElementById('breathOuter').className = 'breath-circle-outer';
   document.getElementById('breathCircle').className = 'breath-circle';
   const textEl = document.getElementById('breathText');
-  textEl.textContent = 'Ready';
+  textEl.textContent = t('breathe.ready');
   textEl.className = 'breath-text';
   document.getElementById('breathTimer').textContent = '4:4:4:4';
-  if (breathRounds > 0) showToast(`${breathRounds} rounds complete — your body thanks you.`);
+  if (breathRounds > 0) showToast(breathRounds + t('toast.breathSession'));
 }
 
 // ===== SOS =====
@@ -1555,7 +1976,7 @@ function saveJournalEntry() {
   saveData(data);
   input.value = '';
   renderJournal();
-  showToast('Journal entry saved. Reflecting = healing.');
+  showToast(t('toast.journalSaved'));
 }
 function renderJournal() {
   const c = document.getElementById('journalEntries');
@@ -1570,26 +1991,18 @@ function renderJournal() {
 function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 
 // ===== MILESTONES =====
-const milestones = [
-  { hours: 1, icon: '💓', title: 'Heart rate normalizing', desc: 'Heart rate and blood pressure begin dropping.' },
-  { hours: 8, icon: '🫁', title: 'Oxygen levels recover', desc: 'Carbon monoxide clears. Oxygen returns to normal.' },
-  { hours: 24, icon: '🧹', title: 'Lungs start clearing', desc: 'Lungs begin clearing mucus and debris.' },
-  { hours: 48, icon: '👃', title: 'Taste & smell return', desc: 'Nerve endings regrow. Food tastes amazing again.' },
-  { hours: 72, icon: '⚡', title: 'Breathing easier', desc: 'Bronchial tubes relax. Energy levels rise.' },
-  { hours: 336, icon: '🛡️', title: 'Immune boost (2 weeks)', desc: 'Circulation improves. Immune function strengthens.' },
-  { hours: 720, icon: '🧠', title: 'Anxiety decreases (1 month)', desc: 'Baseline anxiety drops to non-smoker levels.' },
-  { hours: 2160, icon: '💪', title: 'Lung function +30% (3 months)', desc: 'Lung capacity significantly improved.' },
-];
+// milestones now in milestonesI18n above
 
 function renderMilestones() {
   const c = document.getElementById('milestones');
   c.innerHTML = '';
   const h = daysBetween(data.startDate, today()) * 24;
+  const milestones = milestonesI18n[data.lang] || milestonesI18n.en;
   milestones.forEach(m => {
     const pct = Math.min(100, (h / m.hours) * 100);
     const el = document.createElement('div');
     el.className = 'milestone';
-    el.innerHTML = `<div class="milestone-bar" style="width:${pct}%"></div><div class="milestone-icon">${m.icon}</div><div class="milestone-info"><h4>${m.title}</h4><p>${m.desc}</p></div><div class="milestone-time">${pct >= 100 ? 'Unlocked!' : Math.round(pct) + '%'}</div>`;
+    el.innerHTML = `<div class="milestone-bar" style="width:${pct}%"></div><div class="milestone-icon">${m.icon}</div><div class="milestone-info"><h4>${m.title}</h4><p>${m.desc}</p></div><div class="milestone-time">${pct >= 100 ? t('milestone.unlocked') : Math.round(pct) + '%'}</div>`;
     c.appendChild(el);
   });
 }
@@ -1599,15 +2012,7 @@ function renderTimeline() {
   const c = document.getElementById('progressTimeline');
   c.innerHTML = '';
   const w = currentWeek();
-  const phases = [
-    { w: 0, label: 'Awareness', desc: 'Track every puff. Build self-awareness. Prepare your tools.' },
-    { w: 2, label: 'First Cut (-25%)', desc: 'Eliminate the automatic, mindless puffs first.' },
-    { w: 4, label: 'Half Way (-50%)', desc: 'Down to half. Add 10-min delays. Use replacements.' },
-    { w: 6, label: 'Structured Use (-75%)', desc: 'Designated times only. Max 3 sessions per day.' },
-    { w: 8, label: 'Almost Free (1-2/day)', desc: 'Once or twice daily. NRT for breakthroughs.' },
-    { w: 10, label: 'Full Stop', desc: 'Zero puffs. Every tool in this app is ready for you.' },
-    { w: 12, label: 'Freedom', desc: 'You did it. The hardest thing you\'ve ever done. Maintain & celebrate.' },
-  ];
+  const phases = timelinePhasesI18n[data.lang] || timelinePhasesI18n.en;
   phases.forEach((p, i) => {
     const status = w >= (phases[i+1]?.w ?? Infinity) ? 'completed' : (w >= p.w && (i === phases.length - 1 || w < phases[i+1].w) ? 'current' : '');
     const el = document.createElement('div');
@@ -1630,7 +2035,7 @@ function renderChart() {
     ctx.fillStyle = '#8c87a0';
     ctx.font = '14px Inter, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Check in for at least 2 days to see your trend', canvas.width/2, 100);
+    ctx.fillText(t('progress.chartEmpty'), canvas.width/2, 100);
     return;
   }
   const ww = canvas.width, hh = canvas.height;
@@ -1655,11 +2060,11 @@ function renderChart() {
       ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
     });
   }
-  drawLine(entries.map(e => e[1].craving || 5), '#6d5cce');
+  drawLine(entries.map(e => e[1].craving || 5), '#db2777');
   drawLine(entries.map(e => e[1].anxiety || 5), '#16a34a');
   ctx.font = '12px Inter, sans-serif';
-  ctx.fillStyle = '#6d5cce'; ctx.fillText('● Cravings', ww - 160, hh - 6);
-  ctx.fillStyle = '#16a34a'; ctx.fillText('● Anxiety', ww - 70, hh - 6);
+  ctx.fillStyle = '#db2777'; ctx.fillText(t('progress.cravings'), ww - 160, hh - 6);
+  ctx.fillStyle = '#16a34a'; ctx.fillText(t('progress.anxiety'), ww - 70, hh - 6);
   ctx.fillStyle = '#8c87a0'; ctx.font = '10px Inter, sans-serif'; ctx.textAlign = 'center';
   entries.forEach((e, i) => {
     if (i % Math.ceil(entries.length / 7) === 0 || i === entries.length - 1) {
@@ -1675,51 +2080,23 @@ function renderAchievements() {
   c.innerHTML = '';
   const days = daysBetween(data.startDate, today());
   const checkins = Object.keys(data.dailyCheckins).length;
-  const badges = [
-    { cond: true, icon: '🌱', title: 'Journey Started', desc: 'You took the hardest step — the first one.' },
-    { cond: days >= 1, icon: '☀️', title: 'Day One', desc: 'Your first full day on the plan.' },
-    { cond: days >= 3, icon: '🔥', title: 'Three Day Streak', desc: 'The first 72 hours are the hardest. You did it.' },
-    { cond: days >= 7, icon: '⭐', title: 'One Week Strong', desc: '7 days of commitment. This is real.' },
-    { cond: days >= 14, icon: '🎯', title: 'Two Weeks', desc: 'Officially through the awareness phase.' },
-    { cond: days >= 30, icon: '🏆', title: 'One Month', desc: 'Your brain is actively rewiring. Anxiety is dropping.' },
-    { cond: days >= 60, icon: '💎', title: 'Two Months', desc: 'Nicotine receptors are downregulating. You\'re changing.' },
-    { cond: days >= 84, icon: '👑', title: 'Plan Complete', desc: '12 weeks. You conquered it. You\'re free.' },
-    { cond: checkins >= 7, icon: '📝', title: 'Consistent Tracker', desc: '7 daily check-ins. Awareness is your superpower.' },
-    { cond: data.cravingsBeaten >= 10, icon: '💪', title: 'Craving Crusher', desc: '10 cravings beaten. Each one made you stronger.' },
-    { cond: data.cravingsBeaten >= 50, icon: '🦁', title: 'Unstoppable', desc: '50 cravings defeated. You are a force.' },
-    { cond: data.breathRoundsTotal >= 20, icon: '🧘', title: 'Zen Master', desc: '20 breathing rounds. Your nervous system thanks you.' },
-    { cond: data.journal.length >= 5, icon: '✍️', title: 'Reflective Mind', desc: '5 journal entries. Self-awareness is healing.' },
-    { cond: data.journal.length >= 20, icon: '📖', title: 'Storyteller', desc: '20 entries. You\'re writing the story of your freedom.' },
-  ];
+  const badgeTexts = badgesI18n[data.lang] || badgesI18n.en;
+  const conditions = [true, days >= 1, days >= 3, days >= 7, days >= 14, days >= 30, days >= 60, days >= 84, checkins >= 7, data.cravingsBeaten >= 10, data.cravingsBeaten >= 50, data.breathRoundsTotal >= 20, data.journal.length >= 5, data.journal.length >= 20];
+  const badges = badgeTexts.map((b, i) => ({ ...b, cond: conditions[i] }));
   badges.forEach(b => {
     const el = document.createElement('div');
     el.className = 'milestone';
     el.style.opacity = b.cond ? '1' : '0.3';
-    el.innerHTML = `<div class="milestone-icon">${b.icon}</div><div class="milestone-info"><h4>${b.title}</h4><p>${b.desc}</p></div><div class="milestone-time" style="color:${b.cond ? 'var(--green)' : 'var(--text-dim)'}">${b.cond ? 'Earned!' : 'Locked'}</div>`;
+    el.innerHTML = `<div class="milestone-icon">${b.icon}</div><div class="milestone-info"><h4>${b.title}</h4><p>${b.desc}</p></div><div class="milestone-time" style="color:${b.cond ? 'var(--green)' : 'var(--text-dim)'}">${b.cond ? t('badge.earned') : t('badge.locked')}</div>`;
     c.appendChild(el);
   });
 }
 
 // ===== QUOTES =====
-const quotes = [
-  "You don't have to be fearless. You just have to be <strong>brave enough to start</strong>.",
-  "Every craving you resist makes the next one <strong>weaker</strong>. That's not motivation — that's <strong>neuroscience</strong>.",
-  "The discomfort is temporary. The freedom is <strong>permanent</strong>.",
-  "You're not giving something up — you're <strong>getting yourself back</strong>.",
-  "Anxiety lies. It says you can't do this. But here you are, <strong>doing it anyway</strong>.",
-  "Progress isn't linear. A bad day doesn't erase <strong>a good week</strong>.",
-  "Your lungs are healing <strong>right now</strong>, as you read this.",
-  "The version of you who started this would be <strong>so proud of today's you</strong>.",
-  "Small steps still move you <strong>forward</strong>.",
-  "You didn't come this far to <strong>only come this far</strong>.",
-  "Courage isn't the absence of fear. It's <strong>acting in spite of it</strong>.",
-  "3 months from now, you'll wish you had <strong>started today</strong>. Oh wait — you did.",
-  "You are not your addiction. You are the person <strong>fighting it</strong>.",
-  "The only person you need to be better than is <strong>who you were yesterday</strong>.",
-  "Some days the mountain seems impossible. But you're already <strong>climbing it</strong>.",
-];
+// quotes now in quotesI18n above
 
 function showQuote() {
+  const quotes = quotesI18n[data.lang] || quotesI18n.en;
   const idx = Math.floor(Math.random() * quotes.length);
   document.getElementById('quoteBar').innerHTML = '"' + quotes[idx] + '"';
 }
@@ -1750,7 +2127,7 @@ function saveSettings() {
   updatePersonalization();
   renderPuffCounter();
   showMotivBanner();
-  showToast(name ? `Settings saved! Let's go, ${name}.` : 'Settings saved!');
+  showToast(name ? t('toast.settingsSavedName') + name + '.' : t('toast.settingsSaved'));
 }
 
 function loadSettings() {
@@ -1758,26 +2135,68 @@ function loadSettings() {
   if (data.weeklySpend) document.getElementById('weeklySpend').value = data.weeklySpend;
   if (data.baselinePuffs) document.getElementById('baselinePuffsInput').value = data.baselinePuffs;
   document.getElementById('currencyLabel').textContent = data.currency || '$';
-  document.querySelectorAll('.currency-btn').forEach(b => {
+  document.querySelectorAll('.currency-btn:not(.lang-btn)').forEach(b => {
     if (b.textContent.includes(data.currencyCode || 'USD')) b.classList.add('active');
   });
   updatePersonalization();
+  applyLanguage();
 }
 
 function updatePersonalization() {
   const name = data.userName;
   const headerSub = document.querySelector('.header p');
   if (name) {
-    headerSub.textContent = name + ', your personal journey to freedom — one breath at a time';
+    headerSub.textContent = name + t('app.subtitle.name');
   } else {
-    headerSub.textContent = 'Your personal journey to freedom — one breath at a time';
+    headerSub.textContent = t('app.subtitle');
   }
+}
+
+// ===== LANGUAGE =====
+function setLanguage(lang) {
+  data.lang = lang;
+  saveData(data);
+  applyLanguage();
+}
+
+function applyLanguage() {
+  document.documentElement.lang = data.lang;
+  // Update data-i18n elements (plain text)
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  // Update data-i18n-html elements (rich text with <strong> etc)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+  // Highlight active language button
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', (b.textContent === 'English' && data.lang === 'en') || (b.textContent === 'Español' && data.lang === 'es'));
+  });
+  // Re-render all dynamic content
+  showMotivBanner();
+  updateStats();
+  renderWeek();
+  renderPuffCounter();
+  renderCheckin();
+  renderSetup();
+  renderTriggers();
+  renderMilestones();
+  renderTimeline();
+  renderAchievements();
+  renderChart();
+  updatePersonalization();
+  showQuote();
 }
 
 // ===== RESET =====
 function resetApp() {
-  if (confirm('This will delete ALL your data. Are you sure?')) {
-    if (confirm('Really? This cannot be undone.')) {
+  if (confirm(t('toast.resetConfirm1'))) {
+    if (confirm(t('toast.resetConfirm2'))) {
       localStorage.removeItem(STORAGE_KEY);
       location.reload();
     }
