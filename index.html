@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BreatheFreely — Your Quit Vaping Journey</title>
+
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#6d5cce">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="BreatheFreely">
+<link rel="apple-touch-icon" href="./icon-192.png">
+
+<!-- Open Graph for sharing -->
+<meta property="og:title" content="BreatheFreely — Quit Vaping Journey">
+<meta property="og:description" content="A free, science-backed app to help you quit vaping gradually — with anxiety support, craving tools, and daily tracking.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./icon-512.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+  :root {
+    --bg: #faf9f7;
+    --surface: #ffffff;
+    --surface2: #f3f1ee;
+    --surface3: #ebe8e3;
+    --accent: #6d5cce;
+    --accent2: #8b7be8;
+    --accent-light: #eeebfa;
+    --accent-glow: rgba(109,92,206,0.15);
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --green-bg: #f0fdf4;
+    --orange: #d97706;
+    --orange-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --teal: #0d9488;
+    --teal-light: #ccfbf1;
+    --pink: #db2777;
+    --pink-light: #fce7f3;
+    --text: #1e1b2e;
+    --text-mid: #4a4560;
+    --text-dim: #8c87a0;
+    --border: #e8e5df;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+    --shadow-lg: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .app { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 50px 20px 20px;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8em;
+    background: linear-gradient(135deg, var(--accent), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .header p {
+    color: var(--text-dim);
+    font-size: 1.1em;
+    font-weight: 300;
+  }
+
+  /* Motivational banner */
+  .motiv-banner {
+    background: linear-gradient(135deg, var(--accent), #8b5cf6, var(--teal));
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin: 20px 0;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .motiv-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
+  .motiv-banner .motiv-text {
+    position: relative;
+    font-size: 1.15em;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .motiv-banner .motiv-text strong {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.4);
+    text-underline-offset: 3px;
+  }
+  .motiv-sub {
+    position: relative;
+    font-size: 0.85em;
+    opacity: 0.85;
+    margin-top: 8px;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+  }
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .stat-number {
+    font-size: 2em;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7em;
+    color: var(--text-dim);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .stat-card.highlight .stat-number { color: var(--green); }
+  .stat-card.accent .stat-number { color: var(--accent); }
+  .stat-card.teal .stat-number { color: var(--teal); }
+
+  /* Navigation tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    margin: 20px 0;
+    background: var(--surface2);
+    border-radius: 14px;
+    padding: 5px;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    flex: 1;
+    padding: 12px 8px;
+    border: none;
+    background: none;
+    color: var(--text-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82em;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--text); background: rgba(255,255,255,0.6); }
+  .nav-tab.active {
+    background: var(--surface);
+    color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+
+  /* Panels */
+  .panel { display: none; animation: fadeIn 0.4s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4em;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .card h3 {
+    font-size: 1em;
+    color: var(--accent);
+    margin: 18px 0 10px;
+    font-weight: 700;
+  }
+  .card p, .card li {
+    color: var(--text-mid);
+    line-height: 1.75;
+    font-size: 0.95em;
+  }
+  .card ul { padding-left: 20px; }
+  .card li { margin-bottom: 6px; }
+  .card .callout {
+    background: var(--green-bg);
+    border-left: 4px solid var(--green);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    color: #15803d;
+    font-weight: 500;
+    font-size: 0.95em;
+    line-height: 1.6;
+  }
+  .card .callout-accent {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    color: #5b4aab;
+    font-weight: 500;
+    font-size: 0.95em;
+    line-height: 1.6;
+  }
+
+  /* Checkin items */
+  .checkin-grid { display: grid; gap: 10px; margin-top: 14px; }
+  .checkin-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--surface2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    user-select: none;
+  }
+  .checkin-item:hover { border-color: var(--accent-light); background: #faf8ff; }
+  .checkin-item.checked {
+    border-color: var(--green);
+    background: var(--green-bg);
+  }
+  .check-circle {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 2px solid var(--text-dim);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .checkin-item.checked .check-circle {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .check-circle svg { opacity: 0; transition: 0.3s; }
+  .checkin-item.checked .check-circle svg { opacity: 1; }
+  .checkin-text { font-weight: 500; color: var(--text); font-size: 0.92em; }
+  .checkin-item.checked .checkin-text { color: var(--green); }
+
+  /* Sliders */
+  .slider-group { margin: 18px 0; }
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+  }
+  .slider-label span:first-child { color: var(--text); font-weight: 600; }
+  .slider-label span:last-child { color: var(--accent); font-weight: 800; font-size: 1.2em; }
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface3);
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--accent-glow);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    padding: 12px 28px;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px var(--accent-glow);
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-full { width: 100%; margin-top: 16px; }
+
+  /* Breathing */
+  .breath-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  .breath-circle-outer {
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: conic-gradient(from 0deg, var(--accent), var(--teal), var(--accent2), var(--accent));
+    padding: 4px;
+    animation: none;
+  }
+  .breath-circle-outer.animating { animation: breathSpin 16s linear infinite; }
+  @keyframes breathSpin { to { transform: rotate(360deg); } }
+  .breath-circle {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: transform 4s ease-in-out;
+  }
+  .breath-circle.inhale { transform: scale(1.15); }
+  .breath-circle.exhale { transform: scale(0.9); }
+  .breath-text { font-size: 1.3em; font-weight: 700; color: var(--text); }
+  .breath-timer { font-size: 2.5em; font-weight: 800; color: var(--accent); margin-top: 4px; }
+  .breath-btn {
+    margin-top: 30px;
+    padding: 14px 44px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px var(--accent-glow);
+  }
+  .breath-btn:hover { transform: scale(1.05); }
+  .breath-rounds { margin-top: 16px; color: var(--text-dim); font-size: 0.9em; }
+
+  /* SOS */
+  .sos-btn {
+    width: 100%;
+    padding: 22px;
+    background: linear-gradient(135deg, #dc2626, #e11d48, #be123c);
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15em;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(220,38,38,0.25);
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .sos-btn:hover { transform: scale(1.02); box-shadow: 0 6px 30px rgba(220,38,38,0.35); }
+  .sos-btn:active { transform: scale(0.98); }
+  .sos-tips { display: none; animation: fadeIn 0.5s ease; }
+  .sos-tips.visible { display: block; }
+  .sos-tip {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border: 1px solid var(--border);
+  }
+  .sos-tip .icon { font-size: 1.5em; flex-shrink: 0; }
+  .sos-tip h4 { color: var(--text); font-size: 0.95em; margin-bottom: 4px; }
+  .sos-tip p { color: var(--text-mid); font-size: 0.85em; line-height: 1.6; }
+
+  /* Week calendar */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .week-day {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    background: var(--surface2);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .week-day .day-name { color: var(--text-dim); font-size: 0.7em; font-weight: 700; text-transform: uppercase; }
+  .week-day .day-num { color: var(--text); font-weight: 800; font-size: 1.2em; margin-top: 2px; }
+  .week-day.today { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .week-day.logged { background: var(--green-light); border-color: var(--green); }
+  .week-day.logged .day-num { color: var(--green); }
+
+  /* Toolkit cards */
+  .toolkit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+  }
+  .toolkit-card:hover { border-left-color: var(--teal); transform: translateX(3px); box-shadow: var(--shadow-lg); }
+  .toolkit-card h4 { color: var(--text); margin-bottom: 8px; font-size: 1em; }
+  .toolkit-card p { font-size: 0.9em; color: var(--text-mid); line-height: 1.7; }
+  .tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.72em;
+    font-weight: 700;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag-purple { background: var(--accent-light); color: var(--accent); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .tag-pink { background: var(--pink-light); color: var(--pink); }
+
+  /* Habit replacement grid */
+  .habit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .habit-card {
+    background: var(--surface2);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .habit-card:hover { background: white; box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .habit-card .habit-icon { font-size: 2em; margin-bottom: 10px; }
+  .habit-card h4 { color: var(--text); font-size: 0.95em; margin-bottom: 6px; }
+  .habit-card p { color: var(--text-mid); font-size: 0.82em; line-height: 1.6; }
+  .habit-card .habit-when {
+    margin-top: 10px;
+    font-size: 0.75em;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Milestones */
+  .milestone {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px;
+    background: var(--surface2);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .milestone-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--green-light), transparent);
+    transition: width 1s ease;
+  }
+  .milestone-icon { font-size: 1.8em; z-index: 1; }
+  .milestone-info { z-index: 1; flex: 1; }
+  .milestone-info h4 { font-size: 0.9em; color: var(--text); margin-bottom: 2px; }
+  .milestone-info p { font-size: 0.8em; color: var(--text-dim); }
+  .milestone-time { z-index: 1; font-size: 0.75em; color: var(--green); font-weight: 700; text-align: right; }
+
+  /* Timeline */
+  .timeline { margin-top: 16px; }
+  .timeline-item { display: flex; gap: 16px; padding-bottom: 24px; position: relative; }
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 15px; top: 36px; bottom: 0;
+    width: 2px;
+    background: var(--surface3);
+  }
+  .timeline-item.completed:not(:last-child)::after { background: var(--green); }
+  .timeline-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 2px solid var(--text-dim);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+  .timeline-item.completed .timeline-dot { background: var(--green); border-color: var(--green); color: white; }
+  .timeline-item.current .timeline-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    box-shadow: 0 0 0 4px var(--accent-light);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 4px var(--accent-light); }
+    50% { box-shadow: 0 0 0 8px rgba(109,92,206,0.1); }
+  }
+  .timeline-content h4 { color: var(--text); font-size: 0.95em; margin-bottom: 4px; }
+  .timeline-content p { font-size: 0.85em; color: var(--text-dim); }
+
+  /* Journal */
+  .journal-input {
+    width: 100%;
+    min-height: 120px;
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95em;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .journal-input:focus { border-color: var(--accent); }
+  .journal-input::placeholder { color: var(--text-dim); }
+  .journal-entries { margin-top: 20px; }
+  .journal-entry {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--accent);
+  }
+  .journal-entry .date { font-size: 0.75em; color: var(--accent); margin-bottom: 6px; font-weight: 700; }
+  .journal-entry .text { color: var(--text-mid); font-size: 0.9em; line-height: 1.6; white-space: pre-wrap; }
+
+  /* Schedule table */
+  .schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+    margin: 12px 0;
+  }
+  .schedule-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 0.72em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .schedule-table td {
+    padding: 14px;
+    background: var(--surface2);
+    font-size: 0.9em;
+    color: var(--text);
+  }
+  .schedule-table tr td:first-child { border-radius: 10px 0 0 10px; font-weight: 700; color: var(--accent); }
+  .schedule-table tr td:last-child { border-radius: 0 10px 10px 0; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.72em;
+    font-weight: 700;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-orange { background: var(--orange-light); color: var(--orange); }
+  .badge-purple { background: var(--accent-light); color: var(--accent); }
+  .badge-teal { background: var(--teal-light); color: var(--teal); }
+
+  /* Puff counter */
+  .puff-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: var(--surface2);
+    border-radius: 14px;
+    margin: 16px 0;
+    border: 1px solid var(--border);
+  }
+  .puff-counter button {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .puff-counter button:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+  .puff-count {
+    text-align: center;
+  }
+  .puff-count .number { font-size: 2.5em; font-weight: 800; color: var(--text); }
+  .puff-count .label { font-size: 0.75em; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .puff-target { text-align: center; margin-top: 8px; font-size: 0.85em; color: var(--text-dim); }
+  .puff-target strong { color: var(--accent); }
+
+  /* Quote bar */
+  .quote-bar {
+    text-align: center;
+    padding: 28px 20px;
+    font-style: italic;
+    color: var(--text-mid);
+    font-size: 0.95em;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+    line-height: 1.6;
+  }
+  .quote-bar strong { color: var(--accent); font-style: normal; }
+
+  /* Reset */
+  .reset-link {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    color: var(--text-dim);
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+  .reset-link:hover { opacity: 1; color: var(--red); }
+
+  /* Confetti overlay */
+  .confetti-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* Success toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--green);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95em;
+    box-shadow: 0 4px 20px rgba(22,163,74,0.3);
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    font-family: 'Inter', sans-serif;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { font-size: 2em; }
+    .nav-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .nav-tab { flex: none; padding: 12px 14px; }
+    .habit-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="header">
+    <h1>BreatheFreely</h1>
+    <p>Your personal journey to freedom — one breath at a time</p>
+  </div>
+
+  <!-- Motivational banner - changes daily -->
+  <div class="motiv-banner">
+    <div class="motiv-text" id="motivText"></div>
+    <div class="motiv-sub" id="motivSub"></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card highlight">
+      <div class="stat-number" id="daysFree">0</div>
+      <div class="stat-label">Days on Plan</div>
+    </div>
+    <div class="stat-card accent">
+      <div class="stat-number" id="moneySaved">$0</div>
+      <div class="stat-label">Money Saved</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-number" id="cravingsBeaten">0</div>
+      <div class="stat-label">Cravings Beaten</div>
+    </div>
+    <div class="stat-card highlight">
+      <div class="stat-number" id="currentPhase">—</div>
+      <div class="stat-label">Current Phase</div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPanel('today',this)">Today</button>
+    <button class="nav-tab" onclick="showPanel('breathe',this)">Breathe</button>
+    <button class="nav-tab" onclick="showPanel('cravings',this)">Cravings</button>
+    <button class="nav-tab" onclick="showPanel('plan',this)">My Plan</button>
+    <button class="nav-tab" onclick="showPanel('social',this)">Social Kit</button>
+    <button class="nav-tab" onclick="showPanel('journal',this)">Journal</button>
+    <button class="nav-tab" onclick="showPanel('progress',this)">Progress</button>
+  </div>
+
+  <!-- ====== TODAY ====== -->
+  <div class="panel active" id="panel-today">
+    <div class="card">
+      <h2>This Week</h2>
+      <div class="week-grid" id="weekGrid"></div>
+    </div>
+
+    <div class="card">
+      <h2>Today's Puff Tracker</h2>
+      <p>Track how many times you vape today. The goal is to gradually reduce this number week by week — no pressure, just awareness.</p>
+      <div class="puff-counter">
+        <button onclick="changePuffs(-1)">-</button>
+        <div class="puff-count">
+          <div class="number" id="puffCount">0</div>
+          <div class="label">Puffs today</div>
+        </div>
+        <button onclick="changePuffs(1)">+</button>
+      </div>
+      <div class="puff-target" id="puffTarget"></div>
+    </div>
+
+    <div class="card">
+      <h2>Daily Check-in</h2>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>Anxiety Level</span>
+          <span id="anxietyVal">5</span>
+        </div>
+        <input type="range" min="1" max="10" value="5" id="anxietySlider" oninput="document.getElementById('anxietyVal').textContent=this.value">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>Craving Intensity</span>
+          <span id="cravingVal">5</span>
+        </div>
+        <input type="range" min="1" max="10" value="5" id="cravingSlider" oninput="document.getElementById('cravingVal').textContent=this.value">
+      </div>
+      <div class="checkin-grid" id="checkinGrid"></div>
+      <button class="btn-primary btn-full" onclick="saveDailyCheckin()">Save Today's Check-in</button>
+    </div>
+
+    <div class="card">
+      <h2>Craving Right Now?</h2>
+      <button class="sos-btn" onclick="triggerSOS()">SOS — I Need Help Right Now</button>
+      <div class="sos-tips" id="sosTips">
+        <div class="sos-tip">
+          <div class="icon">🧊</div>
+          <div>
+            <h4>Ice Cube Trick</h4>
+            <p>Hold ice in your hand or press it to your neck. The cold activates your dive reflex and drops your heart rate in 30 seconds. Focus entirely on the sensation.</p>
+          </div>
+        </div>
+        <div class="sos-tip">
+          <div class="icon">🫁</div>
+          <div>
+            <h4>Box Breathing — Do It Now</h4>
+            <p>Go to the <strong>Breathe</strong> tab. 4 rounds = 4 minutes. The deep inhale you crave from vaping? You get it here — without the nicotine.</p>
+          </div>
+        </div>
+        <div class="sos-tip">
+          <div class="icon">🚶</div>
+          <div>
+            <h4>Move for 5 Minutes</h4>
+            <p>Walk, stretch, pace — anything. Taylor et al. (2007) found brief walking cuts cravings by 50%. Your body needs to burn off the restless energy.</p>
+          </div>
+        </div>
+        <div class="sos-tip">
+          <div class="icon">✊</div>
+          <div>
+            <h4>Squeeze Something</h4>
+            <p>Grab a stress ball, rubber band, or just clench your fist hard for 10 seconds then release. This redirects the physical tension your body is feeling.</p>
+          </div>
+        </div>
+        <div class="sos-tip">
+          <div class="icon">⏱️</div>
+          <div>
+            <h4>Wait 5 Minutes</h4>
+            <p>"I'll wait just 5 more minutes." Most cravings peak and fade within 3-5 minutes. Set a timer. You'll be surprised how fast it passes.</p>
+          </div>
+        </div>
+        <div class="sos-tip">
+          <div class="icon">🧠</div>
+          <div>
+            <h4>Reframe the Thought</h4>
+            <p>"I need to vape" → "My brain is requesting nicotine. This uncomfortable feeling IS the addiction losing its grip. Each time I resist, it gets weaker. I am winning right now."</p>
+          </div>
+        </div>
+        <div class="sos-tip">
+          <div class="icon">🍬</div>
+          <div>
+            <h4>Oral Substitute — Now</h4>
+            <p>Pop a mint, chew gum, bite a toothpick, eat a crunchy carrot. The oral fixation is real — satisfy it without nicotine.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Health Recovery Timeline</h2>
+      <div id="milestones"></div>
+    </div>
+  </div>
+
+  <!-- ====== BREATHE ====== -->
+  <div class="panel" id="panel-breathe">
+    <div class="card">
+      <h2>Box Breathing Exercise</h2>
+      <p>Your body's built-in calm-down switch. Used by Navy SEALs, recommended by anxiety researchers. Do this whenever you'd reach for the vape — the deep inhale satisfies the same physical urge.</p>
+      <div class="breath-container">
+        <div class="breath-circle-outer" id="breathOuter">
+          <div class="breath-circle" id="breathCircle">
+            <div class="breath-text" id="breathText">Ready</div>
+            <div class="breath-timer" id="breathTimer">4:4:4:4</div>
+          </div>
+        </div>
+        <button class="breath-btn" id="breathBtn" onclick="toggleBreathing()">Start Breathing</button>
+        <div class="breath-rounds">Completed: <strong id="breathRounds">0</strong> rounds</div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Why This Replaces Vaping</h2>
+      <p>Here's what most people don't realize: when you vape, the calming effect comes partly from the <strong>breathing pattern itself</strong> — slow, deep inhales. Nicotine gets the credit, but your lungs do the real work.</p>
+      <div class="callout">Box breathing gives you the same parasympathetic activation without the 50+ chemicals. After 2-3 weeks of practice, your brain rewires to use this as the default stress response.</div>
+      <h3>The Science</h3>
+      <ul>
+        <li>Extended exhales stimulate the vagus nerve, lowering heart rate instantly (Gerritsen & Band, 2018)</li>
+        <li>4 rounds reduce cortisol by up to 20% (Ma et al., 2017)</li>
+        <li>Regular practice physically rewires your stress response in 2-3 weeks</li>
+        <li>This is literally what your body was doing when you vaped — minus the poison</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ====== CRAVINGS & HABITS ====== -->
+  <div class="panel" id="panel-cravings">
+    <div class="card">
+      <h2>Understanding Your Cravings</h2>
+      <p>A craving is a <strong>wave</strong> — it rises, peaks, and falls in 3-5 minutes. You don't need to fight it. You just need to <strong>surf it</strong>. The technique is called "urge surfing" (Marlatt, 1985) and it's one of the most effective tools in addiction research.</p>
+      <div class="callout-accent">Every single craving you ride out without vaping physically weakens the neural pathway. Your brain literally rewires. It's not willpower — it's neuroscience.</div>
+      <h3>The Craving Wave</h3>
+      <ul>
+        <li><strong>0-1 min:</strong> Trigger hits. You feel the pull. This is the steepest part.</li>
+        <li><strong>1-3 min:</strong> Peak intensity. Your brain is screaming. This is where most people give in.</li>
+        <li><strong>3-5 min:</strong> It starts fading. You made it through the worst.</li>
+        <li><strong>5+ min:</strong> Gone. You won. The neural pathway just got weaker.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Hand-to-Mouth Habit Replacements</h2>
+      <p>Vaping isn't just nicotine — it's a <strong>physical habit</strong>. Your hand reaches for it automatically. Here are proven replacements that satisfy the same motor pattern:</p>
+      <div class="habit-grid">
+        <div class="habit-card">
+          <div class="habit-icon">🖊️</div>
+          <h4>Pen / Pencil Fidget</h4>
+          <p>Keep a pen in your hand. Click it, twirl it, hold it between your fingers like a vape. Same hand movement, zero nicotine.</p>
+          <div class="habit-when">When: Working, sitting, thinking</div>
+        </div>
+        <div class="habit-card">
+          <div class="habit-icon">🍬</div>
+          <h4>Mints & Hard Candy</h4>
+          <p>Strong mints (Altoids, cinnamon) work best. The intense flavor distracts your brain and satisfies the oral fixation.</p>
+          <div class="habit-when">When: After meals, social events</div>
+        </div>
+        <div class="habit-card">
+          <div class="habit-icon">🥕</div>
+          <h4>Crunchy Snacks</h4>
+          <p>Carrots, celery, sunflower seeds, apple slices. The chewing and crunching engages your jaw and satisfies the oral need.</p>
+          <div class="habit-when">When: At home, watching TV</div>
+        </div>
+        <div class="habit-card">
+          <div class="habit-icon">💪</div>
+          <h4>Stress Ball / Grip</h4>
+          <p>Squeeze a stress ball or hand gripper. Channels the physical tension somewhere productive. Bonus: builds forearm strength.</p>
+          <div class="habit-when">When: Anxious moments, meetings</div>
+        </div>
+        <div class="habit-card">
+          <div class="habit-icon">🧊</div>
+          <h4>Cold Water Bottle</h4>
+          <p>Sip ice water through a straw. The cold, the sipping motion, and the hand-holding all mimic vaping sensations.</p>
+          <div class="habit-when">When: Driving, desk work</div>
+        </div>
+        <div class="habit-card">
+          <div class="habit-icon">🪥</div>
+          <h4>Flavored Toothpick</h4>
+          <p>Cinnamon or tea tree toothpicks give you something in your mouth and hands. Many ex-smokers swear by this.</p>
+          <div class="habit-when">When: Social events, bars</div>
+        </div>
+        <div class="habit-card">
+          <div class="habit-icon">📿</div>
+          <h4>Fidget Ring / Worry Stone</h4>
+          <p>A spinner ring or smooth stone you roll between your fingers. Keeps your hands busy without thinking about it.</p>
+          <div class="habit-when">When: Anywhere, anytime</div>
+        </div>
+        <div class="habit-card">
+          <div class="habit-icon">🫁</div>
+          <h4>Deep Breath Through a Straw</h4>
+          <p>Inhale slowly through a straw — mimics the exact draw sensation of vaping. Exhale slowly through your nose. Repeat 5x.</p>
+          <div class="habit-when">When: Intense cravings</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Trigger Map</h2>
+      <p>Most vaping happens on autopilot. Identify your triggers so you can prepare:</p>
+      <div class="checkin-grid" id="triggerChecklist"></div>
+      <p style="margin-top:14px;font-size:0.85em;color:var(--text-dim)">Check the ones that apply to you. For each trigger you identify, plan a specific replacement action. Writing "When X happens, I will do Y instead" (implementation intentions) doubles your success rate (Gollwitzer, 1999).</p>
+    </div>
+
+    <div class="card">
+      <h2>Things That Actually Help (Evidence-Based)</h2>
+      <ul>
+        <li><strong>Nicotine gum/lozenges (NRT):</strong> Available over the counter. Use for breakthrough cravings, especially in social situations. Clinically proven to improve quit rates by 50-70% (Stead et al., 2012)</li>
+        <li><strong>Exercise:</strong> Even 10 minutes reduces cravings significantly. The endorphins replace the dopamine hit from nicotine</li>
+        <li><strong>Sleep:</strong> Poor sleep increases cravings 40%. Prioritize 7+ hours</li>
+        <li><strong>Water:</strong> Dehydration intensifies cravings. Drink a full glass when a craving hits</li>
+        <li><strong>CBT (therapy):</strong> The gold standard for anxiety + cessation. Many therapists offer it online. This is the single most effective intervention available</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ====== PLAN ====== -->
+  <div class="panel" id="panel-plan">
+    <div class="card">
+      <h2>Your Frequency Reduction Plan</h2>
+      <p>Since you're using a 5% nicotine vape with no lower option, the strategy shifts to <strong>reducing how often you use it</strong>. This is called "scheduled reduction" and research shows it's effective — especially for anxious quitters, because it avoids the shock of going cold turkey (Cinciripini et al., 1995).</p>
+      <table class="schedule-table">
+        <thead>
+          <tr><th>Weeks</th><th>Goal</th><th>Strategy</th><th>Phase</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 — 2</td><td>Track baseline</td><td>Count every puff. No reduction yet — just observe.</td><td><span class="badge badge-purple">Awareness</span></td></tr>
+          <tr><td>3 — 4</td><td>Reduce 25%</td><td>If you average 40 puffs/day, target 30. Cut the "automatic" ones first.</td><td><span class="badge badge-orange">Reduce</span></td></tr>
+          <tr><td>5 — 6</td><td>Reduce 50%</td><td>Target half your baseline. Add 10-min delays before each session.</td><td><span class="badge badge-orange">Reduce</span></td></tr>
+          <tr><td>7 — 8</td><td>Reduce 75%</td><td>Vape only at designated times (after meals, before bed). Max 3 sessions/day.</td><td><span class="badge badge-teal">Structure</span></td></tr>
+          <tr><td>9 — 10</td><td>1-2x per day</td><td>Only vape once or twice. Use NRT gum for breakthroughs.</td><td><span class="badge badge-teal">Structure</span></td></tr>
+          <tr><td>11 — 12</td><td>Zero</td><td>Full stop. Use every tool in this app. You're ready.</td><td><span class="badge badge-green">Freedom</span></td></tr>
+        </tbody>
+      </table>
+      <div class="callout">Key principle: Don't try to resist a craving with nothing. Always have a REPLACEMENT ready — gum, breathing, a fidget, a walk. Willpower alone fails. Systems win.</div>
+    </div>
+
+    <div class="card">
+      <h2>The Truth About Anxiety + Nicotine</h2>
+      <p>This is the most important thing you'll read in this app:</p>
+      <p>Nicotine <strong>feels</strong> like it helps your anxiety. But the science shows it actually <strong>makes it worse</strong>:</p>
+      <ul>
+        <li>Nicotine withdrawal creates anxiety symptoms → the next hit "relieves" it → you think it helped → this <strong>increases your baseline anxiety</strong> over time (Moylan et al., 2013)</li>
+        <li>People who quit experience <strong>reduced anxiety equal to taking medication</strong> within 1-3 months (Taylor et al., 2014)</li>
+        <li>The hardest window is days 3-14 after full cessation. After that, it improves every week</li>
+      </ul>
+      <div class="callout" style="background:#faf5ff;border-color:var(--accent);color:#5b4aab;">
+        You're not losing a coping tool. You're breaking free from something that was quietly making your anxiety worse every single day. The person you'll be in 3 months will be calmer, more present, and genuinely less anxious. That person is worth fighting for.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Getting Started Checklist</h2>
+      <p>Complete these to begin your journey:</p>
+      <div class="checkin-grid" id="setupChecklist"></div>
+    </div>
+  </div>
+
+  <!-- ====== SOCIAL KIT ====== -->
+  <div class="panel" id="panel-social">
+    <div class="card">
+      <h2>Social Situations Toolkit</h2>
+      <p>This is your hardest trigger — so it gets the most preparation. These strategies are based on CBT principles for social anxiety and substance use. You're not broken for finding this hard. <strong>Everyone</strong> does.</p>
+    </div>
+
+    <div class="toolkit-card">
+      <h4>Before You Arrive</h4>
+      <p>Vape <strong>before</strong> the event so you arrive satisfied. Set one rule: "I won't vape in the first 30 minutes." This breaks the automatic link between "social = vape." After a few events, the association weakens permanently.</p>
+      <span class="tag tag-purple">Pre-event</span>
+    </div>
+
+    <div class="toolkit-card">
+      <h4>The Dominant Hand Trick</h4>
+      <p>Keep a drink in your dominant hand the entire time. This physically blocks the hand-to-mouth reflex. It's stupidly simple — and that's why it works.</p>
+      <span class="tag tag-teal">During event</span>
+    </div>
+
+    <div class="toolkit-card">
+      <h4>Your Pre-Loaded Response</h4>
+      <p>When someone offers or asks, use: <strong>"I'm cutting back"</strong> — three words, no debate, no awkwardness. Practice saying it out loud before you go. CBT research shows rehearsed responses dramatically reduce social anxiety about refusal.</p>
+      <span class="tag tag-orange">Key phrase</span>
+    </div>
+
+    <div class="toolkit-card">
+      <h4>Your Secret Weapons: Pocket Kit</h4>
+      <p>Bring a small kit to every social event: <strong>strong mints, a fidget ring or worry stone, and nicotine gum (just in case).</strong> Having backups reduces anxiety because you know you're prepared. You may not even use them — but knowing they're there is the point.</p>
+      <span class="tag tag-pink">Game changer</span>
+    </div>
+
+    <div class="toolkit-card">
+      <h4>Find Your Accountability Buddy</h4>
+      <p>Tell <strong>one</strong> friend about your goal. Not for a lecture — just someone who knows. When you feel the pull, text them or make eye contact. Social support increases quit success by 30% (Westmaas et al., 2010).</p>
+      <span class="tag tag-green">Support</span>
+    </div>
+
+    <div class="toolkit-card">
+      <h4>The Step-Away Swap</h4>
+      <p>When you feel the pull to go outside and vape, <strong>still step away</strong> — but do 2 minutes of box breathing or walk around the block instead. You keep the break from socializing (which is what you actually need), just without nicotine.</p>
+      <span class="tag tag-teal">Replacement</span>
+    </div>
+
+    <div class="toolkit-card">
+      <h4>The Reframe</h4>
+      <p><em>"I can't socialize without nicotine"</em> → You did it as a child, a teenager before vaping, and in many situations now. Nicotine withdrawal mimics social anxiety (racing heart, restlessness) but <strong>isn't the same thing</strong>. After 2-4 weeks, most people feel more comfortable socially, not less.</p>
+      <span class="tag tag-purple">Mindset</span>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--green);">
+      <h2>Setback Protocol</h2>
+      <p>If you slip at a party — <strong>read this:</strong></p>
+      <ul>
+        <li>One slip is NOT a relapse. The Abstinence Violation Effect ("I already failed, might as well keep going") is the real enemy</li>
+        <li>Log it in your journal — what triggered it, how you felt</li>
+        <li>Do NOT reset your mental timeline</li>
+        <li>One slip in a month = you succeeded <strong>29 out of 30 days</strong>. That's a 97% success rate</li>
+        <li>Resume the plan tomorrow as if nothing happened. Because nothing did — you're still on track</li>
+      </ul>
+      <div class="callout">Perfection isn't the goal. Progress is. And progress isn't linear — it's messy and human. Just like you. Keep going.</div>
+    </div>
+  </div>
+
+  <!-- ====== JOURNAL ====== -->
+  <div class="panel" id="panel-journal">
+    <div class="card">
+      <h2>Your Journal</h2>
+      <p>Writing about cravings, victories, and feelings improves quit outcomes by 25% (Pennebaker, 1997). This is private and stays on your device only.</p>
+      <textarea class="journal-input" id="journalInput" placeholder="How are you feeling today? What triggered a craving? What are you proud of? Write anything..."></textarea>
+      <button class="btn-primary btn-full" onclick="saveJournalEntry()">Save Entry</button>
+      <div class="journal-entries" id="journalEntries"></div>
+    </div>
+  </div>
+
+  <!-- ====== PROGRESS ====== -->
+  <div class="panel" id="panel-progress">
+    <div class="card">
+      <h2>Your Journey Timeline</h2>
+      <div class="timeline" id="progressTimeline"></div>
+    </div>
+    <div class="card">
+      <h2>Craving & Anxiety Trend</h2>
+      <canvas id="trendChart" height="200"></canvas>
+      <p style="margin-top:12px;font-size:0.85em;color:var(--text-dim)">Your daily scores over the last 14 days. Fluctuations are normal — the <strong>overall downward trend</strong> is what matters. Some days will be harder. That's not failure, that's the process.</p>
+    </div>
+    <div class="card">
+      <h2>Achievements</h2>
+      <div id="achievements"></div>
+    </div>
+  </div>
+
+  <div class="quote-bar" id="quoteBar"></div>
+  <div class="reset-link" onclick="resetApp()">Reset all data and start over</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+const STORAGE_KEY = 'breathefreely_v2';
+const defaultData = () => ({
+  startDate: new Date().toISOString().split('T')[0],
+  dailyCheckins: {},
+  journal: [],
+  cravingsBeaten: 0,
+  setupDone: {},
+  triggersDone: {},
+  breathRoundsTotal: 0,
+  costPerDay: 7,
+  baselinePuffs: 40
+});
+
+function loadData() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (d && d.startDate) return d;
+  } catch(e) {}
+  const d = defaultData();
+  saveData(d);
+  return d;
+}
+function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+let data = loadData();
+
+// ===== UTILS =====
+function daysBetween(a, b) {
+  return Math.floor((new Date(b) - new Date(a)) / 86400000);
+}
+function today() { return new Date().toISOString().split('T')[0]; }
+function currentWeek() { return daysBetween(data.startDate, today()) / 7; }
+
+function getPhase() {
+  const w = currentWeek();
+  if (w < 2) return { name: 'Track', color: 'var(--accent)' };
+  if (w < 4) return { name: '-25%', color: 'var(--orange)' };
+  if (w < 6) return { name: '-50%', color: 'var(--orange)' };
+  if (w < 8) return { name: '-75%', color: 'var(--teal)' };
+  if (w < 10) return { name: '1-2/day', color: 'var(--teal)' };
+  if (w < 12) return { name: 'Free!', color: 'var(--green)' };
+  return { name: 'Done!', color: 'var(--green)' };
+}
+
+function getTargetPuffs() {
+  const w = currentWeek();
+  const b = data.baselinePuffs;
+  if (w < 2) return b;
+  if (w < 4) return Math.round(b * 0.75);
+  if (w < 6) return Math.round(b * 0.5);
+  if (w < 8) return Math.round(b * 0.25);
+  if (w < 10) return Math.round(b * 0.1);
+  return 0;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===== MOTIVATIONAL BANNERS =====
+const motivBanners = [
+  { text: "Every craving you survive is a <strong>neural pathway getting weaker</strong>. You are literally rewiring your brain right now.", sub: "Neuroscience backs this — it's not just motivation, it's biology." },
+  { text: "You are not giving something up. You are <strong>getting yourself back</strong>.", sub: "The calm, present, un-addicted version of you is already emerging." },
+  { text: "The anxiety you feel isn't you — it's <strong>nicotine withdrawal pretending to be you</strong>.", sub: "Real you is calmer. You'll meet that person soon." },
+  { text: "People who quit nicotine see anxiety drop to <strong>the same level as taking medication</strong>.", sub: "Taylor et al., 2014 — this is published, peer-reviewed science." },
+  { text: "The craving you're fighting right now will <strong>last 3-5 minutes</strong>. Your freedom lasts forever.", sub: "Set a timer. You'll be shocked how fast it passes." },
+  { text: "You didn't come this far to <strong>only come this far</strong>.", sub: "Look at your stats above. That's real progress. That's you." },
+  { text: "A bad day doesn't erase a good week. <strong>Progress isn't linear</strong> — and that's okay.", sub: "The overall trend is what matters. Keep showing up." },
+  { text: "Your lungs are healing <strong>right now</strong>, even as you read this.", sub: "Your body wants to recover. You just have to let it." },
+  { text: "The version of you who started this journey would be <strong>proud of today's you</strong>.", sub: "Don't forget to celebrate how far you've come." },
+  { text: "Discipline isn't about perfection. It's about <strong>getting back up one more time than you fall</strong>.", sub: "Every day you try is a day you win." },
+  { text: "In 3 months, you'll look back and be <strong>grateful you didn't quit quitting</strong>.", sub: "Future you is counting on present you. Don't let them down." },
+  { text: "You are stronger than a <strong>3-minute craving</strong>. You've survived harder things.", sub: "This feeling is temporary. Your strength is not." },
+];
+
+function showMotivBanner() {
+  const dayIdx = daysBetween(data.startDate, today());
+  const b = motivBanners[dayIdx % motivBanners.length];
+  document.getElementById('motivText').innerHTML = b.text;
+  document.getElementById('motivSub').textContent = b.sub;
+}
+
+// ===== STATS =====
+function updateStats() {
+  const days = Math.max(0, daysBetween(data.startDate, today()));
+  document.getElementById('daysFree').textContent = days;
+  document.getElementById('moneySaved').textContent = '$' + (days * data.costPerDay);
+  document.getElementById('cravingsBeaten').textContent = data.cravingsBeaten;
+  const phase = getPhase();
+  const el = document.getElementById('currentPhase');
+  el.textContent = phase.name;
+  el.style.color = phase.color;
+}
+
+// ===== NAV =====
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'progress') { renderChart(); }
+}
+
+// ===== WEEK GRID =====
+function renderWeek() {
+  const grid = document.getElementById('weekGrid');
+  grid.innerHTML = '';
+  const now = new Date();
+  const dow = now.getDay();
+  const mon = new Date(now);
+  mon.setDate(now.getDate() - ((dow + 6) % 7));
+  const names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(mon);
+    d.setDate(mon.getDate() + i);
+    const key = d.toISOString().split('T')[0];
+    const el = document.createElement('div');
+    el.className = 'week-day' + (key === today() ? ' today' : '') + (data.dailyCheckins[key] ? ' logged' : '');
+    el.innerHTML = `<span class="day-name">${names[i]}</span><span class="day-num">${d.getDate()}</span>`;
+    grid.appendChild(el);
+  }
+}
+
+// ===== PUFF TRACKER =====
+function renderPuffCounter() {
+  const td = data.dailyCheckins[today()];
+  const count = td ? (td.puffs || 0) : 0;
+  document.getElementById('puffCount').textContent = count;
+  const target = getTargetPuffs();
+  const w = currentWeek();
+  if (w < 2) {
+    document.getElementById('puffTarget').innerHTML = 'Tracking phase — just count honestly. Your average becomes the baseline.';
+  } else {
+    document.getElementById('puffTarget').innerHTML = `Today's target: <strong>${target} puffs or fewer</strong>` + (count <= target ? ' — You\'re on track!' : '');
+  }
+}
+
+function changePuffs(delta) {
+  const key = today();
+  if (!data.dailyCheckins[key]) data.dailyCheckins[key] = { tasks: {}, anxiety: 5, craving: 5, puffs: 0 };
+  data.dailyCheckins[key].puffs = Math.max(0, (data.dailyCheckins[key].puffs || 0) + delta);
+  saveData(data);
+  renderPuffCounter();
+}
+
+// ===== DAILY CHECKIN =====
+const dailyTasks = [
+  "I stayed at or below my puff target today",
+  "I used a replacement (gum, mint, fidget) instead of vaping at least once",
+  "I did a breathing exercise",
+  "I moved my body for 10+ minutes",
+  "I identified a trigger and chose a different response",
+  "I drank plenty of water today",
+  "I'm proud of myself for trying — even if today wasn't perfect"
+];
+
+function renderCheckin() {
+  const grid = document.getElementById('checkinGrid');
+  grid.innerHTML = '';
+  const td = data.dailyCheckins[today()] || {};
+  dailyTasks.forEach((task, i) => {
+    const checked = td.tasks && td.tasks[i];
+    const el = document.createElement('div');
+    el.className = 'checkin-item' + (checked ? ' checked' : '');
+    el.innerHTML = `<div class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="checkin-text">${task}</span>`;
+    el.onclick = () => {
+      const key = today();
+      if (!data.dailyCheckins[key]) data.dailyCheckins[key] = { tasks: {}, anxiety: 5, craving: 5, puffs: 0 };
+      data.dailyCheckins[key].tasks[i] = !data.dailyCheckins[key].tasks[i];
+      saveData(data);
+      renderCheckin();
+    };
+    grid.appendChild(el);
+  });
+}
+
+function saveDailyCheckin() {
+  const key = today();
+  if (!data.dailyCheckins[key]) data.dailyCheckins[key] = { tasks: {}, anxiety: 5, craving: 5, puffs: 0 };
+  data.dailyCheckins[key].anxiety = parseInt(document.getElementById('anxietySlider').value);
+  data.dailyCheckins[key].craving = parseInt(document.getElementById('cravingSlider').value);
+  saveData(data);
+  renderWeek();
+  updateStats();
+  // Calculate baseline from first 14 days
+  const entries = Object.entries(data.dailyCheckins).sort((a,b) => a[0].localeCompare(b[0]));
+  if (entries.length >= 3 && currentWeek() < 2) {
+    const avg = Math.round(entries.reduce((s,e) => s + (e[1].puffs || 0), 0) / entries.length);
+    if (avg > 0) { data.baselinePuffs = avg; saveData(data); }
+  }
+  showToast('Check-in saved! You showed up today — that matters.');
+}
+
+// ===== SETUP CHECKLIST =====
+const setupTasks = [
+  "Write down 3 personal reasons for quitting",
+  "Set your start date (today counts!)",
+  "Buy oral substitutes: strong mints, gum, toothpicks",
+  "Get a fidget (stress ball, spinner ring, or worry stone)",
+  "Consider buying nicotine gum/lozenges for breakthrough cravings",
+  "Tell one person about your goal",
+  "Remove the vape from your nightstand / easy-access spots"
+];
+
+function renderSetup() {
+  const grid = document.getElementById('setupChecklist');
+  grid.innerHTML = '';
+  setupTasks.forEach((task, i) => {
+    const checked = data.setupDone[i];
+    const el = document.createElement('div');
+    el.className = 'checkin-item' + (checked ? ' checked' : '');
+    el.innerHTML = `<div class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="checkin-text">${task}</span>`;
+    el.onclick = () => {
+      data.setupDone[i] = !data.setupDone[i];
+      saveData(data);
+      renderSetup();
+    };
+    grid.appendChild(el);
+  });
+}
+
+// ===== TRIGGER CHECKLIST =====
+const triggers = [
+  "After eating a meal",
+  "First thing in the morning",
+  "While driving",
+  "When feeling anxious or stressed",
+  "During social events / parties",
+  "When drinking alcohol",
+  "When bored / scrolling phone",
+  "Before bed",
+  "During work breaks",
+  "After an argument or conflict",
+  "When seeing others vape"
+];
+
+function renderTriggers() {
+  const grid = document.getElementById('triggerChecklist');
+  grid.innerHTML = '';
+  triggers.forEach((t, i) => {
+    const checked = data.triggersDone && data.triggersDone[i];
+    const el = document.createElement('div');
+    el.className = 'checkin-item' + (checked ? ' checked' : '');
+    el.innerHTML = `<div class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="checkin-text">${t}</span>`;
+    el.onclick = () => {
+      if (!data.triggersDone) data.triggersDone = {};
+      data.triggersDone[i] = !data.triggersDone[i];
+      saveData(data);
+      renderTriggers();
+    };
+    grid.appendChild(el);
+  });
+}
+
+// ===== BREATHING =====
+let breathInterval = null, breathPhase = 0, breathCount = 0, breathRounds = 0;
+const breathPhases = ['Breathe In', 'Hold', 'Breathe Out', 'Hold'];
+const breathClasses = ['inhale', '', 'exhale', ''];
+
+function toggleBreathing() {
+  breathInterval ? stopBreathing() : startBreathing();
+}
+function startBreathing() {
+  breathPhase = 0; breathCount = 4; breathRounds = 0;
+  document.getElementById('breathBtn').textContent = 'Stop';
+  document.getElementById('breathOuter').classList.add('animating');
+  updateBreathDisplay();
+  breathInterval = setInterval(() => {
+    breathCount--;
+    if (breathCount <= 0) {
+      breathPhase = (breathPhase + 1) % 4;
+      if (breathPhase === 0) {
+        breathRounds++;
+        document.getElementById('breathRounds').textContent = breathRounds;
+        data.breathRoundsTotal++;
+        saveData(data);
+      }
+      breathCount = 4;
+    }
+    updateBreathDisplay();
+  }, 1000);
+}
+function updateBreathDisplay() {
+  document.getElementById('breathCircle').className = 'breath-circle ' + breathClasses[breathPhase];
+  document.getElementById('breathText').textContent = breathPhases[breathPhase];
+  document.getElementById('breathTimer').textContent = breathCount;
+}
+function stopBreathing() {
+  clearInterval(breathInterval); breathInterval = null;
+  document.getElementById('breathBtn').textContent = 'Start Breathing';
+  document.getElementById('breathOuter').classList.remove('animating');
+  document.getElementById('breathCircle').className = 'breath-circle';
+  document.getElementById('breathText').textContent = 'Ready';
+  document.getElementById('breathTimer').textContent = '4:4:4:4';
+  if (breathRounds > 0) showToast(`${breathRounds} rounds complete — your body thanks you.`);
+}
+
+// ===== SOS =====
+function triggerSOS() {
+  const tips = document.getElementById('sosTips');
+  tips.classList.toggle('visible');
+  if (tips.classList.contains('visible')) {
+    data.cravingsBeaten++;
+    saveData(data);
+    updateStats();
+  }
+}
+
+// ===== JOURNAL =====
+function saveJournalEntry() {
+  const input = document.getElementById('journalInput');
+  const text = input.value.trim();
+  if (!text) return;
+  data.journal.unshift({ date: new Date().toLocaleString(), text });
+  saveData(data);
+  input.value = '';
+  renderJournal();
+  showToast('Journal entry saved. Reflecting = healing.');
+}
+function renderJournal() {
+  const c = document.getElementById('journalEntries');
+  c.innerHTML = '';
+  data.journal.forEach(e => {
+    const el = document.createElement('div');
+    el.className = 'journal-entry';
+    el.innerHTML = `<div class="date">${e.date}</div><div class="text">${escapeHtml(e.text)}</div>`;
+    c.appendChild(el);
+  });
+}
+function escapeHtml(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+// ===== MILESTONES =====
+const milestones = [
+  { hours: 1, icon: '💓', title: 'Heart rate normalizing', desc: 'Heart rate and blood pressure begin dropping.' },
+  { hours: 8, icon: '🫁', title: 'Oxygen levels recover', desc: 'Carbon monoxide clears. Oxygen returns to normal.' },
+  { hours: 24, icon: '🧹', title: 'Lungs start clearing', desc: 'Lungs begin clearing mucus and debris.' },
+  { hours: 48, icon: '👃', title: 'Taste & smell return', desc: 'Nerve endings regrow. Food tastes amazing again.' },
+  { hours: 72, icon: '⚡', title: 'Breathing easier', desc: 'Bronchial tubes relax. Energy levels rise.' },
+  { hours: 336, icon: '🛡️', title: 'Immune boost (2 weeks)', desc: 'Circulation improves. Immune function strengthens.' },
+  { hours: 720, icon: '🧠', title: 'Anxiety decreases (1 month)', desc: 'Baseline anxiety drops to non-smoker levels.' },
+  { hours: 2160, icon: '💪', title: 'Lung function +30% (3 months)', desc: 'Lung capacity significantly improved.' },
+];
+
+function renderMilestones() {
+  const c = document.getElementById('milestones');
+  c.innerHTML = '';
+  const h = daysBetween(data.startDate, today()) * 24;
+  milestones.forEach(m => {
+    const pct = Math.min(100, (h / m.hours) * 100);
+    const el = document.createElement('div');
+    el.className = 'milestone';
+    el.innerHTML = `<div class="milestone-bar" style="width:${pct}%"></div><div class="milestone-icon">${m.icon}</div><div class="milestone-info"><h4>${m.title}</h4><p>${m.desc}</p></div><div class="milestone-time">${pct >= 100 ? 'Unlocked!' : Math.round(pct) + '%'}</div>`;
+    c.appendChild(el);
+  });
+}
+
+// ===== TIMELINE =====
+function renderTimeline() {
+  const c = document.getElementById('progressTimeline');
+  c.innerHTML = '';
+  const w = currentWeek();
+  const phases = [
+    { w: 0, label: 'Awareness', desc: 'Track every puff. Build self-awareness. Prepare your tools.' },
+    { w: 2, label: 'First Cut (-25%)', desc: 'Eliminate the automatic, mindless puffs first.' },
+    { w: 4, label: 'Half Way (-50%)', desc: 'Down to half. Add 10-min delays. Use replacements.' },
+    { w: 6, label: 'Structured Use (-75%)', desc: 'Designated times only. Max 3 sessions per day.' },
+    { w: 8, label: 'Almost Free (1-2/day)', desc: 'Once or twice daily. NRT for breakthroughs.' },
+    { w: 10, label: 'Full Stop', desc: 'Zero puffs. Every tool in this app is ready for you.' },
+    { w: 12, label: 'Freedom', desc: 'You did it. The hardest thing you\'ve ever done. Maintain & celebrate.' },
+  ];
+  phases.forEach((p, i) => {
+    const status = w >= (phases[i+1]?.w ?? Infinity) ? 'completed' : (w >= p.w && (i === phases.length - 1 || w < phases[i+1].w) ? 'current' : '');
+    const el = document.createElement('div');
+    el.className = 'timeline-item ' + status;
+    el.innerHTML = `<div class="timeline-dot">${status === 'completed' ? '✓' : (i+1)}</div><div class="timeline-content"><h4>Week ${p.w === 0 ? '1-2' : p.w + '-' + (p.w+2)} — ${p.label}</h4><p>${p.desc}</p></div>`;
+    c.appendChild(el);
+  });
+}
+
+// ===== CHART =====
+function renderChart() {
+  const canvas = document.getElementById('trendChart');
+  if (!canvas || !canvas.parentElement) return;
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width - 56;
+  canvas.height = 200;
+  const entries = Object.entries(data.dailyCheckins).sort((a,b) => a[0].localeCompare(b[0])).slice(-14);
+  if (entries.length < 2) {
+    ctx.fillStyle = '#8c87a0';
+    ctx.font = '14px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Check in for at least 2 days to see your trend', canvas.width/2, 100);
+    return;
+  }
+  const ww = canvas.width, hh = canvas.height;
+  const pad = { top: 20, bottom: 30, left: 10, right: 10 };
+  const pw = ww - pad.left - pad.right, ph = hh - pad.top - pad.bottom;
+  ctx.strokeStyle = 'rgba(0,0,0,0.05)';
+  for (let i = 0; i <= 10; i += 2) {
+    const y = pad.top + ph - (i/10) * ph;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(ww - pad.right, y); ctx.stroke();
+  }
+  function drawLine(vals, color) {
+    ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
+    vals.forEach((v, i) => {
+      const x = pad.left + (i / (vals.length - 1)) * pw;
+      const y = pad.top + ph - (v / 10) * ph;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    vals.forEach((v, i) => {
+      const x = pad.left + (i / (vals.length - 1)) * pw;
+      const y = pad.top + ph - (v / 10) * ph;
+      ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
+    });
+  }
+  drawLine(entries.map(e => e[1].craving || 5), '#6d5cce');
+  drawLine(entries.map(e => e[1].anxiety || 5), '#16a34a');
+  ctx.font = '12px Inter, sans-serif';
+  ctx.fillStyle = '#6d5cce'; ctx.fillText('● Cravings', ww - 160, hh - 6);
+  ctx.fillStyle = '#16a34a'; ctx.fillText('● Anxiety', ww - 70, hh - 6);
+  ctx.fillStyle = '#8c87a0'; ctx.font = '10px Inter, sans-serif'; ctx.textAlign = 'center';
+  entries.forEach((e, i) => {
+    if (i % Math.ceil(entries.length / 7) === 0 || i === entries.length - 1) {
+      const x = pad.left + (i / (entries.length - 1)) * pw;
+      ctx.fillText(e[0].slice(5), x, hh - 6);
+    }
+  });
+}
+
+// ===== ACHIEVEMENTS =====
+function renderAchievements() {
+  const c = document.getElementById('achievements');
+  c.innerHTML = '';
+  const days = daysBetween(data.startDate, today());
+  const checkins = Object.keys(data.dailyCheckins).length;
+  const badges = [
+    { cond: true, icon: '🌱', title: 'Journey Started', desc: 'You took the hardest step — the first one.' },
+    { cond: days >= 1, icon: '☀️', title: 'Day One', desc: 'Your first full day on the plan.' },
+    { cond: days >= 3, icon: '🔥', title: 'Three Day Streak', desc: 'The first 72 hours are the hardest. You did it.' },
+    { cond: days >= 7, icon: '⭐', title: 'One Week Strong', desc: '7 days of commitment. This is real.' },
+    { cond: days >= 14, icon: '🎯', title: 'Two Weeks', desc: 'Officially through the awareness phase.' },
+    { cond: days >= 30, icon: '🏆', title: 'One Month', desc: 'Your brain is actively rewiring. Anxiety is dropping.' },
+    { cond: days >= 60, icon: '💎', title: 'Two Months', desc: 'Nicotine receptors are downregulating. You\'re changing.' },
+    { cond: days >= 84, icon: '👑', title: 'Plan Complete', desc: '12 weeks. You conquered it. You\'re free.' },
+    { cond: checkins >= 7, icon: '📝', title: 'Consistent Tracker', desc: '7 daily check-ins. Awareness is your superpower.' },
+    { cond: data.cravingsBeaten >= 10, icon: '💪', title: 'Craving Crusher', desc: '10 cravings beaten. Each one made you stronger.' },
+    { cond: data.cravingsBeaten >= 50, icon: '🦁', title: 'Unstoppable', desc: '50 cravings defeated. You are a force.' },
+    { cond: data.breathRoundsTotal >= 20, icon: '🧘', title: 'Zen Master', desc: '20 breathing rounds. Your nervous system thanks you.' },
+    { cond: data.journal.length >= 5, icon: '✍️', title: 'Reflective Mind', desc: '5 journal entries. Self-awareness is healing.' },
+    { cond: data.journal.length >= 20, icon: '📖', title: 'Storyteller', desc: '20 entries. You\'re writing the story of your freedom.' },
+  ];
+  badges.forEach(b => {
+    const el = document.createElement('div');
+    el.className = 'milestone';
+    el.style.opacity = b.cond ? '1' : '0.3';
+    el.innerHTML = `<div class="milestone-icon">${b.icon}</div><div class="milestone-info"><h4>${b.title}</h4><p>${b.desc}</p></div><div class="milestone-time" style="color:${b.cond ? 'var(--green)' : 'var(--text-dim)'}">${b.cond ? 'Earned!' : 'Locked'}</div>`;
+    c.appendChild(el);
+  });
+}
+
+// ===== QUOTES =====
+const quotes = [
+  "You don't have to be fearless. You just have to be <strong>brave enough to start</strong>.",
+  "Every craving you resist makes the next one <strong>weaker</strong>. That's not motivation — that's <strong>neuroscience</strong>.",
+  "The discomfort is temporary. The freedom is <strong>permanent</strong>.",
+  "You're not giving something up — you're <strong>getting yourself back</strong>.",
+  "Anxiety lies. It says you can't do this. But here you are, <strong>doing it anyway</strong>.",
+  "Progress isn't linear. A bad day doesn't erase <strong>a good week</strong>.",
+  "Your lungs are healing <strong>right now</strong>, as you read this.",
+  "The version of you who started this would be <strong>so proud of today's you</strong>.",
+  "Small steps still move you <strong>forward</strong>.",
+  "You didn't come this far to <strong>only come this far</strong>.",
+  "Courage isn't the absence of fear. It's <strong>acting in spite of it</strong>.",
+  "3 months from now, you'll wish you had <strong>started today</strong>. Oh wait — you did.",
+  "You are not your addiction. You are the person <strong>fighting it</strong>.",
+  "The only person you need to be better than is <strong>who you were yesterday</strong>.",
+  "Some days the mountain seems impossible. But you're already <strong>climbing it</strong>.",
+];
+
+function showQuote() {
+  const idx = Math.floor(Math.random() * quotes.length);
+  document.getElementById('quoteBar').innerHTML = '"' + quotes[idx] + '"';
+}
+
+// ===== RESET =====
+function resetApp() {
+  if (confirm('This will delete ALL your data. Are you sure?')) {
+    if (confirm('Really? This cannot be undone.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+  }
+}
+
+// ===== INIT =====
+function init() {
+  showMotivBanner();
+  updateStats();
+  renderWeek();
+  renderPuffCounter();
+  renderCheckin();
+  renderSetup();
+  renderTriggers();
+  renderMilestones();
+  renderTimeline();
+  renderJournal();
+  renderAchievements();
+  showQuote();
+  const td = data.dailyCheckins[today()];
+  if (td) {
+    document.getElementById('anxietySlider').value = td.anxiety || 5;
+    document.getElementById('anxietyVal').textContent = td.anxiety || 5;
+    document.getElementById('cravingSlider').value = td.craving || 5;
+    document.getElementById('cravingVal').textContent = td.craving || 5;
+  }
+}
+init();
+window.addEventListener('resize', renderChart);
+
+// Register service worker for offline/PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
