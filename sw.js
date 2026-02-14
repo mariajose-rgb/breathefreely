@@ -1,4 +1,4 @@
-const CACHE_NAME = 'breathefreely-v2';
+const CACHE_NAME = 'breathefreely-v3';
 const ASSETS = [
   './',
   './index.html',
