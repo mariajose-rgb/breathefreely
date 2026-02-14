@@ -1,10 +1,11 @@
-const CACHE_NAME = 'breathefreely-v1';
+const CACHE_NAME = 'breathefreely-v2';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './favicon.png'
 ];
 
 self.addEventListener('install', e => {
