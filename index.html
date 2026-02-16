@@ -663,6 +663,7 @@
     text-align: center;
   }
   .puff-count .number { font-size: 2.5em; font-weight: 800; color: var(--text); }
+  .puff-baseline { font-size: 0.5em; font-weight: 600; color: var(--text-dim); vertical-align: baseline; }
   .puff-count .label { font-size: 0.75em; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
   .puff-target { text-align: center; margin-top: 8px; font-size: 0.85em; color: var(--text-dim); }
   .puff-target strong { color: var(--accent); }
@@ -806,7 +807,7 @@
       <div class="puff-counter">
         <button onclick="changePuffs(-1)">-</button>
         <div class="puff-count">
-          <div class="number" id="puffCount">0</div>
+          <div class="number"><span id="puffCount">0</span><span class="puff-baseline" id="puffBaseline"></span></div>
           <div class="label" data-i18n="today.puffsToday">Puffs today</div>
         </div>
         <button onclick="changePuffs(1)">+</button>
@@ -1800,7 +1801,10 @@ function renderPuffCounter() {
   const count = td ? (td.puffs || 0) : 0;
   document.getElementById('puffCount').textContent = count;
   const target = getTargetPuffs();
+  const baseline = data.baselinePuffs || 0;
   const w = currentWeek();
+  // Show baseline reference next to count
+  document.getElementById('puffBaseline').textContent = baseline > 0 ? ` / ${baseline}` : '';
   if (w < 2) {
     document.getElementById('puffTarget').innerHTML = t('puff.tracking');
   } else {
