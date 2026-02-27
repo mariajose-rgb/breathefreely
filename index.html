@@ -738,6 +738,144 @@
   .currency-btn:hover { border-color: var(--accent); color: var(--accent); }
   .currency-btn.active { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
 
+  /* Setback section */
+  .setback-toggle label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: var(--text-mid);
+    margin-top: 14px;
+  }
+  .setback-toggle input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--orange);
+    cursor: pointer;
+  }
+  #setbackNote {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9em;
+    color: var(--text);
+    background: var(--surface2);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #setbackNote:focus { border-color: var(--orange); }
+  .setback-affirmation {
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: var(--orange-light);
+    border-radius: 10px;
+    font-size: 0.88em;
+    color: var(--orange);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* History & Setback Log */
+  .history-entry {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--surface2);
+    margin-bottom: 10px;
+    border-left: 3px solid transparent;
+    transition: background 0.2s;
+  }
+  .history-entry.setback-day {
+    border-left-color: var(--orange);
+    background: #fffbf5;
+  }
+  .history-date-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .setback-badge {
+    font-size: 0.72em;
+    font-weight: 700;
+    background: var(--orange-light);
+    color: var(--orange);
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .history-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .history-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 6px 12px;
+    min-width: 52px;
+  }
+  .history-stat .stat-label {
+    font-size: 0.72em;
+    color: var(--text-dim);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .history-stat .stat-val {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 2px;
+  }
+  .history-note {
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: var(--text-mid);
+    font-style: italic;
+    padding-left: 4px;
+  }
+  .setback-entry {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--orange-light);
+    margin-bottom: 10px;
+  }
+  .setback-entry-date {
+    font-weight: 600;
+    font-size: 0.88em;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .setback-entry-puffs {
+    font-size: 0.85em;
+    color: var(--text-mid);
+  }
+  .setback-entry-note {
+    margin-top: 6px;
+    font-size: 0.85em;
+    color: var(--text-mid);
+    font-style: italic;
+  }
+  .history-empty {
+    text-align: center;
+    color: var(--text-dim);
+    padding: 20px;
+    font-size: 0.9em;
+  }
+
   /* Responsive */
   @media (max-width: 600px) {
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
@@ -894,6 +1032,22 @@
     <div class="card">
       <h2 data-i18n="today.healthTimeline">Health Recovery Timeline</h2>
       <div id="milestones"></div>
+    </div>
+
+    <div class="card">
+      <h2>🌱 Had a Setback?</h2>
+      <p style="font-size:0.9em;color:var(--text-mid);margin-bottom:4px">Setbacks are part of recovery — not the end of it. Logging them honestly is what change is made of. Your streak stays intact.</p>
+      <div class="setback-toggle">
+        <label>
+          <input type="checkbox" id="setbackToggle" onchange="toggleSetbackForm(this.checked)">
+          <span>Log today as a setback</span>
+        </label>
+      </div>
+      <div id="setbackForm" style="display:none;margin-top:16px">
+        <textarea id="setbackNote" placeholder="What happened? What triggered it? (optional — just for you)" rows="3"></textarea>
+        <div class="setback-affirmation" id="setbackAffirmation"></div>
+        <button class="btn-primary btn-full" onclick="saveSetback()" style="margin-top:12px">Save</button>
+      </div>
     </div>
   </div>
 
@@ -1146,6 +1300,16 @@
     <div class="card">
       <h2 data-i18n="progress.achievements">Achievements</h2>
       <div id="achievements"></div>
+    </div>
+    <div class="card">
+      <h2>🌱 Setback Log</h2>
+      <p style="font-size:0.9em;color:var(--text-dim);margin-bottom:14px">Every hard day you logged — and got through.</p>
+      <div id="setbackLog"></div>
+    </div>
+    <div class="card">
+      <h2>📅 Daily History</h2>
+      <p style="font-size:0.9em;color:var(--text-dim);margin-bottom:14px">All your check-in days, newest first.</p>
+      <div id="historyLog"></div>
     </div>
   </div>
 
@@ -1772,7 +1936,7 @@ function showPanel(name, btn) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
   if (btn) btn.classList.add('active');
-  if (name === 'progress') { renderChart(); }
+  if (name === 'progress') { renderChart(); renderSetbackLog(); renderHistory(); }
 }
 
 // ===== WEEK GRID =====
@@ -2229,9 +2393,114 @@ function init() {
     document.getElementById('cravingSlider').value = td.craving || 5;
     document.getElementById('cravingVal').textContent = td.craving || 5;
   }
+  loadSetbackState();
 }
 init();
 window.addEventListener('resize', renderChart);
+
+// ===== SETBACKS =====
+const setbackAffirmations = [
+  "You reached out instead of giving up. That's courage.",
+  "One hard day doesn't undo everything you've built.",
+  "Every person who has ever quit had days like this. You are not alone.",
+  "Logging this takes honesty. That honesty is what recovery is made of.",
+  "Tomorrow is a fresh start. You're still in this.",
+  "The fact that you're logging this means you haven't given up.",
+  "Progress isn't a straight line — it never has been for anyone.",
+  "You noticed. You logged it. That awareness is already the next step forward."
+];
+
+function toggleSetbackForm(checked) {
+  const form = document.getElementById('setbackForm');
+  const affirmEl = document.getElementById('setbackAffirmation');
+  if (checked) {
+    form.style.display = 'block';
+    const idx = Math.floor(Math.random() * setbackAffirmations.length);
+    affirmEl.textContent = setbackAffirmations[idx];
+  } else {
+    form.style.display = 'none';
+    affirmEl.textContent = '';
+  }
+}
+
+function saveSetback() {
+  const key = today();
+  if (!data.dailyCheckins[key]) data.dailyCheckins[key] = { tasks: {}, anxiety: 5, craving: 5, puffs: 0 };
+  data.dailyCheckins[key].setback = true;
+  data.dailyCheckins[key].setbackNote = document.getElementById('setbackNote').value.trim();
+  saveData(data);
+  showToast('Setback logged. You showed up anyway — that matters.');
+}
+
+function loadSetbackState() {
+  const td = data.dailyCheckins[today()];
+  if (td && td.setback) {
+    document.getElementById('setbackToggle').checked = true;
+    document.getElementById('setbackForm').style.display = 'block';
+    document.getElementById('setbackNote').value = td.setbackNote || '';
+    const idx = Math.floor(Math.random() * setbackAffirmations.length);
+    document.getElementById('setbackAffirmation').textContent = setbackAffirmations[idx];
+  }
+}
+
+// ===== SETBACK LOG =====
+function renderSetbackLog() {
+  const c = document.getElementById('setbackLog');
+  if (!c) return;
+  const setbacks = Object.entries(data.dailyCheckins)
+    .filter(([, d]) => d.setback)
+    .sort((a, b) => b[0].localeCompare(a[0]));
+  if (setbacks.length === 0) {
+    c.innerHTML = '<p class="history-empty">No setbacks logged yet — keep going! 💪</p>';
+    return;
+  }
+  c.innerHTML = '';
+  setbacks.forEach(([date, d]) => {
+    const el = document.createElement('div');
+    el.className = 'setback-entry';
+    el.innerHTML =
+      '<div class="setback-entry-date">' + formatDate(date) + '</div>' +
+      '<div class="setback-entry-puffs">' + (d.puffs || 0) + ' puffs that day</div>' +
+      (d.setbackNote ? '<p class="setback-entry-note">"' + d.setbackNote + '"</p>' : '');
+    c.appendChild(el);
+  });
+}
+
+// ===== DAILY HISTORY =====
+function renderHistory() {
+  const c = document.getElementById('historyLog');
+  if (!c) return;
+  const entries = Object.entries(data.dailyCheckins)
+    .sort((a, b) => b[0].localeCompare(a[0]));
+  if (entries.length === 0) {
+    c.innerHTML = '<p class="history-empty">No check-ins yet — start tracking today!</p>';
+    return;
+  }
+  c.innerHTML = '';
+  entries.forEach(([date, d]) => {
+    const tasksDone = Object.values(d.tasks || {}).filter(Boolean).length;
+    const el = document.createElement('div');
+    el.className = 'history-entry' + (d.setback ? ' setback-day' : '');
+    el.innerHTML =
+      '<div class="history-date-header">' +
+        formatDate(date) +
+        (d.setback ? ' <span class="setback-badge">setback</span>' : '') +
+      '</div>' +
+      '<div class="history-stats">' +
+        '<div class="history-stat"><span class="stat-label">Puffs</span><span class="stat-val">' + (d.puffs || 0) + '</span></div>' +
+        '<div class="history-stat"><span class="stat-label">Anxiety</span><span class="stat-val">' + (d.anxiety || '—') + '</span></div>' +
+        '<div class="history-stat"><span class="stat-label">Craving</span><span class="stat-val">' + (d.craving || '—') + '</span></div>' +
+        '<div class="history-stat"><span class="stat-label">Tasks</span><span class="stat-val">' + tasksDone + '/7</span></div>' +
+      '</div>' +
+      (d.setbackNote ? '<p class="history-note">"' + d.setbackNote + '"</p>' : '');
+    c.appendChild(el);
+  });
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+}
 
 // Register service worker for offline/PWA
 if ('serviceWorker' in navigator) {
