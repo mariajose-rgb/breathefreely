@@ -876,6 +876,111 @@
     font-size: 0.9em;
   }
 
+  /* Day detail modal */
+  .day-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(30,27,46,0.5);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(2px);
+  }
+  .day-modal-box {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+  .day-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: var(--surface2);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 0.85em;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .day-modal-close:hover { background: var(--surface3); color: var(--text); }
+  .day-modal-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .day-modal-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .day-modal-stat {
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .day-modal-stat .label {
+    font-size: 0.75em;
+    color: var(--text-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .day-modal-stat .value {
+    font-size: 1.5em;
+    font-weight: 800;
+    color: var(--text);
+    margin-top: 2px;
+  }
+  .day-modal-tasks {
+    margin-bottom: 14px;
+  }
+  .day-modal-tasks h4 {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--text-mid);
+    margin-bottom: 8px;
+  }
+  .day-modal-task-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88em;
+    color: var(--text-mid);
+    padding: 4px 0;
+  }
+  .day-modal-task-row .tick {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    flex-shrink: 0;
+  }
+  .day-modal-task-row .tick.done { background: var(--green-light); color: var(--green); }
+  .day-modal-task-row .tick.skip { background: var(--surface3); color: var(--text-dim); }
+  .day-modal-setback {
+    background: var(--orange-light);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 0.88em;
+    color: var(--orange);
+    font-weight: 500;
+  }
+  .day-modal-setback p { margin-top: 4px; font-weight: 400; font-style: italic; color: var(--text-mid); }
+
   /* Responsive */
   @media (max-width: 600px) {
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
@@ -930,6 +1035,14 @@
     <button class="nav-tab" onclick="showPanel('journal',this)" data-i18n="nav.journal">Journal</button>
     <button class="nav-tab" onclick="showPanel('progress',this)" data-i18n="nav.progress">Progress</button>
     <button class="nav-tab" onclick="showPanel('settings',this)" data-i18n="nav.settings">Settings</button>
+  </div>
+
+  <!-- Day Detail Modal -->
+  <div id="dayModal" class="day-modal-overlay" onclick="closeDayModal(event)" style="display:none">
+    <div class="day-modal-box">
+      <button class="day-modal-close" onclick="closeDayModal()">✕</button>
+      <div id="dayModalContent"></div>
+    </div>
   </div>
 
   <!-- ====== TODAY ====== -->
@@ -1955,6 +2068,7 @@ function renderWeek() {
     const el = document.createElement('div');
     el.className = 'week-day' + (key === today() ? ' today' : '') + (data.dailyCheckins[key] ? ' logged' : '');
     el.innerHTML = `<span class="day-name">${names[i]}</span><span class="day-num">${d.getDate()}</span>`;
+    if (data.dailyCheckins[key]) el.onclick = () => showDayDetail(key);
     grid.appendChild(el);
   }
 }
@@ -2397,6 +2511,48 @@ function init() {
 }
 init();
 window.addEventListener('resize', renderChart);
+
+// ===== DAY DETAIL MODAL =====
+function showDayDetail(dateStr) {
+  const d = data.dailyCheckins[dateStr];
+  if (!d) return;
+  const taskLabels = [
+    'No vaping first 30 min after waking',
+    'Delayed a craving at least once',
+    'Drank enough water today',
+    'Did a breathing exercise',
+    'Avoided main trigger situation',
+    'Logged my puff count',
+    'Showed up for myself today'
+  ];
+  const tasksDone = Object.values(d.tasks || {}).filter(Boolean).length;
+  let html = '<div class="day-modal-date">' + formatDate(dateStr) + '</div>';
+  html += '<div class="day-modal-stats">';
+  html += '<div class="day-modal-stat"><div class="label">Puffs</div><div class="value">' + (d.puffs || 0) + '</div></div>';
+  html += '<div class="day-modal-stat"><div class="label">Tasks</div><div class="value">' + tasksDone + '/7</div></div>';
+  html += '<div class="day-modal-stat"><div class="label">Anxiety</div><div class="value">' + (d.anxiety || '—') + '</div></div>';
+  html += '<div class="day-modal-stat"><div class="label">Craving</div><div class="value">' + (d.craving || '—') + '</div></div>';
+  html += '</div>';
+  if (taskLabels.length > 0) {
+    html += '<div class="day-modal-tasks"><h4>Daily Tasks</h4>';
+    taskLabels.forEach((label, i) => {
+      const done = d.tasks && d.tasks[i];
+      html += '<div class="day-modal-task-row"><span class="tick ' + (done ? 'done' : 'skip') + '">' + (done ? '✓' : '–') + '</span>' + label + '</div>';
+    });
+    html += '</div>';
+  }
+  if (d.setback) {
+    html += '<div class="day-modal-setback">🌱 Setback logged' + (d.setbackNote ? '<p>"' + d.setbackNote + '"</p>' : '') + '</div>';
+  }
+  document.getElementById('dayModalContent').innerHTML = html;
+  document.getElementById('dayModal').style.display = 'flex';
+}
+
+function closeDayModal(e) {
+  if (!e || e.target === document.getElementById('dayModal')) {
+    document.getElementById('dayModal').style.display = 'none';
+  }
+}
 
 // ===== SETBACKS =====
 const setbackAffirmations = [
