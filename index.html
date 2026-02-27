@@ -1517,6 +1517,21 @@
       <button class="btn-primary btn-full" onclick="saveSettings()" data-i18n="settings.save">Save Settings</button>
     </div>
 
+    <div class="card" style="border-left:4px solid var(--teal);">
+      <h2 class="has-icon"><div class="icon-box teal sm"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>Backup &amp; Restore</h2>
+      <p style="font-size:0.9em;color:var(--text-mid);margin-bottom:16px">Save your progress to a file so you never lose it. Keep this file safe — use it to restore your data anytime.</p>
+
+      <button class="btn-primary btn-full" onclick="exportData()" style="margin-bottom:10px">
+        Download My Data
+      </button>
+
+      <button class="btn-primary btn-full" onclick="document.getElementById('importFile').click()" style="background:var(--surface2);color:var(--text);border:2px solid var(--border)">
+        Restore from Backup
+      </button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this)">
+      <p style="margin-top:10px;font-size:0.8em;color:var(--text-dim)">Restoring will replace all current data with the backup file.</p>
+    </div>
+
     <div class="card" style="border-left:4px solid var(--red);">
       <h2 data-i18n="settings.danger">Danger Zone</h2>
       <p data-i18n="settings.dangerDesc">This permanently deletes all your data — check-ins, journal entries, achievements, everything.</p>
@@ -2739,6 +2754,42 @@ function renderHistory() {
 function formatDate(dateStr) {
   const d = new Date(dateStr + 'T12:00:00');
   return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+// ===== BACKUP & RESTORE =====
+function exportData() {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const date = new Date().toISOString().split('T')[0];
+  a.href = url;
+  a.download = `breathefreely-backup-${date}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Backup downloaded! Keep that file safe.');
+}
+
+function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!imported.startDate || !imported.dailyCheckins) {
+        showToast('That file doesn\'t look like a BreatheFreely backup.');
+        return;
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(imported));
+      showToast('Data restored! Reloading...');
+      setTimeout(() => location.reload(), 1500);
+    } catch {
+      showToast('Could not read that file. Make sure it\'s a BreatheFreely backup.');
+    }
+  };
+  reader.readAsText(file);
+  input.value = '';
 }
 
 // Register service worker for offline/PWA
