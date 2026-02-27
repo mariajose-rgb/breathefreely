@@ -1013,6 +1013,9 @@
   .icon-box.coral { background: var(--accent); }
   .icon-box.amber { background: var(--orange); }
   .icon-box.mint  { background: var(--primary); }
+  .icon-box.sm { width: 32px; height: 32px; border-radius: 9px; }
+  .icon-box.sm svg { width: 18px; height: 18px; }
+  .card h2.has-icon { display: flex; align-items: center; gap: 10px; }
 
   /* Responsive */
   @media (max-width: 600px) {
@@ -1187,7 +1190,7 @@
     </div>
 
     <div class="card">
-      <h2>🌱 Had a Setback?</h2>
+      <h2 class="has-icon"><div class="icon-box green sm"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>Had a Setback?</h2>
       <p style="font-size:0.9em;color:var(--text-mid);margin-bottom:4px">Setbacks are part of recovery — not the end of it. Logging them honestly is what change is made of. Your streak stays intact.</p>
       <div class="setback-toggle">
         <label>
@@ -1454,12 +1457,12 @@
       <div id="achievements"></div>
     </div>
     <div class="card">
-      <h2>🌱 Setback Log</h2>
+      <h2 class="has-icon"><div class="icon-box green sm"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>Setback Log</h2>
       <p style="font-size:0.9em;color:var(--text-dim);margin-bottom:14px">Every hard day you logged — and got through.</p>
       <div id="setbackLog"></div>
     </div>
     <div class="card">
-      <h2>📅 Daily History</h2>
+      <h2 class="has-icon"><div class="icon-box teal sm"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div>Daily History</h2>
       <p style="font-size:0.9em;color:var(--text-dim);margin-bottom:14px">All your check-in days, newest first.</p>
       <div id="historyLog"></div>
     </div>
@@ -2622,7 +2625,7 @@ function showDayDetail(dateStr) {
     html += '</div>';
   }
   if (d.setback) {
-    html += '<div class="day-modal-setback">🌱 Setback logged' + (d.setbackNote ? '<p>"' + d.setbackNote + '"</p>' : '') + '</div>';
+    html += '<div class="day-modal-setback"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px;color:var(--green)"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Setback logged' + (d.setbackNote ? '<p>"' + d.setbackNote + '"</p>' : '') + '</div>';
   }
   document.getElementById('dayModalContent').innerHTML = html;
   document.getElementById('dayModal').style.display = 'flex';
