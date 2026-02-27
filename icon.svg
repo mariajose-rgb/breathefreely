@@ -1,12 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <!-- Background - solid teal, no gradient -->
-  <rect width="512" height="512" rx="110" fill="#2FA39A"/>
+  <!-- Background - solid teal -->
+  <rect width="512" height="512" rx="112" fill="#2FA39A"/>
 
-  <!-- Wind / breath lines - Lucide wind icon scaled up, centered -->
-  <!-- translate(76,70) scale(15) centers the 24x24 paths in 512x512 -->
-  <g transform="translate(76,70) scale(15)" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none">
-    <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/>
-    <path d="M9.6 4.6A2 2 0 1 1 11 8H2"/>
-    <path d="M12.6 19.4A2 2 0 1 0 14 16H2"/>
+  <g transform="translate(256,230)">
+    <!-- Soft cloud / breath puff -->
+    <ellipse cx="0" cy="0" rx="85" ry="65" fill="rgba(255,255,255,0.92)"/>
+    <ellipse cx="-55" cy="10" rx="55" ry="48" fill="rgba(255,255,255,0.92)"/>
+    <ellipse cx="55" cy="10" rx="55" ry="48" fill="rgba(255,255,255,0.92)"/>
+    <ellipse cx="-30" cy="-30" rx="45" ry="42" fill="rgba(255,255,255,0.92)"/>
+    <ellipse cx="30" cy="-30" rx="45" ry="42" fill="rgba(255,255,255,0.92)"/>
+
+    <!-- Eyes -->
+    <ellipse cx="-22" cy="-8" rx="7" ry="8" fill="#2FA39A"/>
+    <ellipse cx="22" cy="-8" rx="7" ry="8" fill="#2FA39A"/>
+    <!-- Happy closed eyes -->
+    <ellipse cx="-22" cy="-10" rx="7" ry="5" fill="rgba(255,255,255,0.92)"/>
+    <ellipse cx="22" cy="-10" rx="7" ry="5" fill="rgba(255,255,255,0.92)"/>
+    <!-- Smile -->
+    <path d="M-18,12 Q0,28 18,12" fill="none" stroke="#2FA39A" stroke-width="5" stroke-linecap="round"/>
+    <!-- Rosy cheeks -->
+    <ellipse cx="-38" cy="10" rx="10" ry="7" fill="rgba(94,211,179,0.45)"/>
+    <ellipse cx="38" cy="10" rx="10" ry="7" fill="rgba(94,211,179,0.45)"/>
+
+    <!-- Breath bubbles -->
+    <circle cx="-10" cy="-75" r="12" fill="rgba(255,255,255,0.7)"/>
+    <circle cx="15" cy="-95" r="9" fill="rgba(255,255,255,0.55)"/>
+    <circle cx="-5" cy="-115" r="6" fill="rgba(255,255,255,0.4)"/>
   </g>
+
+  <!-- App name -->
+  <text x="256" y="400" text-anchor="middle" font-family="Arial Rounded MT Bold,Nunito,Arial,sans-serif" font-weight="700" font-size="42" fill="rgba(255,255,255,0.95)" letter-spacing="1">breathe</text>
+  <text x="256" y="440" text-anchor="middle" font-family="Arial Rounded MT Bold,Nunito,Arial,sans-serif" font-weight="700" font-size="34" fill="rgba(255,255,255,0.7)" letter-spacing="2">freely</text>
 </svg>
