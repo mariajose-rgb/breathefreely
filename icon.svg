@@ -1,47 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f472b6"/>
-      <stop offset="50%" style="stop-color:#ec4899"/>
-      <stop offset="100%" style="stop-color:#f9a8d4"/>
-    </linearGradient>
-    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:rgba(255,255,255,0.25)"/>
-      <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
-    </linearGradient>
-  </defs>
-  <!-- Background with rounded corners -->
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <!-- Soft glow overlay -->
-  <ellipse cx="200" cy="180" rx="200" ry="180" fill="url(#glow)"/>
+  <!-- Background - solid teal, no gradient -->
+  <rect width="512" height="512" rx="110" fill="#2FA39A"/>
 
-  <g transform="translate(256,230)">
-    <!-- Soft cloud / breath puff - main shape -->
-    <ellipse cx="0" cy="0" rx="85" ry="65" fill="rgba(255,255,255,0.92)"/>
-    <ellipse cx="-55" cy="10" rx="55" ry="48" fill="rgba(255,255,255,0.92)"/>
-    <ellipse cx="55" cy="10" rx="55" ry="48" fill="rgba(255,255,255,0.92)"/>
-    <ellipse cx="-30" cy="-30" rx="45" ry="42" fill="rgba(255,255,255,0.92)"/>
-    <ellipse cx="30" cy="-30" rx="45" ry="42" fill="rgba(255,255,255,0.92)"/>
-
-    <!-- Cute smile face in the cloud -->
-    <ellipse cx="-22" cy="-8" rx="7" ry="8" fill="#ec4899"/>
-    <ellipse cx="22" cy="-8" rx="7" ry="8" fill="#ec4899"/>
-    <!-- Happy closed eyes (arcs) -->
-    <ellipse cx="-22" cy="-10" rx="7" ry="5" fill="rgba(255,255,255,0.92)"/>
-    <ellipse cx="22" cy="-10" rx="7" ry="5" fill="rgba(255,255,255,0.92)"/>
-    <!-- Warm smile -->
-    <path d="M-18,12 Q0,28 18,12" fill="none" stroke="#ec4899" stroke-width="5" stroke-linecap="round"/>
-    <!-- Rosy cheeks -->
-    <ellipse cx="-38" cy="10" rx="10" ry="7" fill="rgba(244,160,180,0.5)"/>
-    <ellipse cx="38" cy="10" rx="10" ry="7" fill="rgba(244,160,180,0.5)"/>
-
-    <!-- Small floating breath bubbles rising up -->
-    <circle cx="-10" cy="-75" r="12" fill="rgba(255,255,255,0.7)"/>
-    <circle cx="15" cy="-95" r="9" fill="rgba(255,255,255,0.55)"/>
-    <circle cx="-5" cy="-115" r="6" fill="rgba(255,255,255,0.4)"/>
+  <!-- Wind / breath lines - Lucide wind icon scaled up, centered -->
+  <!-- translate(76,70) scale(15) centers the 24x24 paths in 512x512 -->
+  <g transform="translate(76,70) scale(15)" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none">
+    <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/>
+    <path d="M9.6 4.6A2 2 0 1 1 11 8H2"/>
+    <path d="M12.6 19.4A2 2 0 1 0 14 16H2"/>
   </g>
-
-  <!-- App name at bottom -->
-  <text x="256" y="400" text-anchor="middle" font-family="Arial Rounded MT Bold,Nunito,Arial,sans-serif" font-weight="700" font-size="42" fill="rgba(255,255,255,0.95)" letter-spacing="1">breathe</text>
-  <text x="256" y="440" text-anchor="middle" font-family="Arial Rounded MT Bold,Nunito,Arial,sans-serif" font-weight="700" font-size="34" fill="rgba(255,255,255,0.7)" letter-spacing="2">freely</text>
 </svg>

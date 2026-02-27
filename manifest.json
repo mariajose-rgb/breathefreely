@@ -4,8 +4,8 @@
   "description": "Your personal, science-backed journey to quit vaping — with anxiety support, craving tools, and daily tracking.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#faf9f7",
-  "theme_color": "#db2777",
+  "background_color": "#F4F9F8",
+  "theme_color": "#2FA39A",
   "orientation": "portrait-primary",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
