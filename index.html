@@ -439,7 +439,7 @@
     gap: 14px;
     border: 1px solid rgba(255,255,255,0.9);
   }
-  .sos-tip .icon { font-size: 1.5em; flex-shrink: 0; }
+  .sos-tip .icon { display: flex; align-items: center; flex-shrink: 0; }
   .sos-tip h4 { color: var(--text); font-size: 0.95em; margin-bottom: 4px; }
   .sos-tip p { color: var(--text-mid); font-size: 0.85em; line-height: 1.6; }
 
@@ -514,7 +514,7 @@
     transition: all 0.3s;
   }
   .habit-card:hover { background: white; box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-  .habit-card .habit-icon { font-size: 2em; margin-bottom: 10px; }
+  .habit-card .habit-icon { display: flex; justify-content: center; margin-bottom: 10px; }
   .habit-card h4 { color: var(--text); font-size: 0.95em; margin-bottom: 6px; }
   .habit-card p { color: var(--text-mid); font-size: 0.82em; line-height: 1.6; }
   .habit-card .habit-when {
@@ -543,7 +543,7 @@
     background: var(--green-light);
     transition: width 1s ease;
   }
-  .milestone-icon { font-size: 1.8em; z-index: 1; }
+  .milestone-icon { z-index: 1; display: flex; align-items: center; flex-shrink: 0; }
   .milestone-info { z-index: 1; flex: 1; }
   .milestone-info h4 { font-size: 0.9em; color: var(--text); margin-bottom: 2px; }
   .milestone-info p { font-size: 0.8em; color: var(--text-dim); }
@@ -997,6 +997,23 @@
   }
   .day-modal-setback p { margin-top: 4px; font-weight: 400; font-style: italic; color: var(--text-mid); }
 
+  /* Icon boxes */
+  .icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+  }
+  .icon-box.teal  { background: var(--teal); }
+  .icon-box.green { background: var(--green); }
+  .icon-box.coral { background: var(--accent); }
+  .icon-box.amber { background: var(--orange); }
+  .icon-box.mint  { background: var(--primary); }
+
   /* Responsive */
   @media (max-width: 600px) {
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
@@ -1113,49 +1130,49 @@
       <button class="sos-btn" onclick="triggerSOS()" data-i18n="today.sosBtn">SOS — I Need Help Right Now</button>
       <div class="sos-tips" id="sosTips">
         <div class="sos-tip">
-          <div class="icon">🧊</div>
+          <div class="icon"><div class="icon-box teal"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><line x1="2" x2="22" y1="12" y2="12"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg></div></div>
           <div>
             <h4 data-i18n="sos.ice.title">Ice Cube Trick</h4>
             <p data-i18n="sos.ice.desc">Hold ice in your hand or press it to your neck. The cold activates your dive reflex and drops your heart rate in 30 seconds. Focus entirely on the sensation.</p>
           </div>
         </div>
         <div class="sos-tip">
-          <div class="icon">🫁</div>
+          <div class="icon"><div class="icon-box teal"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg></div></div>
           <div>
             <h4 data-i18n="sos.box.title">Box Breathing — Do It Now</h4>
             <p data-i18n-html="sos.box.desc">Go to the <strong>Breathe</strong> tab. 4 rounds = 4 minutes. The deep inhale you crave from vaping? You get it here — without the nicotine.</p>
           </div>
         </div>
         <div class="sos-tip">
-          <div class="icon">🚶</div>
+          <div class="icon"><div class="icon-box green"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></div></div>
           <div>
             <h4 data-i18n="sos.move.title">Move for 5 Minutes</h4>
             <p data-i18n="sos.move.desc">Walk, stretch, pace — anything. Taylor et al. (2007) found brief walking cuts cravings by 50%. Your body needs to burn off the restless energy.</p>
           </div>
         </div>
         <div class="sos-tip">
-          <div class="icon">✊</div>
+          <div class="icon"><div class="icon-box coral"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div></div>
           <div>
             <h4 data-i18n="sos.squeeze.title">Squeeze Something</h4>
             <p data-i18n="sos.squeeze.desc">Grab a stress ball, rubber band, or just clench your fist hard for 10 seconds then release. This redirects the physical tension your body is feeling.</p>
           </div>
         </div>
         <div class="sos-tip">
-          <div class="icon">⏱️</div>
+          <div class="icon"><div class="icon-box amber"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg></div></div>
           <div>
             <h4 data-i18n="sos.wait.title">Wait 5 Minutes</h4>
             <p data-i18n="sos.wait.desc">"I'll wait just 5 more minutes." Most cravings peak and fade within 3-5 minutes. Set a timer. You'll be surprised how fast it passes.</p>
           </div>
         </div>
         <div class="sos-tip">
-          <div class="icon">🧠</div>
+          <div class="icon"><div class="icon-box teal"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div></div>
           <div>
             <h4 data-i18n="sos.reframe.title">Reframe the Thought</h4>
             <p data-i18n="sos.reframe.desc">"I need to vape" → "My brain is requesting nicotine. This uncomfortable feeling IS the addiction losing its grip. Each time I resist, it gets weaker. I am winning right now."</p>
           </div>
         </div>
         <div class="sos-tip">
-          <div class="icon">🍬</div>
+          <div class="icon"><div class="icon-box green"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg></div></div>
           <div>
             <h4 data-i18n="sos.oral.title">Oral Substitute — Now</h4>
             <p data-i18n="sos.oral.desc">Pop a mint, chew gum, bite a toothpick, eat a crunchy carrot. The oral fixation is real — satisfy it without nicotine.</p>
@@ -1236,49 +1253,49 @@
       <p data-i18n-html="cravings.habitsDesc">Vaping isn't just nicotine — it's a <strong>physical habit</strong>. Your hand reaches for it automatically. Here are proven replacements that satisfy the same motor pattern:</p>
       <div class="habit-grid">
         <div class="habit-card">
-          <div class="habit-icon">🖊️</div>
+          <div class="habit-icon"><div class="icon-box teal"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div></div>
           <h4 data-i18n="habit.pen.title">Pen / Pencil Fidget</h4>
           <p data-i18n="habit.pen.desc">Keep a pen in your hand. Click it, twirl it, hold it between your fingers like a vape. Same hand movement, zero nicotine.</p>
           <div class="habit-when" data-i18n="habit.pen.when">When: Working, sitting, thinking</div>
         </div>
         <div class="habit-card">
-          <div class="habit-icon">🍬</div>
+          <div class="habit-icon"><div class="icon-box coral"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div></div>
           <h4 data-i18n="habit.mints.title">Mints & Hard Candy</h4>
           <p data-i18n="habit.mints.desc">Strong mints (Altoids, cinnamon) work best. The intense flavor distracts your brain and satisfies the oral fixation.</p>
           <div class="habit-when" data-i18n="habit.mints.when">When: After meals, social events</div>
         </div>
         <div class="habit-card">
-          <div class="habit-icon">🥕</div>
+          <div class="habit-icon"><div class="icon-box green"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div></div>
           <h4 data-i18n="habit.snacks.title">Crunchy Snacks</h4>
           <p data-i18n="habit.snacks.desc">Carrots, celery, sunflower seeds, apple slices. The chewing and crunching engages your jaw and satisfies the oral need.</p>
           <div class="habit-when" data-i18n="habit.snacks.when">When: At home, watching TV</div>
         </div>
         <div class="habit-card">
-          <div class="habit-icon">💪</div>
+          <div class="habit-icon"><div class="icon-box coral"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg></div></div>
           <h4 data-i18n="habit.stress.title">Stress Ball / Grip</h4>
           <p data-i18n="habit.stress.desc">Squeeze a stress ball or hand gripper. Channels the physical tension somewhere productive. Bonus: builds forearm strength.</p>
           <div class="habit-when" data-i18n="habit.stress.when">When: Anxious moments, meetings</div>
         </div>
         <div class="habit-card">
-          <div class="habit-icon">🧊</div>
+          <div class="habit-icon"><div class="icon-box teal"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.81 17.21A2 2 0 0 1 15.2 22z"/><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0"/></svg></div></div>
           <h4 data-i18n="habit.water.title">Cold Water Bottle</h4>
           <p data-i18n="habit.water.desc">Sip ice water through a straw. The cold, the sipping motion, and the hand-holding all mimic vaping sensations.</p>
           <div class="habit-when" data-i18n="habit.water.when">When: Driving, desk work</div>
         </div>
         <div class="habit-card">
-          <div class="habit-icon">🪥</div>
+          <div class="habit-icon"><div class="icon-box amber"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></div></div>
           <h4 data-i18n="habit.toothpick.title">Flavored Toothpick</h4>
           <p data-i18n="habit.toothpick.desc">Cinnamon or tea tree toothpicks give you something in your mouth and hands. Many ex-smokers swear by this.</p>
           <div class="habit-when" data-i18n="habit.toothpick.when">When: Social events, bars</div>
         </div>
         <div class="habit-card">
-          <div class="habit-icon">📿</div>
+          <div class="habit-icon"><div class="icon-box mint"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div></div>
           <h4 data-i18n="habit.fidget.title">Fidget Ring / Worry Stone</h4>
           <p data-i18n="habit.fidget.desc">A spinner ring or smooth stone you roll between your fingers. Keeps your hands busy without thinking about it.</p>
           <div class="habit-when" data-i18n="habit.fidget.when">When: Anywhere, anytime</div>
         </div>
         <div class="habit-card">
-          <div class="habit-icon">🫁</div>
+          <div class="habit-icon"><div class="icon-box teal"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg></div></div>
           <h4 data-i18n="habit.straw.title">Deep Breath Through a Straw</h4>
           <p data-i18n="habit.straw.desc">Inhale slowly through a straw — mimics the exact draw sensation of vaping. Exhale slowly through your nose. Repeat 5x.</p>
           <div class="habit-when" data-i18n="habit.straw.when">When: Intense cravings</div>
@@ -1510,6 +1527,47 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ===== ICONS =====
+const ICONS = {
+  snowflake:       `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><line x1="2" x2="22" y1="12" y2="12"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg>`,
+  wind:            `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
+  activity:        `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>`,
+  zap:             `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>`,
+  timer:           `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg>`,
+  lightbulb:       `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`,
+  droplets:        `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>`,
+  pencil:          `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>`,
+  sparkles:        `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>`,
+  leaf:            `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`,
+  dumbbell:        `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>`,
+  'glass-water':   `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.81 17.21A2 2 0 0 1 15.2 22z"/><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0"/></svg>`,
+  minus:           `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>`,
+  'rotate-ccw':    `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`,
+  heart:           `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
+  sun:             `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
+  'trending-up':   `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+  shield:          `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>`,
+  flame:           `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`,
+  star:            `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  target:          `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+  trophy:          `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`,
+  gem:             `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>`,
+  crown:           `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>`,
+  'clipboard-check': `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>`,
+  'book-open':     `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+};
+const ICON_COLORS = {
+  snowflake: 'teal', wind: 'teal', activity: 'green', zap: 'amber', timer: 'amber',
+  lightbulb: 'green', droplets: 'green', pencil: 'mint', sparkles: 'coral', leaf: 'green',
+  dumbbell: 'coral', 'glass-water': 'teal', minus: 'amber', 'rotate-ccw': 'mint',
+  heart: 'coral', sun: 'amber', 'trending-up': 'mint', shield: 'teal',
+  flame: 'coral', star: 'amber', target: 'teal', trophy: 'amber', gem: 'teal',
+  crown: 'amber', 'clipboard-check': 'green', 'book-open': 'amber',
+};
+function iconBox(name) {
+  return `<div class="icon-box ${ICON_COLORS[name]||'teal'}">${ICONS[name]||''}</div>`;
+}
+
 // ===== DATA =====
 const STORAGE_KEY = 'breathefreely_v2';
 const defaultData = () => ({
@@ -1846,24 +1904,24 @@ const triggersI18n = {
 
 const milestonesI18n = {
   en: [
-    { hours: 1, icon: '💓', title: 'Heart rate normalizing', desc: 'Heart rate and blood pressure begin dropping.' },
-    { hours: 8, icon: '🫁', title: 'Oxygen levels recover', desc: 'Carbon monoxide clears. Oxygen returns to normal.' },
-    { hours: 24, icon: '🧹', title: 'Lungs start clearing', desc: 'Lungs begin clearing mucus and debris.' },
-    { hours: 48, icon: '👃', title: 'Taste & smell return', desc: 'Nerve endings regrow. Food tastes amazing again.' },
-    { hours: 72, icon: '⚡', title: 'Breathing easier', desc: 'Bronchial tubes relax. Energy levels rise.' },
-    { hours: 336, icon: '🛡️', title: 'Immune boost (2 weeks)', desc: 'Circulation improves. Immune function strengthens.' },
-    { hours: 720, icon: '🧠', title: 'Anxiety decreases (1 month)', desc: 'Baseline anxiety drops to non-smoker levels.' },
-    { hours: 2160, icon: '💪', title: 'Lung function +30% (3 months)', desc: 'Lung capacity significantly improved.' },
+    { hours: 1,    icon: 'heart',        title: 'Heart rate normalizing',         desc: 'Heart rate and blood pressure begin dropping.' },
+    { hours: 8,    icon: 'wind',         title: 'Oxygen levels recover',          desc: 'Carbon monoxide clears. Oxygen returns to normal.' },
+    { hours: 24,   icon: 'sparkles',     title: 'Lungs start clearing',           desc: 'Lungs begin clearing mucus and debris.' },
+    { hours: 48,   icon: 'sun',          title: 'Taste & smell return',           desc: 'Nerve endings regrow. Food tastes amazing again.' },
+    { hours: 72,   icon: 'zap',          title: 'Breathing easier',               desc: 'Bronchial tubes relax. Energy levels rise.' },
+    { hours: 336,  icon: 'shield',       title: 'Immune boost (2 weeks)',         desc: 'Circulation improves. Immune function strengthens.' },
+    { hours: 720,  icon: 'lightbulb',    title: 'Anxiety decreases (1 month)',    desc: 'Baseline anxiety drops to non-smoker levels.' },
+    { hours: 2160, icon: 'trending-up',  title: 'Lung function +30% (3 months)', desc: 'Lung capacity significantly improved.' },
   ],
   es: [
-    { hours: 1, icon: '💓', title: 'Ritmo cardíaco normalizándose', desc: 'El ritmo cardíaco y la presión arterial comienzan a bajar.' },
-    { hours: 8, icon: '🫁', title: 'Niveles de oxígeno se recuperan', desc: 'El monóxido de carbono se elimina. El oxígeno vuelve a la normalidad.' },
-    { hours: 24, icon: '🧹', title: 'Los pulmones empiezan a limpiarse', desc: 'Los pulmones comienzan a eliminar mucosidad y residuos.' },
-    { hours: 48, icon: '👃', title: 'El gusto y olfato regresan', desc: 'Las terminaciones nerviosas se regeneran. La comida sabe increíble otra vez.' },
-    { hours: 72, icon: '⚡', title: 'Respirar es más fácil', desc: 'Los tubos bronquiales se relajan. Los niveles de energía suben.' },
-    { hours: 336, icon: '🛡️', title: 'Impulso inmunológico (2 semanas)', desc: 'La circulación mejora. La función inmune se fortalece.' },
-    { hours: 720, icon: '🧠', title: 'La ansiedad disminuye (1 mes)', desc: 'La ansiedad base baja a niveles de no fumador.' },
-    { hours: 2160, icon: '💪', title: 'Función pulmonar +30% (3 meses)', desc: 'La capacidad pulmonar mejora significativamente.' },
+    { hours: 1,    icon: 'heart',        title: 'Ritmo cardíaco normalizándose',         desc: 'El ritmo cardíaco y la presión arterial comienzan a bajar.' },
+    { hours: 8,    icon: 'wind',         title: 'Niveles de oxígeno se recuperan',       desc: 'El monóxido de carbono se elimina. El oxígeno vuelve a la normalidad.' },
+    { hours: 24,   icon: 'sparkles',     title: 'Los pulmones empiezan a limpiarse',     desc: 'Los pulmones comienzan a eliminar mucosidad y residuos.' },
+    { hours: 48,   icon: 'sun',          title: 'El gusto y olfato regresan',            desc: 'Las terminaciones nerviosas se regeneran. La comida sabe increíble otra vez.' },
+    { hours: 72,   icon: 'zap',          title: 'Respirar es más fácil',                desc: 'Los tubos bronquiales se relajan. Los niveles de energía suben.' },
+    { hours: 336,  icon: 'shield',       title: 'Impulso inmunológico (2 semanas)',      desc: 'La circulación mejora. La función inmune se fortalece.' },
+    { hours: 720,  icon: 'lightbulb',    title: 'La ansiedad disminuye (1 mes)',         desc: 'La ansiedad base baja a niveles de no fumador.' },
+    { hours: 2160, icon: 'trending-up',  title: 'Función pulmonar +30% (3 meses)',       desc: 'La capacidad pulmonar mejora significativamente.' },
   ]
 };
 
@@ -1942,36 +2000,36 @@ const quotesI18n = {
 
 const badgesI18n = {
   en: [
-    { icon: '🌱', title: 'Journey Started', desc: 'You took the hardest step — the first one.' },
-    { icon: '☀️', title: 'Day One', desc: 'Your first full day on the plan.' },
-    { icon: '🔥', title: 'Three Day Streak', desc: 'The first 72 hours are the hardest. You did it.' },
-    { icon: '⭐', title: 'One Week Strong', desc: '7 days of commitment. This is real.' },
-    { icon: '🎯', title: 'Two Weeks', desc: 'Officially through the awareness phase.' },
-    { icon: '🏆', title: 'One Month', desc: 'Your brain is actively rewiring. Anxiety is dropping.' },
-    { icon: '💎', title: 'Two Months', desc: "Nicotine receptors are downregulating. You're changing." },
-    { icon: '👑', title: 'Plan Complete', desc: "12 weeks. You conquered it. You're free." },
-    { icon: '📝', title: 'Consistent Tracker', desc: '7 daily check-ins. Awareness is your superpower.' },
-    { icon: '💪', title: 'Craving Crusher', desc: '10 cravings beaten. Each one made you stronger.' },
-    { icon: '🦁', title: 'Unstoppable', desc: '50 cravings defeated. You are a force.' },
-    { icon: '🧘', title: 'Zen Master', desc: '20 breathing rounds. Your nervous system thanks you.' },
-    { icon: '✍️', title: 'Reflective Mind', desc: '5 journal entries. Self-awareness is healing.' },
-    { icon: '📖', title: 'Storyteller', desc: "20 entries. You're writing the story of your freedom." },
+    { icon: 'leaf',             title: 'Journey Started',    desc: 'You took the hardest step — the first one.' },
+    { icon: 'sun',              title: 'Day One',            desc: 'Your first full day on the plan.' },
+    { icon: 'flame',            title: 'Three Day Streak',   desc: 'The first 72 hours are the hardest. You did it.' },
+    { icon: 'star',             title: 'One Week Strong',    desc: '7 days of commitment. This is real.' },
+    { icon: 'target',           title: 'Two Weeks',          desc: 'Officially through the awareness phase.' },
+    { icon: 'trophy',           title: 'One Month',          desc: 'Your brain is actively rewiring. Anxiety is dropping.' },
+    { icon: 'gem',              title: 'Two Months',         desc: "Nicotine receptors are downregulating. You're changing." },
+    { icon: 'crown',            title: 'Plan Complete',      desc: "12 weeks. You conquered it. You're free." },
+    { icon: 'clipboard-check',  title: 'Consistent Tracker', desc: '7 daily check-ins. Awareness is your superpower.' },
+    { icon: 'dumbbell',         title: 'Craving Crusher',   desc: '10 cravings beaten. Each one made you stronger.' },
+    { icon: 'zap',              title: 'Unstoppable',        desc: '50 cravings defeated. You are a force.' },
+    { icon: 'wind',             title: 'Zen Master',         desc: '20 breathing rounds. Your nervous system thanks you.' },
+    { icon: 'pencil',           title: 'Reflective Mind',    desc: '5 journal entries. Self-awareness is healing.' },
+    { icon: 'book-open',        title: 'Storyteller',        desc: "20 entries. You're writing the story of your freedom." },
   ],
   es: [
-    { icon: '🌱', title: 'Viaje Iniciado', desc: 'Diste el paso más difícil — el primero.' },
-    { icon: '☀️', title: 'Día Uno', desc: 'Tu primer día completo en el plan.' },
-    { icon: '🔥', title: 'Racha de Tres Días', desc: 'Las primeras 72 horas son las más difíciles. Lo lograste.' },
-    { icon: '⭐', title: 'Una Semana Fuerte', desc: '7 días de compromiso. Esto es real.' },
-    { icon: '🎯', title: 'Dos Semanas', desc: 'Oficialmente pasaste la fase de consciencia.' },
-    { icon: '🏆', title: 'Un Mes', desc: 'Tu cerebro se está reconfigurando activamente. La ansiedad está bajando.' },
-    { icon: '💎', title: 'Dos Meses', desc: 'Los receptores de nicotina se están regulando a la baja. Estás cambiando.' },
-    { icon: '👑', title: 'Plan Completado', desc: '12 semanas. Lo conquistaste. Eres libre.' },
-    { icon: '📝', title: 'Tracker Consistente', desc: '7 check-ins diarios. La consciencia es tu superpoder.' },
-    { icon: '💪', title: 'Destructor de Antojos', desc: '10 antojos vencidos. Cada uno te hizo más fuerte.' },
-    { icon: '🦁', title: 'Imparable', desc: '50 antojos derrotados. Eres una fuerza.' },
-    { icon: '🧘', title: 'Maestro Zen', desc: '20 rondas de respiración. Tu sistema nervioso te lo agradece.' },
-    { icon: '✍️', title: 'Mente Reflexiva', desc: '5 entradas de diario. La autoconciencia es sanación.' },
-    { icon: '📖', title: 'Narrador/a', desc: '20 entradas. Estás escribiendo la historia de tu libertad.' },
+    { icon: 'leaf',             title: 'Viaje Iniciado',          desc: 'Diste el paso más difícil — el primero.' },
+    { icon: 'sun',              title: 'Día Uno',                 desc: 'Tu primer día completo en el plan.' },
+    { icon: 'flame',            title: 'Racha de Tres Días',      desc: 'Las primeras 72 horas son las más difíciles. Lo lograste.' },
+    { icon: 'star',             title: 'Una Semana Fuerte',       desc: '7 días de compromiso. Esto es real.' },
+    { icon: 'target',           title: 'Dos Semanas',             desc: 'Oficialmente pasaste la fase de consciencia.' },
+    { icon: 'trophy',           title: 'Un Mes',                  desc: 'Tu cerebro se está reconfigurando activamente. La ansiedad está bajando.' },
+    { icon: 'gem',              title: 'Dos Meses',               desc: 'Los receptores de nicotina se están regulando a la baja. Estás cambiando.' },
+    { icon: 'crown',            title: 'Plan Completado',         desc: '12 semanas. Lo conquistaste. Eres libre.' },
+    { icon: 'clipboard-check',  title: 'Tracker Consistente',     desc: '7 check-ins diarios. La consciencia es tu superpoder.' },
+    { icon: 'dumbbell',         title: 'Destructor de Antojos',   desc: '10 antojos vencidos. Cada uno te hizo más fuerte.' },
+    { icon: 'zap',              title: 'Imparable',               desc: '50 antojos derrotados. Eres una fuerza.' },
+    { icon: 'wind',             title: 'Maestro Zen',             desc: '20 rondas de respiración. Tu sistema nervioso te lo agradece.' },
+    { icon: 'pencil',           title: 'Mente Reflexiva',         desc: '5 entradas de diario. La autoconciencia es sanación.' },
+    { icon: 'book-open',        title: 'Narrador/a',              desc: '20 entradas. Estás escribiendo la historia de tu libertad.' },
   ]
 };
 
@@ -2306,7 +2364,7 @@ function renderMilestones() {
     const pct = Math.min(100, (h / m.hours) * 100);
     const el = document.createElement('div');
     el.className = 'milestone';
-    el.innerHTML = `<div class="milestone-bar" style="width:${pct}%"></div><div class="milestone-icon">${m.icon}</div><div class="milestone-info"><h4>${m.title}</h4><p>${m.desc}</p></div><div class="milestone-time">${pct >= 100 ? t('milestone.unlocked') : Math.round(pct) + '%'}</div>`;
+    el.innerHTML = `<div class="milestone-bar" style="width:${pct}%"></div><div class="milestone-icon">${iconBox(m.icon)}</div><div class="milestone-info"><h4>${m.title}</h4><p>${m.desc}</p></div><div class="milestone-time">${pct >= 100 ? t('milestone.unlocked') : Math.round(pct) + '%'}</div>`;
     c.appendChild(el);
   });
 }
@@ -2391,7 +2449,7 @@ function renderAchievements() {
     const el = document.createElement('div');
     el.className = 'milestone';
     el.style.opacity = b.cond ? '1' : '0.3';
-    el.innerHTML = `<div class="milestone-icon">${b.icon}</div><div class="milestone-info"><h4>${b.title}</h4><p>${b.desc}</p></div><div class="milestone-time" style="color:${b.cond ? 'var(--green)' : 'var(--text-dim)'}">${b.cond ? t('badge.earned') : t('badge.locked')}</div>`;
+    el.innerHTML = `<div class="milestone-icon">${iconBox(b.icon)}</div><div class="milestone-info"><h4>${b.title}</h4><p>${b.desc}</p></div><div class="milestone-time" style="color:${b.cond ? 'var(--green)' : 'var(--text-dim)'}">${b.cond ? t('badge.earned') : t('badge.locked')}</div>`;
     c.appendChild(el);
   });
 }
