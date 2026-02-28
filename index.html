@@ -738,6 +738,24 @@
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
+  /* Backup reminder banner */
+  .backup-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--orange-light);
+    border: 1.5px solid var(--orange);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .backup-banner p { flex: 1; font-size: 0.88em; color: var(--text); margin: 0; line-height: 1.4; }
+  .backup-banner strong { color: var(--orange); }
+  .backup-banner-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .backup-banner button { font-family: 'Inter', sans-serif; font-size: 0.82em; font-weight: 600; border: none; border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+  .backup-now-btn { background: var(--orange); color: white; }
+  .backup-dismiss-btn { background: transparent; color: var(--text-dim); }
+
   /* Currency buttons */
   .currency-btn {
     padding: 8px 16px;
@@ -1089,6 +1107,14 @@
 
   <!-- ====== TODAY ====== -->
   <div class="panel active" id="panel-today">
+    <div id="backupBanner" style="display:none" class="backup-banner">
+      <div class="icon-box amber sm"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
+      <p><strong>Back up your progress!</strong> Save your data so you never lose your streak again.</p>
+      <div class="backup-banner-actions">
+        <button class="backup-now-btn" onclick="exportDataFromBanner()">Save now</button>
+        <button class="backup-dismiss-btn" onclick="dismissBackupBanner()">Later</button>
+      </div>
+    </div>
     <div class="card">
       <h2 data-i18n="today.thisWeek">This Week</h2>
       <div class="week-grid" id="weekGrid"></div>
@@ -2076,7 +2102,7 @@ const timelinePhasesI18n = {
 function daysBetween(a, b) {
   return Math.floor((new Date(b) - new Date(a)) / 86400000);
 }
-function today() { return new Date().toISOString().split('T')[0]; }
+function today() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 function currentWeek() { return daysBetween(data.startDate, today()) / 7; }
 
 function getPhase() {
@@ -2606,6 +2632,7 @@ function init() {
     document.getElementById('cravingVal').textContent = td.craving || 5;
   }
   loadSetbackState();
+  checkBackupReminder();
 }
 init();
 window.addEventListener('resize', renderChart);
@@ -2758,16 +2785,37 @@ function formatDate(dateStr) {
 
 // ===== BACKUP & RESTORE =====
 function exportData() {
+  data.lastBackup = Date.now();
+  saveData(data);
   const json = JSON.stringify(data, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const date = new Date().toISOString().split('T')[0];
   a.href = url;
-  a.download = `breathefreely-backup-${date}.json`;
+  a.download = `breathefreely-backup-${today()}.json`;
   a.click();
   URL.revokeObjectURL(url);
+  document.getElementById('backupBanner').style.display = 'none';
   showToast('Backup downloaded! Keep that file safe.');
+}
+function exportDataFromBanner() { exportData(); }
+function dismissBackupBanner() {
+  data.lastBackupDismissed = Date.now();
+  saveData(data);
+  document.getElementById('backupBanner').style.display = 'none';
+}
+function checkBackupReminder() {
+  const checkinCount = Object.keys(data.dailyCheckins || {}).length;
+  if (checkinCount < 1) return;
+  const now = Date.now();
+  const threeDays = 3 * 24 * 60 * 60 * 1000;
+  const lastBackup = data.lastBackup || 0;
+  const lastDismissed = data.lastBackupDismissed || 0;
+  const sinceBackup = now - lastBackup;
+  const sinceDismissed = now - lastDismissed;
+  if (sinceBackup > threeDays && sinceDismissed > threeDays) {
+    document.getElementById('backupBanner').style.display = 'flex';
+  }
 }
 
 function importData(input) {
