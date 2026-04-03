@@ -1260,6 +1260,57 @@
         <li data-i18n="breathe.sci4">This is literally what your body was doing when you vaped — minus the poison</li>
       </ul>
     </div>
+
+    <!-- ====== URGE SURFING ====== -->
+    <div class="card">
+      <h2 data-i18n="urge.title">Urge Surfing</h2>
+      <p data-i18n="urge.desc">Watch your craving like an ocean wave — it rises, peaks, and passes. You don't have to act on it. (~5 min)</p>
+      <div id="urgeContainer" style="display:none;flex-direction:column;align-items:center;gap:12px;width:100%;">
+        <!-- Wave animation -->
+        <div style="width:100%;background:linear-gradient(180deg,#ede9fe 0%,#ddd6fe 100%);border-radius:16px;overflow:hidden;position:relative;height:160px;">
+          <svg id="urgeSvg" viewBox="0 0 400 160" preserveAspectRatio="none" style="width:100%;height:100%;position:absolute;top:0;left:0;">
+            <defs>
+              <linearGradient id="waveGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.3"/>
+              </linearGradient>
+            </defs>
+            <path id="wavePath" fill="url(#waveGrad)" d="M0,160 Q100,160 200,160 Q300,160 400,160 L400,160 L0,160 Z"/>
+            <path id="wavePath2" fill="#a78bfa" fill-opacity="0.25" d="M0,160 Q100,160 200,160 Q300,160 400,160 L400,160 L0,160 Z"/>
+          </svg>
+          <!-- Text overlay -->
+          <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:16px;text-align:center;">
+            <div id="urgeText" style="font-size:0.9em;color:#4c1d95;font-weight:500;line-height:1.5;max-width:320px;"></div>
+            <div id="urgeTimer" style="font-size:1.6em;font-weight:700;color:#7c3aed;margin-top:6px;"></div>
+          </div>
+        </div>
+        <div id="urgeProgress" style="font-size:0.82em;color:var(--text-dim);"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap;">
+        <button class="breath-btn" id="urgeBtn" onclick="toggleUrge()" data-i18n="urge.start" style="margin-top:0;background:linear-gradient(135deg,#a78bfa,#7c3aed);box-shadow:0 4px 20px rgba(167,139,250,0.35);">Start Exercise</button>
+        <span style="font-size:0.82em;color:var(--text-dim);" id="urgeCompletionsLabel" data-i18n="urge.completions">Completed: 0</span>
+      </div>
+    </div>
+
+    <!-- ====== PROGRESSIVE MUSCLE RELAXATION ====== -->
+    <div class="card">
+      <h2 data-i18n="pmr.title">Progressive Muscle Relaxation</h2>
+      <p data-i18n="pmr.desc">Tense and release each muscle group from face to feet. Melts stress and breaks the craving cycle. (~8 min)</p>
+      <div class="breath-container" id="pmrContainer" style="display:none;">
+        <div class="breath-circle-outer" id="pmrOuter" style="background:linear-gradient(135deg,#fb923c,#c2410c);">
+          <div class="breath-circle" id="pmrCircle">
+            <div class="breath-text" id="pmrText" style="font-size:0.95em;padding:0 16px;text-align:center;line-height:1.4;"></div>
+            <div class="breath-timer" id="pmrTimer" style="color:#c2410c;"></div>
+          </div>
+        </div>
+        <div class="breath-rounds" id="pmrProgress"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap;">
+        <button class="breath-btn" id="pmrBtn" onclick="togglePMR()" data-i18n="pmr.start" style="margin-top:0;background:linear-gradient(135deg,#fb923c,#c2410c);box-shadow:0 4px 20px rgba(251,146,60,0.35);">Start Exercise</button>
+        <span style="font-size:0.82em;color:var(--text-dim);" data-i18n="pmr.completions">Completed: 0</span>
+      </div>
+    </div>
+
   </div>
 
   <!-- ====== CRAVINGS & HABITS ====== -->
@@ -1623,6 +1674,8 @@ const defaultData = () => ({
   setupDone: {},
   triggersDone: {},
   breathRoundsTotal: 0,
+  urgeCompletions: 0,
+  pmrCompletions: 0,
   costPerDay: 7,
   baselinePuffs: 40,
   currency: '$',
@@ -1711,6 +1764,25 @@ const T = {
   'breathe.sci2': { en: '4 rounds reduce cortisol by up to 20% (Ma et al., 2017)', es: '4 rondas reducen el cortisol hasta un 20% (Ma et al., 2017)' },
   'breathe.sci3': { en: 'Regular practice physically rewires your stress response in 2-3 weeks', es: 'La práctica regular reconfigura físicamente tu respuesta al estrés en 2-3 semanas' },
   'breathe.sci4': { en: 'This is literally what your body was doing when you vaped — minus the poison', es: 'Esto es literalmente lo que tu cuerpo hacía cuando vapeabas — menos el veneno' },
+  // Urge Surfing exercise
+  'urge.title': { en: 'Urge Surfing', es: 'Surfea el Impulso' },
+  'urge.desc': { en: 'Watch your craving like an ocean wave — it rises, peaks, and passes. You don\'t have to act on it. (~5 min)', es: 'Observa tu antojo como una ola del océano — sube, llega al pico y pasa. No tienes que actuar. (~5 min)' },
+  'urge.start': { en: 'Start Exercise', es: 'Comenzar Ejercicio' },
+  'urge.stop': { en: 'Stop', es: 'Detener' },
+  'urge.step': { en: 'Step', es: 'Paso' },
+  'urge.of': { en: 'of', es: 'de' },
+  'urge.completions': { en: 'Completed: 0', es: 'Completado: 0' },
+  'urge.done': { en: 'The wave has passed. You surfed it. Well done.', es: 'La ola pasó. La surfeaste. Bien hecho.' },
+  'urge.toast': { en: 'Urge surfed! The craving has no power over you.', es: '¡Impulso surfeado! El antojo no tiene poder sobre ti.' },
+  // PMR exercise
+  'pmr.title': { en: 'Progressive Muscle Relaxation', es: 'Relajación Muscular Progresiva' },
+  'pmr.desc': { en: 'Tense and release each muscle group from face to feet. Melts stress and breaks the craving cycle. (~8 min)', es: 'Tensa y suelta cada grupo muscular de la cara a los pies. Disuelve el estrés y rompe el ciclo del antojo. (~8 min)' },
+  'pmr.start': { en: 'Start Exercise', es: 'Comenzar Ejercicio' },
+  'pmr.stop': { en: 'Stop', es: 'Detener' },
+  'pmr.step': { en: 'Step', es: 'Paso' },
+  'pmr.of': { en: 'of', es: 'de' },
+  'pmr.completions': { en: 'Completed: 0', es: 'Completado: 0' },
+  'pmr.toast': { en: 'Full body relaxed. The craving has no hold on you.', es: 'Cuerpo completamente relajado. El antojo no tiene poder sobre ti.' },
   // Cravings panel
   'cravings.title': { en: 'Understanding Your Cravings', es: 'Entendiendo Tus Antojos' },
   'cravings.desc': { en: 'A craving is a <strong>wave</strong> — it rises, peaks, and falls in 3-5 minutes. You don\'t need to fight it. You just need to <strong>surf it</strong>. The technique is called "urge surfing" (Marlatt, 1985) and it\'s one of the most effective tools in addiction research.', es: 'Un antojo es una <strong>ola</strong> — sube, llega al pico y baja en 3-5 minutos. No necesitas luchar contra él. Solo necesitas <strong>surfear la ola</strong>. La técnica se llama "surfeo de impulsos" (Marlatt, 1985) y es una de las herramientas más efectivas en investigación de adicciones.' },
@@ -2362,6 +2434,168 @@ function stopBreathing() {
   if (breathRounds > 0) showToast(breathRounds + t('toast.breathSession'));
 }
 
+// ===== URGE SURFING =====
+const URGE_STEPS = {
+  en: [
+    { text: "Notice the craving. Don't fight it — just observe it.", dur: 30 },
+    { text: "Imagine the craving as an ocean wave. Watch it begin to rise.", dur: 60 },
+    { text: "The wave is at its peak. Breathe slowly. You don't have to act.", dur: 60 },
+    { text: "Feel the wave beginning to fall. Cravings always pass.", dur: 60 },
+    { text: "The wave has passed. You surfed it. Well done.", dur: 30 }
+  ],
+  es: [
+    { text: "Nota el antojo. No lo combatas — solo obsérvalo.", dur: 30 },
+    { text: "Imagina el antojo como una ola del océano. Observa cómo empieza a crecer.", dur: 60 },
+    { text: "La ola está en su punto más alto. Respira despacio. No tienes que actuar.", dur: 60 },
+    { text: "Siente cómo la ola empieza a bajar. Los antojos siempre pasan.", dur: 60 },
+    { text: "La ola pasó. La surfeaste. Bien hecho.", dur: 30 }
+  ]
+};
+// ===== URGE SURFING WAVE ANIMATION =====
+let urgeInterval = null, urgeStepIdx = 0, urgeCount = 0;
+let urgeWaveRaf = null, urgeWavePhase = 0, urgeWaveTarget = 160, urgeWaveCurrent = 160;
+
+function toggleUrge() { urgeInterval ? stopUrge(false) : startUrge(); }
+
+// Wave heights per step: flat → rising → peak → falling → flat
+const URGE_WAVE_HEIGHTS = [140, 90, 40, 90, 145]; // lower = higher wave (SVG y coords)
+
+function animateUrgeWave() {
+  urgeWavePhase += 0.03;
+  // Smoothly interpolate current toward target
+  urgeWaveCurrent += (urgeWaveTarget - urgeWaveCurrent) * 0.015;
+  const h = urgeWaveCurrent;
+  const ripple = 12 * Math.sin(urgeWavePhase * 2.2);
+  const ripple2 = 8 * Math.sin(urgeWavePhase * 1.5 + 1);
+  // Main wave path
+  const p = `M0,160 Q50,${h + ripple} 100,${h} Q150,${h - ripple} 200,${h + ripple2} Q250,${h + ripple} 300,${h} Q350,${h - ripple2} 400,${h + ripple} L400,160 L0,160 Z`;
+  // Second wave slightly offset
+  const h2 = h + 14;
+  const p2 = `M0,160 Q60,${h2 - ripple} 130,${h2 + ripple2} Q200,${h2} 270,${h2 - ripple} Q340,${h2 + ripple2} 400,${h2} L400,160 L0,160 Z`;
+  document.getElementById('wavePath').setAttribute('d', p);
+  document.getElementById('wavePath2').setAttribute('d', p2);
+  urgeWaveRaf = requestAnimationFrame(animateUrgeWave);
+}
+
+function startUrge() {
+  urgeStepIdx = 0;
+  urgeWaveCurrent = 160;
+  urgeWaveTarget = URGE_WAVE_HEIGHTS[0];
+  document.getElementById('urgeContainer').style.display = 'flex';
+  document.getElementById('urgeBtn').textContent = t('urge.stop');
+  runUrgeStep();
+  urgeWaveRaf = requestAnimationFrame(animateUrgeWave);
+  urgeInterval = setInterval(() => {
+    urgeCount--;
+    if (urgeCount <= 0) {
+      urgeStepIdx++;
+      const steps = URGE_STEPS[data.lang] || URGE_STEPS.en;
+      if (urgeStepIdx >= steps.length) { stopUrge(true); return; }
+      runUrgeStep();
+    } else {
+      document.getElementById('urgeTimer').textContent = urgeCount;
+    }
+  }, 1000);
+}
+
+function runUrgeStep() {
+  const steps = URGE_STEPS[data.lang] || URGE_STEPS.en;
+  const step = steps[urgeStepIdx];
+  urgeCount = step.dur;
+  urgeWaveTarget = URGE_WAVE_HEIGHTS[Math.min(urgeStepIdx, URGE_WAVE_HEIGHTS.length - 1)];
+  document.getElementById('urgeText').textContent = step.text;
+  document.getElementById('urgeTimer').textContent = urgeCount;
+  document.getElementById('urgeProgress').textContent = t('urge.step') + ' ' + (urgeStepIdx + 1) + ' ' + t('urge.of') + ' ' + steps.length;
+}
+
+function stopUrge(completed) {
+  clearInterval(urgeInterval); urgeInterval = null;
+  cancelAnimationFrame(urgeWaveRaf); urgeWaveRaf = null;
+  document.getElementById('urgeContainer').style.display = 'none';
+  document.getElementById('urgeBtn').textContent = t('urge.start');
+  if (completed) {
+    data.urgeCompletions = (data.urgeCompletions || 0) + 1;
+    saveData(data);
+    updateExerciseCompletions();
+    showToast(t('urge.toast'));
+  }
+}
+
+// ===== PROGRESSIVE MUSCLE RELAXATION =====
+const PMR_STEPS = {
+  en: [
+    { text: "Face & jaw: Scrunch your face tightly for 5 seconds... now release. Feel the tension melt.", dur: 60 },
+    { text: "Shoulders: Raise your shoulders to your ears, hold... now drop them. Notice the warmth.", dur: 60 },
+    { text: "Arms & hands: Clench your fists and tighten your arms, hold... release. Feel the relief.", dur: 60 },
+    { text: "Chest: Take a deep breath and hold it, tighten your chest... exhale and let go.", dur: 60 },
+    { text: "Stomach: Tighten your stomach muscles, hold... now release. Breathe naturally.", dur: 60 },
+    { text: "Hips & glutes: Squeeze your glutes tightly, hold... release. Feel the relaxation spread.", dur: 60 },
+    { text: "Legs: Tighten your thighs and calves, hold... release. Let your legs feel heavy.", dur: 60 },
+    { text: "Full body: Take a slow breath. Your whole body is relaxed. The craving has no hold on you.", dur: 60 }
+  ],
+  es: [
+    { text: "Cara y mandíbula: Arruga tu cara fuerte por 5 segundos... ahora suelta. Siente la tensión desaparecer.", dur: 60 },
+    { text: "Hombros: Sube los hombros a las orejas, sostén... ahora suéltalos. Nota el calor.", dur: 60 },
+    { text: "Brazos y manos: Aprieta los puños y tensiona los brazos, sostén... suelta. Siente el alivio.", dur: 60 },
+    { text: "Pecho: Toma aire profundo y sostenlo, tensa el pecho... exhala y suelta.", dur: 60 },
+    { text: "Estómago: Tensa los músculos del estómago, sostén... ahora suelta. Respira naturalmente.", dur: 60 },
+    { text: "Caderas y glúteos: Aprieta los glúteos fuerte, sostén... suelta. Siente la relajación extenderse.", dur: 60 },
+    { text: "Piernas: Tensa los muslos y pantorrillas, sostén... suelta. Deja que tus piernas se sientan pesadas.", dur: 60 },
+    { text: "Cuerpo completo: Respira despacio. Todo tu cuerpo está relajado. El antojo no tiene poder sobre ti.", dur: 60 }
+  ]
+};
+let pmrInterval = null, pmrStepIdx = 0, pmrCount = 0;
+function togglePMR() { pmrInterval ? stopPMR(false) : startPMR(); }
+function startPMR() {
+  pmrStepIdx = 0;
+  document.getElementById('pmrContainer').style.display = 'flex';
+  document.getElementById('pmrBtn').textContent = t('pmr.stop');
+  runPMRStep();
+  pmrInterval = setInterval(() => {
+    pmrCount--;
+    if (pmrCount <= 0) {
+      pmrStepIdx++;
+      const steps = PMR_STEPS[data.lang] || PMR_STEPS.en;
+      if (pmrStepIdx >= steps.length) {
+        stopPMR(true);
+        return;
+      }
+      runPMRStep();
+    } else {
+      document.getElementById('pmrTimer').textContent = pmrCount;
+    }
+  }, 1000);
+}
+function runPMRStep() {
+  const steps = PMR_STEPS[data.lang] || PMR_STEPS.en;
+  const step = steps[pmrStepIdx];
+  pmrCount = step.dur;
+  document.getElementById('pmrText').textContent = step.text;
+  document.getElementById('pmrTimer').textContent = pmrCount;
+  document.getElementById('pmrProgress').textContent = t('pmr.step') + ' ' + (pmrStepIdx + 1) + ' ' + t('pmr.of') + ' ' + steps.length;
+}
+function stopPMR(completed) {
+  clearInterval(pmrInterval); pmrInterval = null;
+  document.getElementById('pmrContainer').style.display = 'none';
+  document.getElementById('pmrBtn').textContent = t('pmr.start');
+  if (completed) {
+    data.pmrCompletions = (data.pmrCompletions || 0) + 1;
+    saveData(data);
+    updateExerciseCompletions();
+    showToast(t('pmr.toast'));
+  }
+}
+
+
+function updateExerciseCompletions() {
+  document.querySelectorAll('[data-i18n="urge.completions"]').forEach(el => {
+    el.textContent = (data.lang === 'es' ? 'Completado: ' : 'Completed: ') + (data.urgeCompletions || 0);
+  });
+  document.querySelectorAll('[data-i18n="pmr.completions"]').forEach(el => {
+    el.textContent = (data.lang === 'es' ? 'Completado: ' : 'Completed: ') + (data.pmrCompletions || 0);
+  });
+}
+
 // ===== SOS =====
 function triggerSOS() {
   const tips = document.getElementById('sosTips');
@@ -2597,6 +2831,7 @@ function applyLanguage() {
   renderChart();
   updatePersonalization();
   showQuote();
+  updateExerciseCompletions();
 }
 
 // ===== RESET =====
@@ -2633,6 +2868,7 @@ function init() {
   }
   loadSetbackState();
   checkBackupReminder();
+  updateExerciseCompletions();
 }
 init();
 window.addEventListener('resize', renderChart);
